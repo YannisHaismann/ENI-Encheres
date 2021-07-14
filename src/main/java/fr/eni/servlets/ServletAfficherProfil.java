@@ -36,7 +36,7 @@ public class ServletAfficherProfil extends HttpServlet {
 		}
 		else if(idutilisateur > 0)
 		{
-			//J'ai un id au bon format, je récupère la liste associée eventuelle
+			//J'ai un id au bon format, je récupère l'utilisateur eventuel
 			UtilisateurManager utilisateurManager = new UtilisateurManager();
 			chargerUtilisateur(request, utilisateurManager);
 			
