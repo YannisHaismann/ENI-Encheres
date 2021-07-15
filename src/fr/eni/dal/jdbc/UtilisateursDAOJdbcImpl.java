@@ -1,0 +1,233 @@
+package fr.eni.dal.jdbc;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.eni.bo.Utilisateurs;
+import fr.eni.dal.CodesResultatDAL;
+import fr.eni.dal.ConnectionProvider;
+import fr.eni.dal.UtilisateursDAO;
+import fr.eni.exception.BusinessException;
+
+public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
+	public static final String INSERT = "INSERT INTO Utilisateurs VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+	public static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?;";
+	public static final String SELECT_ALL = "SELECT * FROM UTILISATEURS";
+	public static final String UPDATE_BY_ID = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?,"
+			+ " code_postal = ?, ville = ?, mot_de_passe = ?, credit = ?, administrateur = ?, desactiver = ?  WHERE no_utilisateur = ?;";
+	public static final String DELETE_BY_ID = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
+	
+	@Override
+	public void insert(Utilisateurs utilisateur) throws BusinessException {
+		
+		if(utilisateur == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.NULL_PARAM);
+			throw businessException;
+		}
+		
+		try(Connection con = ConnectionProvider.getConnection()) {
+			
+			try {
+				con.setAutoCommit(false);
+				PreparedStatement pstmt;
+				
+				pstmt = con.prepareStatement(INSERT);
+				pstmt.setString(1, utilisateur.getPseudo());
+				pstmt.setString(2, utilisateur.getNom());
+				pstmt.setString(3, utilisateur.getPrenom());
+				pstmt.setString(4, utilisateur.getEmail());
+				pstmt.setString(5, utilisateur.getTelephone());
+				pstmt.setString(6, utilisateur.getRue());
+				pstmt.setInt(7, utilisateur.getCodePostal());
+				pstmt.setString(8, utilisateur.getVille());
+				pstmt.setString(9, utilisateur.getMotDePasse());
+				pstmt.setInt(10, utilisateur.getCredit());
+				pstmt.setInt(10, utilisateur.getAdministrateur());
+				pstmt.setInt(11, utilisateur.getDesactiver());
+				
+				pstmt.executeUpdate();
+				pstmt.close();
+				con.commit();
+			}catch(Exception e) {
+				e.printStackTrace();
+				con.rollback();
+				throw e;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_ECHEC);
+			throw businessException;
+		}	
+	}
+	@Override
+	public Utilisateurs selectBy(int id) throws BusinessException {
+			
+		try(Connection con = ConnectionProvider.getConnection()) {
+			try {
+				PreparedStatement pstmt;
+				pstmt = con.prepareStatement(SELECT_BY_ID);
+				pstmt.setInt(1, id);
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				Utilisateurs nouvelUtilisateur = new Utilisateurs();
+				nouvelUtilisateur.setId(rs.getInt("no_utilisateur"));
+				nouvelUtilisateur.setPseudo(rs.getString("pseudo"));
+				nouvelUtilisateur.setNom(rs.getString("nom"));
+				nouvelUtilisateur.setPrenom(rs.getString("prenom"));
+				nouvelUtilisateur.setEmail(rs.getString("email"));
+				nouvelUtilisateur.setTelephone(rs.getString("telephone"));
+				nouvelUtilisateur.setRue(rs.getString("rue"));
+				nouvelUtilisateur.setCodePostal(rs.getInt("code_postal"));
+				nouvelUtilisateur.setVille(rs.getString("ville"));
+				nouvelUtilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+				nouvelUtilisateur.setCredit(rs.getInt("credit"));
+				nouvelUtilisateur.setAdministrateur(rs.getInt("administrateur"));
+				nouvelUtilisateur.setDesactiver(rs.getInt("desactiver"));
+				
+				rs.close();
+				pstmt.close();
+				
+				return nouvelUtilisateur;
+			}catch(Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_BY_ID_OBJET_ECHEC);
+			throw businessException;
+		}
+	}
+	@Override
+	public List<Utilisateurs> selectAll() throws BusinessException {
+		
+		try(Connection con = ConnectionProvider.getConnection()) {
+			try {
+				Statement stmt;
+				stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(SELECT_ALL);
+				List<Utilisateurs> utilisateurs = new ArrayList<>();
+				while(rs.next()) {
+					Utilisateurs nouvelUtilisateur = new Utilisateurs();
+					nouvelUtilisateur.setId(rs.getInt("no_utilisateur"));
+					nouvelUtilisateur.setPseudo(rs.getString("pseudo"));
+					nouvelUtilisateur.setNom(rs.getString("nom"));
+					nouvelUtilisateur.setPrenom(rs.getString("prenom"));
+					nouvelUtilisateur.setEmail(rs.getString("email"));
+					nouvelUtilisateur.setTelephone(rs.getString("telephone"));
+					nouvelUtilisateur.setRue(rs.getString("rue"));
+					nouvelUtilisateur.setCodePostal(rs.getInt("code_postal"));
+					nouvelUtilisateur.setVille(rs.getString("ville"));
+					nouvelUtilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+					nouvelUtilisateur.setCredit(rs.getInt("credit"));
+					nouvelUtilisateur.setAdministrateur(rs.getInt("administrateur"));
+					nouvelUtilisateur.setDesactiver(rs.getInt("desactiver"));
+					utilisateurs.add(nouvelUtilisateur);
+				}
+				rs.close();
+				stmt.close();
+				
+				return utilisateurs;
+			}catch(Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_OBJET_ECHEC);
+			throw businessException;
+		}
+	}
+	@Override
+	public void update(Utilisateurs utilisateur) throws BusinessException {
+		
+		if(utilisateur == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.NULL_PARAM);
+			throw businessException;
+		}
+		
+		try(Connection con = ConnectionProvider.getConnection()) {
+			try {
+				PreparedStatement pstmt;
+				con.setAutoCommit(false);
+				pstmt = con.prepareStatement(UPDATE_BY_ID);
+				pstmt.setString(1, utilisateur.getPseudo());
+				pstmt.setString(2, utilisateur.getNom());
+				pstmt.setString(3, utilisateur.getPrenom());
+				pstmt.setString(4, utilisateur.getEmail());
+				pstmt.setString(5, utilisateur.getTelephone());
+				pstmt.setString(6, utilisateur.getRue());
+				pstmt.setInt(7, utilisateur.getCodePostal());
+				pstmt.setString(8, utilisateur.getVille());
+				pstmt.setString(9, utilisateur.getMotDePasse());
+				pstmt.setInt(10, utilisateur.getCredit());
+				pstmt.setInt(10, utilisateur.getAdministrateur());
+				pstmt.setInt(11, utilisateur.getDesactiver());
+				pstmt.setInt(12, utilisateur.getId());
+				
+				pstmt.executeUpdate();
+				
+				pstmt.close();
+				
+				con.commit();
+			}catch(Exception e) {
+				e.printStackTrace();
+				con.rollback();
+				throw e;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_ECHEC);
+			throw businessException;
+		}	
+		
+	}
+	@Override
+	public void delete(Utilisateurs utilisateur) throws BusinessException {
+		
+		if(utilisateur == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.NULL_PARAM);
+			throw businessException;
+		}
+		
+		try(Connection con = ConnectionProvider.getConnection()) {
+			try {	
+				con.setAutoCommit(false);
+				PreparedStatement pstmt = con.prepareStatement(DELETE_BY_ID);
+				
+				pstmt.setInt(1, utilisateur.getId());
+				
+				pstmt.executeUpdate();
+				
+				pstmt.close();
+				
+				con.commit();
+			}catch(Exception e) {
+				e.printStackTrace();
+				con.rollback();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_OBJET_ECHEC);
+			throw businessException;
+		}
+		
+	}
+	
+	
+}
