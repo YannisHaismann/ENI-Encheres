@@ -22,7 +22,8 @@
 	</c:if>
 	<div id="form-style" class="form">
 		<h1>Mon Profil</h1>
-		<form name="form-profil" action="<%=request.getContextPath()%>/ModificationProfil"
+		<form name="form-profil"
+			action="<%=request.getContextPath()%>/ModificationProfil"
 			method="post">
 			<div class="form-ligne">
 				<div class="form-label-g">
@@ -113,15 +114,13 @@
 						value="<%=request.getParameter("confirmation")%>" />
 				</div>
 			</div>
-			<div>
-				<div>
-					<p>Crédit : ${utilisateur.codePostal}</p>
+			<div class="form-label-g">Crédit : ${utilisateur.codePostal}</div>
+			<div class="form-ligne-boutton">
+				<div class="boutton">
+					<input type="submit" value="Enregistrer" />
 				</div>
-			</div>
-			<div>
-				<div>
-					<input type="submit" value="Enregistrer" /> <a
-						href="<%=request.getContextPath()%>/SupprimerProfil"><input
+				<div class="boutton">
+					<a href="<%=request.getContextPath()%>/SupprimerProfil"><input
 						type="button" value="Supprimer mon compte" /></a>
 				</div>
 			</div>

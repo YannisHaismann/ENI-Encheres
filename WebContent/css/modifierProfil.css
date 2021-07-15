@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+
+@media all and (min-width: 1024px){
+	
+	h1{
+		text-align: center;	
+	}
+	
+	#form-style{
+	margin: auto;
+	background-color: green;
+	display: block;
+	height: auto;
+	left: 600px;
+	width: 800px;
+	top: 17px;
+		
+	}
+	
+	.form .form-label-g{
+	margin-left: 40px;
+	display: inline-block;
+	background-color: red;
+	padding: 4px;
+    width: 170px;
+    text-align: left;
+	}
+	
+	.form .form-label-d{
+	display: inline-block;
+	background-color: yellow;
+	padding: 4px;
+    width: 110px;
+    text-align: left;
+    margin-left: 50px;
+	}
+
+	.form .form-champ {
+	display: inline-block;
+	background-color: blue;
+	padding: 4px;
+    width: 170px;
+	}
+	
+	.form-ligne-boutton{
+		text-align: center;
+	}
+	
+	.form .boutton{
+	display: inline-block;
+	
+	
+	}
+	
+}	
+
