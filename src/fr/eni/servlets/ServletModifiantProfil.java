@@ -12,37 +12,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ServletAfficherProfil
+ * Servlet implementation class ServletModifiantProfil
  */
-@WebServlet("/Profil")
-public class ServletAfficherProfil extends HttpServlet {
+@WebServlet("/ModificationProfil")
+public class ServletModifiantProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*//Je lis les paramètres
-		int idutilisateur = 0;
-		List<Integer> listeCodesErreur = new ArrayList<>();
-		
-		idutilisateur = lireParametreId(request, listeCodesErreur);
-			
-		if(listeCodesErreur.size() > 0)
-		{
-			request.setAttribute("listeCodesErreur",listeCodesErreur);
-		}
-		else if(idutilisateur > 0)
-		{
-			//J'ai un id au bon format, je récupère l'utilisateur eventuel
-			UtilisateurManager utilisateurManager = new UtilisateurManager();
-			chargerUtilisateur(request, utilisateurManager);
-			
-			request.setAttribute("utilisateur", utilisateurManager);
-		}
-		*/
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/afficherProfil.jsp");
-		rd.forward(request, response);
+	/*	//Je lis les paramètres
+				int idutilisateur = 0;
+				List<Integer> listeCodesErreur = new ArrayList<>();
+				
+				idutilisateur = lireParametreId(request, listeCodesErreur);
+					
+				if(listeCodesErreur.size() > 0)
+				{
+					request.setAttribute("listeCodesErreur",listeCodesErreur);
+				}
+				else if(idutilisateur > 0)
+				{
+					//J'ai un id au bon format, je récupère l'utilisateur associée eventuelle
+					UtilisateurManager utilisateurManager = new UtilisateurManager();
+					chargerUtilisateur(request, utilisateurManager);
+					
+					request.setAttribute("utilisateur", utilisateurManager);
+				}
+				*/
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/modifierProfil.jsp");
+				rd.forward(request, response);
 	}
 
 	/**
@@ -51,8 +50,8 @@ public class ServletAfficherProfil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-	/*
-	private int lireParametreId(HttpServletRequest request, List<Integer> listeCodesErreur) {
+	
+	/*private int lireParametreId(HttpServletRequest request, List<Integer> listeCodesErreur) {
 		int idutilisateur = 0;
 		try
 		{
@@ -67,9 +66,9 @@ public class ServletAfficherProfil extends HttpServlet {
 			listeCodesErreur.add(CodesResultatServlets.FORMAT_ID_UTILISATEUR_ERREUR);
 		}
 		return idutilisateur;
-	}
+	}*/
 	
-	private void chargerUtilisateur(HttpServletRequest request, UtilisateurManager utilisateurManager) {
+	/*private void chargerUtilisateur(HttpServletRequest request, UtilisateurManager utilisateurManager) {
 		Utilisateur utilisateur;
 		
 		try {
