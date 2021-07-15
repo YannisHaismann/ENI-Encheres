@@ -1,0 +1,102 @@
+html {
+    margin: 0;
+}
+ 
+* {
+    box-sizing: border-box;
+}
+
+body { 
+    overflow: none;   
+    margin: 0px;
+    padding: 0px;
+    background: url(../lib/fond_page_connexion.jpg) ;
+    background-size: cover ; background-attachment: fixed; 
+    background-repeat: no-repeat; background-position: top center;
+    font-family: sans-serif;    
+}
+
+.login-box {
+    width: 320px;
+    height: 380px;
+    border-radius: 10px;
+    background: rgb(103, 116, 189);
+    color: #fff;
+    top: 60%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 50px 25px;
+
+}
+
+.login-box a {
+    color: white;
+    font-size: 11px;
+}
+
+.password-field a:hover {
+    color: blue;
+    background-color: white;
+}
+
+.login-title {
+    margin: 0px;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;   
+}
+
+.full-width {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.aligner-login {
+    display: flex;
+    align-content: space-between;
+    margin-bottom: 5px;
+}
+
+.checkbox {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;    
+}
+
+.checkbox label {
+    font-size: 11px;
+    padding-right: 5px;
+}
+
+.creer-button {
+    margin-top: 15px;
+}
+
+.creer-button  {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    border-radius: 6px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.creer-button:hover {
+    opacity: 0.6;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: absolute;
+    top: -76px;
+    left: calc(50% - 40px);
+    
+}
+

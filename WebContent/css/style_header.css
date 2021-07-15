@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+ 
+
+.header {
+    background-color: #1f2029;
+    color: white;    
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.6rem;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+li a:hover{
+    opacity: 0.7;
+    background-color: white;
+    color: black;
+}
+
+.nav {
+    display: flex;           
+    padding: 20px 0 20px 0;
+    align-items: center; 
+    justify-content: space-between;  
+    width: 90%;
+    margin:auto;
+    padding: 2rem;
+
+}
+
+.menu { 
+    display: flex;
+    flex: 1 1 40rem;
+    justify-content: space-around; 
+    align-items: center;   
+    list-style: none;
+}
+
+.logo {
+    flex: 2 1 40rem;
+}
+
+.logo img:hover {
+    opacity: 0.8;
+}
+
+
+
