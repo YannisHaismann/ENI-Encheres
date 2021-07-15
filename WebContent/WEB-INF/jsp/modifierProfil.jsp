@@ -117,11 +117,15 @@
 			<div class="form-label-g">Crédit : ${utilisateur.codePostal}</div>
 			<div class="form-ligne-boutton">
 				<div class="boutton">
-					<input type="submit" value="Enregistrer" />
+					<input type="submit" value="Enregistrer" class="taille-btn"/>
 				</div>
 				<div class="boutton">
 					<a href="<%=request.getContextPath()%>/SupprimerProfil"><input
-						type="button" value="Supprimer mon compte" /></a>
+						type="button" value="Supprimer mon compte" class="taille-btn"/></a>
+				</div>
+				<div class="boutton boutton-retour">
+					<a href="<%=request.getContextPath()%>/acceuil"><input
+						type="button" value="retour" class="taille-btn"/></a>
 				</div>
 			</div>
 		</form>
