@@ -21,7 +21,7 @@
     
     
     <title>Créer un compte</title>
-</head>
+</head> 
 
 
 
