@@ -23,7 +23,7 @@ public class UtilisateursManager {
 		return UtilisateursManager.manager;
 	}
 	
-	public void ajouter(String pseudo, String nom, String prenom, String email, String tel, String rue, int codePostal, String ville,
+	public void ajouter(String pseudo, String nom, String prenom, String email, String tel, String rue, String codePostal, String ville,
 					String motDePasse, int credit, int administrateur, int desactiver) throws BusinessException {
 		
 		try {
@@ -49,7 +49,7 @@ public class UtilisateursManager {
 		
 	}
 	
-	public void update(int id, String pseudo, String nom, String prenom, String email, String tel, String rue, int codePostal, String ville,
+	public void update(int id, String pseudo, String nom, String prenom, String email, String tel, String rue, String codePostal, String ville,
 					String motDePasse, int credit, int administrateur, int desactiver) throws BusinessException {
 		Utilisateurs utilisateur = null;
 		try {
@@ -60,6 +60,7 @@ public class UtilisateursManager {
 				businessException.ajouterErreur(CodesResultatBLL.NULL_UTILISATEUR);
 				throw businessException;
 			}
+			utilisateur.setId(id);
 			utilisateur.setPseudo(pseudo);
 			utilisateur.setNom(nom);
 			utilisateur.setPrenom(prenom);
