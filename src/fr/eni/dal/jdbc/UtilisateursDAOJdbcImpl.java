@@ -124,7 +124,7 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 					nouvelUtilisateur.setEmail(rs.getString("email"));
 					nouvelUtilisateur.setTelephone(rs.getString("telephone"));
 					nouvelUtilisateur.setRue(rs.getString("rue"));
-					nouvelUtilisateur.setCodePostal(rs.getInt("code_postal"));
+					nouvelUtilisateur.setCodePostal(rs.getString("code_postal"));
 					nouvelUtilisateur.setVille(rs.getString("ville"));
 					nouvelUtilisateur.setMotDePasse(rs.getString("mot_de_passe"));
 					nouvelUtilisateur.setCredit(rs.getInt("credit"));

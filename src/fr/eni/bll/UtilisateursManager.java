@@ -23,11 +23,10 @@ public class UtilisateursManager {
 		return UtilisateursManager.manager;
 	}
 	
-<<<<<<< HEAD
-	public void ajouter(String pseudo, String nom, String prenom, String email, String telephone, String rue, int codePostal, String ville,
-=======
-	public void ajouter(String pseudo, String nom, String prenom, String email, String tel, String rue, String codePostal, String ville,
->>>>>>> branch 'master' of https://github.com/YannisHaismann/ENI-Encheres.git
+
+	public void ajouter(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville,
+
+
 					String motDePasse, int credit, int administrateur, int desactiver) throws BusinessException {
 		
 		try {

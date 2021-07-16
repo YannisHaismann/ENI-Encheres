@@ -54,7 +54,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		String email 		= request.getParameter("email");	
 		String telephone 	= request.getParameter("telephone");	
 		String rue 			= request.getParameter("rue");	
-		int codePostal		= Integer.valueOf(request.getParameter("codePostal")) ;
+		String codePostal	= request.getParameter("codePostal") ;
 		String ville 		= request.getParameter("ville");
 		String motDePasse	= request.getParameter("motDePasse");
 		int credit 			= 0;
