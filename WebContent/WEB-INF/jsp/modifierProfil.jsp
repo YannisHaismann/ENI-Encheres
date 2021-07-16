@@ -99,10 +99,10 @@
 				</div>
 			</div>
 			<div class="form-ligne">
-				<div class="form-label-g">
+				<div id="nmdp" class="form-label-g">
 					<label for="nmdp">Nouveau mot de Passe : </label>
 				</div>
-				<div class="form-champ">
+				<div class="form-champ nmdp">
 					<input type="password" name="nmdp"
 						value="<%=request.getParameter("nmdp")%>" />
 				</div>
@@ -114,7 +114,7 @@
 						value="<%=request.getParameter("confirmation")%>" />
 				</div>
 			</div>
-			<div class="form-label-g">Crédit : ${utilisateur.codePostal}</div>
+			<div class="form-label-g">Crédit : ${utilisateur.credit}</div>
 			<div class="form-ligne-boutton">
 				<div class="boutton">
 					<input type="submit" value="Enregistrer" class="taille-btn"/>
