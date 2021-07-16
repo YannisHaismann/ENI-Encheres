@@ -23,7 +23,7 @@ public class UtilisateursManager {
 		return UtilisateursManager.manager;
 	}
 	
-	public void ajouter(String pseudo, String nom, String prenom, String email, String tel, String rue, int codePostal, String ville,
+	public void ajouter(String pseudo, String nom, String prenom, String email, String telephone, String rue, int codePostal, String ville,
 					String motDePasse, int credit, int administrateur, int desactiver) throws BusinessException {
 		
 		try {
@@ -32,7 +32,7 @@ public class UtilisateursManager {
 			utilisateur.setNom(nom);
 			utilisateur.setPrenom(prenom);
 			utilisateur.setEmail(email);
-			utilisateur.setTelephone(tel);
+			utilisateur.setTelephone(telephone);
 			utilisateur.setRue(rue);
 			utilisateur.setCodePostal(codePostal);
 			utilisateur.setVille(ville);

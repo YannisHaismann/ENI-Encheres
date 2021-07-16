@@ -20,7 +20,7 @@ public class Utilisateurs {
 	public Utilisateurs(String pseudo, String nom, String prenom, String email,	String telephone, String rue, int codePostal, String ville,
 						String motDePasse, int credit, int administrateur, int desactiver) {
 		this.setPseudo(pseudo);
-		this.setNom(prenom);
+		this.setNom(nom);
 		this.setPrenom(prenom);
 		this.setEmail(email);
 		this.setTelephone(telephone);
@@ -37,7 +37,7 @@ public class Utilisateurs {
 			String motDePasse, int credit, int administrateur, int desactiver) {
 		this.setId(id);
 		this.setPseudo(pseudo);
-		this.setNom(prenom);
+		this.setNom(nom);
 		this.setPrenom(prenom);
 		this.setEmail(email);
 		this.setTelephone(telephone);
