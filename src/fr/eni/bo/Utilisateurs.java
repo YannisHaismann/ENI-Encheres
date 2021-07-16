@@ -8,7 +8,7 @@ public class Utilisateurs {
 	private String email;	
 	private String telephone;	
 	private String rue;	
-	private int codePostal;
+	private String codePostal;
 	private String ville;
 	private String motDePasse;
 	private int credit;
@@ -17,7 +17,7 @@ public class Utilisateurs {
 	
 	public Utilisateurs() {}
 	
-	public Utilisateurs(String pseudo, String nom, String prenom, String email,	String telephone, String rue, int codePostal, String ville,
+	public Utilisateurs(String pseudo, String nom, String prenom, String email,	String telephone, String rue, String codePostal, String ville,
 						String motDePasse, int credit, int administrateur, int desactiver) {
 		this.setPseudo(pseudo);
 		this.setNom(nom);
@@ -33,7 +33,7 @@ public class Utilisateurs {
 		this.setDesactiver(desactiver);
 	}
 	
-	public Utilisateurs(int id, String pseudo, String nom, String prenom, String email,	String telephone, String rue, int codePostal, String ville,
+	public Utilisateurs(int id, String pseudo, String nom, String prenom, String email,	String telephone, String rue, String codePostal, String ville,
 			String motDePasse, int credit, int administrateur, int desactiver) {
 		this.setId(id);
 		this.setPseudo(pseudo);
@@ -92,11 +92,11 @@ public class Utilisateurs {
 	public void setRue(String rue) {
 		this.rue = rue;
 	}
-	public int getCodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
-	public void setCodePostal(int codePostal) {
-		this.codePostal = codePostal;
+	public void setCodePostal(String codePostal2) {
+		this.codePostal = codePostal2;
 	}
 	public String getVille() {
 		return ville;

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.bll.UtilisateursManager;
+
 /**
  * Servlet implementation class ServletModifiantProfil
  */
@@ -66,9 +68,9 @@ public class ServletModifiantProfil extends HttpServlet {
 			listeCodesErreur.add(CodesResultatServlets.FORMAT_ID_UTILISATEUR_ERREUR);
 		}
 		return idutilisateur;
-	}*/
+	}
 	
-	/*private void chargerUtilisateur(HttpServletRequest request, UtilisateurManager utilisateurManager) {
+	private void chargerUtilisateur(HttpServletRequest request, UtilisateursManager utilisateurManager) {
 		Utilisateur utilisateur;
 		
 		try {

@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/afficherProfil.css">
-<title>Mon profil</title>
+<title>Profil du vendeur</title>
 </head>
 <body>
 	<c:if test="${!empty listeCodesErreur}">
@@ -48,7 +48,7 @@
 	</p>
 	
 	<div class="btn-modif">
-		<a href="<%=request.getContextPath()%>/ModificationProfil"><input type="button" value="Modifier"/></a>
+		<a href="<%=request.getContextPath()%>/"><input type="button" value="Retour"/></a>
 	</div>
 	</div>
 </body>

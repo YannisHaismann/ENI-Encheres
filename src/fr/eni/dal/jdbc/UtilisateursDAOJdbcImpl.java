@@ -14,7 +14,7 @@ import fr.eni.dal.UtilisateursDAO;
 import fr.eni.exception.BusinessException;
 
 public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
-	public static final String INSERT = "INSERT INTO Utilisateurs VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+	public static final String INSERT = "INSERT INTO UTILISATEURS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	public static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?;";
 	public static final String SELECT_ALL = "SELECT * FROM UTILISATEURS";
 	public static final String UPDATE_BY_ID = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?,"
@@ -43,12 +43,12 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 				pstmt.setString(4, utilisateur.getEmail());
 				pstmt.setString(5, utilisateur.getTelephone());
 				pstmt.setString(6, utilisateur.getRue());
-				pstmt.setInt(7, utilisateur.getCodePostal());
+				pstmt.setString(7, utilisateur.getCodePostal());
 				pstmt.setString(8, utilisateur.getVille());
 				pstmt.setString(9, utilisateur.getMotDePasse());
 				pstmt.setInt(10, utilisateur.getCredit());
-				pstmt.setInt(10, utilisateur.getAdministrateur());
-				pstmt.setInt(11, utilisateur.getDesactiver());
+				pstmt.setInt(11, utilisateur.getAdministrateur());
+				pstmt.setInt(12, utilisateur.getDesactiver());
 				
 				pstmt.executeUpdate();
 				pstmt.close();
@@ -84,7 +84,7 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 				nouvelUtilisateur.setEmail(rs.getString("email"));
 				nouvelUtilisateur.setTelephone(rs.getString("telephone"));
 				nouvelUtilisateur.setRue(rs.getString("rue"));
-				nouvelUtilisateur.setCodePostal(rs.getInt("code_postal"));
+				nouvelUtilisateur.setCodePostal(rs.getString("code_postal"));
 				nouvelUtilisateur.setVille(rs.getString("ville"));
 				nouvelUtilisateur.setMotDePasse(rs.getString("mot_de_passe"));
 				nouvelUtilisateur.setCredit(rs.getInt("credit"));
@@ -167,13 +167,13 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 				pstmt.setString(4, utilisateur.getEmail());
 				pstmt.setString(5, utilisateur.getTelephone());
 				pstmt.setString(6, utilisateur.getRue());
-				pstmt.setInt(7, utilisateur.getCodePostal());
+				pstmt.setString(7, utilisateur.getCodePostal());
 				pstmt.setString(8, utilisateur.getVille());
 				pstmt.setString(9, utilisateur.getMotDePasse());
 				pstmt.setInt(10, utilisateur.getCredit());
-				pstmt.setInt(10, utilisateur.getAdministrateur());
-				pstmt.setInt(11, utilisateur.getDesactiver());
-				pstmt.setInt(12, utilisateur.getId());
+				pstmt.setInt(11, utilisateur.getAdministrateur());
+				pstmt.setInt(12, utilisateur.getDesactiver());
+				pstmt.setInt(13, utilisateur.getId());
 				
 				pstmt.executeUpdate();
 				
