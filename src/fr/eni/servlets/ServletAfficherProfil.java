@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.bll.UtilisateursManager;
+import fr.eni.bo.Utilisateurs;
+import fr.eni.exception.BusinessException;
+
 /**
  * Servlet implementation class ServletAfficherProfil
  */
@@ -22,7 +26,7 @@ public class ServletAfficherProfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*//Je lis les paramètres
+		//Je lis les paramètres
 		int idutilisateur = 0;
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		
@@ -35,12 +39,12 @@ public class ServletAfficherProfil extends HttpServlet {
 		else if(idutilisateur > 0)
 		{
 			//J'ai un id au bon format, je récupère l'utilisateur eventuel
-			UtilisateurManager utilisateurManager = new UtilisateurManager();
+			UtilisateursManager utilisateurManager = new UtilisateursManager();
 			chargerUtilisateur(request, utilisateurManager);
 			
 			request.setAttribute("utilisateur", utilisateurManager);
 		}
-		*/
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/afficherProfil.jsp");
 		rd.forward(request, response);
 	}
@@ -51,7 +55,7 @@ public class ServletAfficherProfil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-	/*
+	
 	private int lireParametreId(HttpServletRequest request, List<Integer> listeCodesErreur) {
 		int idutilisateur = 0;
 		try
@@ -69,18 +73,18 @@ public class ServletAfficherProfil extends HttpServlet {
 		return idutilisateur;
 	}
 	
-	private void chargerUtilisateur(HttpServletRequest request, UtilisateurManager utilisateurManager) {
-		Utilisateur utilisateur;
+	private void chargerUtilisateur(HttpServletRequest request, UtilisateursManager utilisateurManager) {
+		Utilisateurs utilisateur;
 		
 		try {
 			int idUtilisateur = lireParametreId(request, null);
-			utilisateur = utilisateurManager.selectionnerUtilisateur(idUtilisateur);
+			utilisateur = utilisateurManager.selectionner(idUtilisateur);
 			request.setAttribute("utilisateur", utilisateur);
 			
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
 		}
-	}*/
+	}
 
 }

@@ -8,11 +8,11 @@ import fr.eni.dal.UtilisateursDAO;
 import fr.eni.exception.BusinessException;
 
 public class UtilisateursManager {
-	
+
 	private static UtilisateursManager manager;
 	private UtilisateursDAO utilisateursDao;
-	
-	private  UtilisateursManager() {
+
+	public UtilisateursManager() {
 		this.utilisateursDao = DAOFactory.getUtilisateursDAO();
 	}
 	
@@ -22,13 +22,10 @@ public class UtilisateursManager {
 		}
 		return UtilisateursManager.manager;
 	}
-	
+	public void ajouter(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse, int credit, int administrateur, int desactiver)
+			throws BusinessException {
 
-	public void ajouter(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville,
-
-
-					String motDePasse, int credit, int administrateur, int desactiver) throws BusinessException {
-		
 		try {
 			Utilisateurs utilisateur = new Utilisateurs();
 			utilisateur.setPseudo(pseudo);
@@ -43,22 +40,23 @@ public class UtilisateursManager {
 			utilisateur.setCredit(credit);
 			utilisateur.setAdministrateur(administrateur);
 			utilisateur.setDesactiver(desactiver);
-			
+
 			this.utilisateursDao.insert(utilisateur);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 	}
-	
-	public void update(int id, String pseudo, String nom, String prenom, String email, String tel, String rue, String codePostal, String ville,
-					String motDePasse, int credit, int administrateur, int desactiver) throws BusinessException {
+
+	public void update(int id, String pseudo, String nom, String prenom, String email, String tel, String rue,
+			String codePostal, String ville, String motDePasse, int credit, int administrateur, int desactiver)
+			throws BusinessException {
 		Utilisateurs utilisateur = null;
 		try {
-			if(this.selectionner(id) != null) {
+			if (this.selectionner(id) != null) {
 				utilisateur = this.selectionner(id);
-			}else {
+			} else {
 				BusinessException businessException = new BusinessException();
 				businessException.ajouterErreur(CodesResultatBLL.NULL_UTILISATEUR);
 				throw businessException;
@@ -76,26 +74,26 @@ public class UtilisateursManager {
 			utilisateur.setCredit(credit);
 			utilisateur.setAdministrateur(administrateur);
 			utilisateur.setDesactiver(desactiver);
-			
+
 			this.utilisateursDao.update(utilisateur);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			throw e;
 		}
 	}
-	
+
 	public void supprimer(int id) throws BusinessException {
-		if(this.selectionner(id) != null) {
+		if (this.selectionner(id) != null) {
 			this.utilisateursDao.delete(this.selectionner(id));
 		}
 	}
-	
+
 	public List<Utilisateurs> selectionnerTous() throws BusinessException {
 		return this.utilisateursDao.selectAll();
 	}
-	
+
 	public Utilisateurs selectionner(int id) throws BusinessException {
 		return this.utilisateursDao.selectBy(id);
 	}
-	
+
 }

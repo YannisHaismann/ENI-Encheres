@@ -74,7 +74,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		utilisateur.setVille(ville);
 		utilisateur.setMotDePasse(motDePasse);
 		
-		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
+		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();;
 		
 		try {
 			utilisateursManager.ajouter(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur, desactiver);
