@@ -22,7 +22,7 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 	public static final String DELETE_BY_ID = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
 	
 	@Override
-	public void insert(Utilisateurs utilisateur) throws BusinessException {
+	public Utilisateurs insert(Utilisateurs utilisateur) throws BusinessException {
 		
 		if(utilisateur == null) {
 			BusinessException businessException = new BusinessException();
@@ -35,8 +35,9 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 			try {
 				con.setAutoCommit(false);
 				PreparedStatement pstmt;
+				int key = -1;
 				
-				pstmt = con.prepareStatement(INSERT);
+				pstmt = con.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 				pstmt.setString(1, utilisateur.getPseudo());
 				pstmt.setString(2, utilisateur.getNom());
 				pstmt.setString(3, utilisateur.getPrenom());
@@ -51,8 +52,14 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 				pstmt.setInt(12, utilisateur.getDesactiver());
 				
 				pstmt.executeUpdate();
+				ResultSet rs = pstmt.getGeneratedKeys();
+				if(rs.next()) {
+					key = rs.getInt(1);
+					utilisateur.setId(key);
+				}
 				pstmt.close();
 				con.commit();
+				return utilisateur;
 			}catch(Exception e) {
 				e.printStackTrace();
 				con.rollback();
