@@ -95,5 +95,12 @@ public class UtilisateursManager {
 	public Utilisateurs selectionner(int id) throws BusinessException {
 		return this.utilisateursDao.selectBy(id);
 	}
-
+	
+	public Utilisateurs selectionnerTousParPseudo(String pseudo) throws BusinessException{
+		return this.utilisateursDao.selectByPseudo(pseudo);
+	}
+	
+	public Utilisateurs selectionnerTousParEmail(String email) throws BusinessException{
+		return this.utilisateursDao.selectByEmail(email);
+	}
 }

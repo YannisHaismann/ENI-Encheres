@@ -17,6 +17,8 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 	public static final String INSERT = "INSERT INTO UTILISATEURS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	public static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?;";
 	public static final String SELECT_ALL = "SELECT * FROM UTILISATEURS";
+	public static final String SELECT_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
+	public static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email = ?";
 	public static final String UPDATE_BY_ID = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?,"
 			+ " code_postal = ?, ville = ?, mot_de_passe = ?, credit = ?, administrateur = ?, desactiver = ?  WHERE no_utilisateur = ?;";
 	public static final String DELETE_BY_ID = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
@@ -236,5 +238,83 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 		
 	}
 	
+	public Utilisateurs selectByPseudo(String pseudo) throws BusinessException {
+		
+		try(Connection con = ConnectionProvider.getConnection()) {
+			try {
+				Statement stmt;
+				stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(SELECT_BY_PSEUDO);
+				Utilisateurs utilisateur = new Utilisateurs();
+				while(rs.next()) {
+					Utilisateurs nouvelUtilisateur = new Utilisateurs();
+					nouvelUtilisateur.setId(rs.getInt("no_utilisateur"));
+					nouvelUtilisateur.setPseudo(rs.getString("pseudo"));
+					nouvelUtilisateur.setNom(rs.getString("nom"));
+					nouvelUtilisateur.setPrenom(rs.getString("prenom"));
+					nouvelUtilisateur.setEmail(rs.getString("email"));
+					nouvelUtilisateur.setTelephone(rs.getString("telephone"));
+					nouvelUtilisateur.setRue(rs.getString("rue"));
+					nouvelUtilisateur.setCodePostal(rs.getString("code_postal"));
+					nouvelUtilisateur.setVille(rs.getString("ville"));
+					nouvelUtilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+					nouvelUtilisateur.setCredit(rs.getInt("credit"));
+					nouvelUtilisateur.setAdministrateur(rs.getInt("administrateur"));
+					nouvelUtilisateur.setDesactiver(rs.getInt("desactiver"));
+				}
+				rs.close();
+				stmt.close();
+				
+				return utilisateur;
+			}catch(Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_BY_PSEUDO_ECHEC);
+			throw businessException;
+		}
+	}
 	
+	public Utilisateurs selectByEmail(String email) throws BusinessException {
+		
+		try(Connection con = ConnectionProvider.getConnection()) {
+			try {
+				Statement stmt;
+				stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(SELECT_BY_EMAIL);
+				Utilisateurs utilisateur = new Utilisateurs();
+				while(rs.next()) {
+					Utilisateurs nouvelUtilisateur = new Utilisateurs();
+					nouvelUtilisateur.setId(rs.getInt("no_utilisateur"));
+					nouvelUtilisateur.setPseudo(rs.getString("pseudo"));
+					nouvelUtilisateur.setNom(rs.getString("nom"));
+					nouvelUtilisateur.setPrenom(rs.getString("prenom"));
+					nouvelUtilisateur.setEmail(rs.getString("email"));
+					nouvelUtilisateur.setTelephone(rs.getString("telephone"));
+					nouvelUtilisateur.setRue(rs.getString("rue"));
+					nouvelUtilisateur.setCodePostal(rs.getString("code_postal"));
+					nouvelUtilisateur.setVille(rs.getString("ville"));
+					nouvelUtilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+					nouvelUtilisateur.setCredit(rs.getInt("credit"));
+					nouvelUtilisateur.setAdministrateur(rs.getInt("administrateur"));
+					nouvelUtilisateur.setDesactiver(rs.getInt("desactiver"));
+				}
+				rs.close();
+				stmt.close();
+				
+				return utilisateur;
+			}catch(Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_BY_EMAIL_ECHEC);
+			throw businessException;
+		}
+	}
 }
