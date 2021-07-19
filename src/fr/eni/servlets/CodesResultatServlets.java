@@ -58,4 +58,6 @@ public class CodesResultatServlets {
 
 	public static final Integer ECHEC_RECUPERATION_PAR_EMAIL = null;
 
+	public static final Integer EMAIL_DEJA_PRIS = null;
+
 }
