@@ -303,5 +303,4 @@ public class ServletModifiantProfil extends HttpServlet {
 
 		return true;
 	}
-
 }
