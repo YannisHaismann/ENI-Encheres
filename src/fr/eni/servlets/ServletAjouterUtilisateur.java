@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.bll.UtilisateursManager;
 import fr.eni.bo.Utilisateurs;
 import fr.eni.exception.BusinessException;
+import fr.eni.utils.BCrypt;
 
 
 
@@ -50,13 +51,13 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		
 		String pseudo 		= request.getParameter("pseudo");
 		String nom 			= request.getParameter("nom");
-		String prenom 		=  request.getParameter("prenom");
+		String prenom 		= request.getParameter("prenom");
 		String email 		= request.getParameter("email");	
 		String telephone 	= request.getParameter("telephone");	
 		String rue 			= request.getParameter("rue");	
 		String codePostal	= request.getParameter("codePostal") ;
 		String ville 		= request.getParameter("ville");
-		String motDePasse	= request.getParameter("motDePasse");
+		String motDePasse	= BCrypt.hashpw(request.getParameter("motDePasse"), BCrypt.gensalt());
 		int credit 			= 0;
 		int administrateur 	= 0;
 		int desactiver 		= 0;

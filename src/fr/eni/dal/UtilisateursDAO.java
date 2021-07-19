@@ -6,7 +6,7 @@ import fr.eni.bo.Utilisateurs;
 import fr.eni.exception.BusinessException;
 
 public interface UtilisateursDAO {
-	public void insert(Utilisateurs utilisateur) throws BusinessException;
+	public Utilisateurs insert(Utilisateurs utilisateur) throws BusinessException;
 	public Utilisateurs selectBy(int id) throws BusinessException;
 	public List<Utilisateurs> selectAll() throws BusinessException;
 	public void update(Utilisateurs utilisateur) throws BusinessException;
