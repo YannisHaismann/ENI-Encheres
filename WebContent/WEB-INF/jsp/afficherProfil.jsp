@@ -10,6 +10,9 @@
 <title>Mon profil</title>
 </head>
 <body>
+
+<%@include file="header_logo_simple.jsp"%>
+
 	<c:if test="${!empty listeCodesErreur}">
 			<div class="alert alert-danger" role="alert">
 			  <strong>Erreur!</strong>
@@ -51,5 +54,9 @@
 		<a href="<%=request.getContextPath()%>/ModificationProfil"><input type="button" value="Modifier"/></a>
 	</div>
 	</div>
+	
+<%@include file="footer.jsp"%>
+	
+	
 </body>
 </html>

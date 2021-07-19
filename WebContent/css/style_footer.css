@@ -5,6 +5,12 @@
     background-color:rgb(64, 78, 160);
     color:#4b4c4d;
   }
+  
+  .flex-elements{
+  	display: flex;
+  	flex-direction: row;
+  	justify-content: space-between;
+  }
    
   .footer-basic ul {
     padding:0;
@@ -13,6 +19,10 @@
     font-size:18px;
     line-height:1.6;
     margin-bottom:0;
+  }
+  
+  .list-inline {
+  	margin-top: 18px;
   }
   
   .footer-basic li {
@@ -27,6 +37,8 @@
   
   .footer-basic ul a:hover {
     opacity:1;
+    text-decoration: none;
+    
   }
   
   .footer-basic .social {
