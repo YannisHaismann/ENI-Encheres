@@ -53,8 +53,8 @@
 			  <ul>
 			  	<c:forEach var="code" items="${listeCodesErreur}">
 			  		<li>${LecteurMessage.getMessageErreur(code)}</li>
-			  	</c:forEach>
-			  </ul>
+			  	</c:forEach> 
+			  </ul> 
 			</div>
 		</c:if>
         
