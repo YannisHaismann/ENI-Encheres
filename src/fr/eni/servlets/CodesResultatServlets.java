@@ -24,4 +24,6 @@ public class CodesResultatServlets {
 
 	public static final Integer EMAIL_NON_VALIDE = null;
 
+	public static final Integer PSEUDO_DEJA_PRIS = null;
+
 }
