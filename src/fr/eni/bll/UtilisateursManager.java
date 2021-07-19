@@ -49,7 +49,7 @@ public class UtilisateursManager {
 
 	}
 
-	public void update(int id, String pseudo, String nom, String prenom, String email, String tel, String rue,
+	public void update(int id, String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, int credit, int administrateur, int desactiver)
 			throws BusinessException {
 		Utilisateurs utilisateur = null;
@@ -66,7 +66,7 @@ public class UtilisateursManager {
 			utilisateur.setNom(nom);
 			utilisateur.setPrenom(prenom);
 			utilisateur.setEmail(email);
-			utilisateur.setTelephone(tel);
+			utilisateur.setTelephone(telephone);
 			utilisateur.setRue(rue);
 			utilisateur.setCodePostal(codePostal);
 			utilisateur.setVille(ville);

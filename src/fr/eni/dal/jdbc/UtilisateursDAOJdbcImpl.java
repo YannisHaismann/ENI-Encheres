@@ -246,7 +246,7 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 				stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(SELECT_BY_PSEUDO);
 				Utilisateurs utilisateur = new Utilisateurs();
-				while(rs.next()) {
+				rs.next();
 					Utilisateurs nouvelUtilisateur = new Utilisateurs();
 					nouvelUtilisateur.setId(rs.getInt("no_utilisateur"));
 					nouvelUtilisateur.setPseudo(rs.getString("pseudo"));
@@ -261,7 +261,7 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 					nouvelUtilisateur.setCredit(rs.getInt("credit"));
 					nouvelUtilisateur.setAdministrateur(rs.getInt("administrateur"));
 					nouvelUtilisateur.setDesactiver(rs.getInt("desactiver"));
-				}
+				
 				rs.close();
 				stmt.close();
 				
@@ -286,7 +286,7 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 				stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(SELECT_BY_EMAIL);
 				Utilisateurs utilisateur = new Utilisateurs();
-				while(rs.next()) {
+				rs.next();
 					Utilisateurs nouvelUtilisateur = new Utilisateurs();
 					nouvelUtilisateur.setId(rs.getInt("no_utilisateur"));
 					nouvelUtilisateur.setPseudo(rs.getString("pseudo"));
@@ -301,7 +301,6 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 					nouvelUtilisateur.setCredit(rs.getInt("credit"));
 					nouvelUtilisateur.setAdministrateur(rs.getInt("administrateur"));
 					nouvelUtilisateur.setDesactiver(rs.getInt("desactiver"));
-				}
 				rs.close();
 				stmt.close();
 				

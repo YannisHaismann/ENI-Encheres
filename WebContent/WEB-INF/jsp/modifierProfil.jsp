@@ -95,7 +95,7 @@
 				</div>
 				<div class="form-champ">
 					<input type="password" name="mdpa"
-						value="<%=request.getParameter("mdpa")%>" />
+						value="<%=request.getParameter("motDePasse")%>" />
 				</div>
 			</div>
 			<div class="form-ligne">
@@ -103,15 +103,15 @@
 					<label for="nmdp">Nouveau mot de Passe : </label>
 				</div>
 				<div class="form-champ nmdp">
-					<input type="password" name="nmdp"
-						value="<%=request.getParameter("nmdp")%>" />
+					<input type="password" name="nouveauMdp"
+						value="<%=request.getParameter("nouveauMdp")%>" />
 				</div>
 				<div class="form-label-d">
 					<label for="confirmation">Confirmation : </label>
 				</div>
 				<div class="form-champ">
-					<input type="password" name="confirmation"
-						value="<%=request.getParameter("confirmation")%>" />
+					<input type="password" name="confirmationMdp"
+						value="<%=request.getParameter("confirmationMdp")%>" />
 				</div>
 			</div>
 			<div class="form-label-g">Crédit : ${utilisateur.credit}</div>
