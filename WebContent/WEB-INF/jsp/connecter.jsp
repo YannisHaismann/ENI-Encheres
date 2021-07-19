@@ -19,40 +19,43 @@
     <link rel="stylesheet" href="../../css/style_footer.css">
     <link rel="stylesheet" href="../../css/style_header.css">
     
-    <title>Connecter au compte</title>
+    <title>Connecter au compte</title> 
 </head> 
 
 
 
 <body> 
 
+
+<h1><b>Bienvenue sur Troc Enchère </b></h1>
+  <p><b>Le site de bonnes affaires</b></p> 
   
-  <a  style="display: inline-block; " href=""> <img src="../../photos/logo-ENI.png" style="margin: 20px 0 0 20px;" height="60" width="60" alt="logo-eni"> </a>
+<%@include file="header_logo_simple.jsp"%>
     
     <div class="login-box"> 
     
         <img src="../../photos/avatar_connexion.png" alt="avatar" class="avatar">        
         
-	        <form action="" method="post">
+	        <form action="./index.html" method="post">
 	        
 	        	<fieldset > <p class=login-title>Se connecter</p>  
 	        
 	                    <div class="full-width">
 			                <label for="username">Identifiant</label><br>
-			                <input type="text" id="username" placeholder="votre mail ou pseudo">
+			                <input type="text" id="username" placeholder="votre mail ou pseudo" name="pseudo">
 			            </div> 
 			            
 			            <div class="full-width">
-			                <label for="password">Mot de passe</label><br>
-			                <input type="password" id="password" placeholder="entrer votre password"><br><br>
+			                <label for="motDePasse">Mot de passe</label><br>
+			                <input type="password" id="motDePasse"  name="motDePasse" placeholder="entrer votre mot de passe"><br><br>
 			            </div>
 			                        
 			            <div class="aligner-login">
 			                <input  type="submit" value="Connexion">
 			                
 			                <div class="checkbox">
-			                    <label for="remember"> Se souvenir de moi</label>
-			                    <input type="checkbox" name="remember" id="remember">
+			                    <label for="seSouvenir"> Se souvenir de moi</label>
+			                    <input type="checkbox" name="seSouvenir" id="seSouvenir">
 			                </div>
 			            </div>
 			            

@@ -14,9 +14,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <link rel="stylesheet" href="../../css/style_inscription.css">
-    <link rel="stylesheet" href="../../css/style_footer.css">
-    <link rel="stylesheet" href="../../css/style_header.css">
+    <link rel="stylesheet" href="css/style_inscription.css">
+    <link rel="stylesheet" href="css/style_connecter.css">    
+    <link rel="stylesheet" href="css/style_footer.css">
+    <link rel="stylesheet" href="css/style_header.css">
     
     
     
@@ -25,9 +26,26 @@
 
 
 
-<body>  
+<body style="background-image: url('./images/fond_page_connexion.jpg');">  
 
-	<a  style="display: inline-block; " href=""> <img src="../../photos/logo-ENI.png" style="margin: 20px 0 0 20px;" height="60" width="60" alt="logo-eni"> </a>
+
+<c:if test="${erreurPseudo != null}" var="test">
+	<div class="alert alert-danger" role="alert">${erreurPseudo}</div>
+</c:if>
+<c:if test="${erreurMail != null}" var="test">
+	<div class="alert alert-danger" role="alert">${erreurMail}</div>
+</c:if>
+<c:if test="${erreurTel != null}" var="test">
+	<div class="alert alert-danger" role="alert">${erreurTel}</div>
+</c:if>
+<c:if test="${erreurMDP != null}" var="test">
+	<div class="alert alert-danger" role="alert">${erreurMDP}</div>
+</c:if>
+<c:if test="${messageCreation != null}" var="test">
+	<div class="alert alert-danger" role="alert">${messageCreation}</div>
+</c:if>
+
+<%@include file="header_logo_simple.jsp"%>
   
   	<c:if test="${!empty listeCodesErreur}">
 			<div class="alert alert-danger" role="alert">
@@ -49,52 +67,53 @@
         <form action="<%=request.getContextPath()%>/ServletAjouterUtilisateur" method="post" class="flex-profil-elements">
         
                         <div >                            
-                                <label class="label-gauche" for="pseudo" >Pseudo</label>
-                                <input type="text" id="pseudo" required name="pseudo">
+                                <label class="label-gauche" for="pseudo" >Pseudo <span class="requis">*</span></label>
+                                <input type="text" id="pseudo" required name="pseudo" value="">
                         </div>
                         <div>
-                            <label class="label-droit" for="nom" >Nom</label>
-                            <input type="text" id="nom" placeholder="votre Nom" required name="nom"><br>
+                            <label class="label-droit" for="nom" >Nom <span class="requis">*</span></label>
+                            <input type="text" id="nom" placeholder="votre Nom" required name="nom" value=""><br>
                         </div>                            
                         
 		                <div>
-                            <label class="label-gauche" for="prenom" >Prénom</label>
-                            <input type="text" id="prenom" required placeholder="votre prénom" name="prenom">
+                            <label class="label-gauche" for="prenom" >Prénom <span class="requis">*</span></label>
+                            <input type="text" id="prenom" required placeholder="votre prénom" name="prenom" value="">
                         </div>
                         <div>
-                            <label class="label-droit" for="email" >Email</label>
-                            <input type="email" id="email" required placeholder="votre_email@mail.fr" name="email"><br>
+                            <label class="label-droit" for="email" >Email <span class="requis">*</span></label>
+                            <input type="email" id="email" required placeholder="votre_email@mail.fr" name="email" value=""><br>
                         </div>
                         
                         <div >
                             <label class="label-gauche" for="telephone" >Téléphone</label>
-                            <input type="text" id="telephone"  name="telephone">
+                            <input type="text" id="telephone"  name="telephone" value="">
                         </div>
                         <div>
-                            <label class="label-droit" for="rue" >Rue</label>
-                            <input type="text" id="rue" required name="rue"><br>
+                            <label class="label-droit" for="rue" >Rue <span class="requis">*</span></label>
+                            <input type="text" id="rue" required name="rue" value=""><br>
                         </div>
                         <div >
-                            <label class="label-gauche" for="code-postale" >Code postal</label>
-                            <input type="text" id="code-postale" required name="codePostal" >
+                            <label class="label-gauche" for="codePostal" >Code postal <span class="requis">*</span></label>
+                            <input type="text" id="codePostal" required name="codePostal"  value=""  max="99999" pattern="[0-9]{5}">
                         </div>
                         <div>
-                            <label class="label-droit" for="ville" >Ville</label>
-                            <input type="text" id="ville" name="ville"><br>
+                            <label class="label-droit" for="ville" >Ville <span class="requis">*</span></label>
+                            <input type="text" id="ville" name="ville" value=""><br>
                         </div>                  
                        	<div >
-                            <label class="label-gauche" for="motDePasse" >Mot de passe</label>
-                            <input type="password" id="motDePasse" required placeholder="entrer le mot De Passe" name="motDePasse">
+                            <label class="label-gauche" for="motDePasse" >Mot de passe <span class="requis">*</span></label>
+                            <input type="password" id="motDePasse" required maxlength="20" placeholder="entrer le mot De Passe" name="motDePasse" value="">
                         </div>
                         <div>
-                            <label class="label-droit" for="confirmation" >Confirmation</label>
-                            <input type="password" id="confirmation" required placeholder="confirmer le password"><br>
+                            <label class="label-droit" for="confirmation" >Confirmation <span class="requis">*</span></label>
+                            <input type="password" id="confirmation" maxlength="20" required placeholder="confirmer le password" value="" name="confirmation"><br>
                         </div>
+                        
                         <div style="width: 228px;">
-                            <input class="creer-button" name="creer-button" type="submit" value="CrÃ©er">                                                        
+                            <a href="<%=request.getContextPath()%>/accueilConnecte.jsp"><input class="creer-button" name="creer-button" type="submit" value="Créer">  </a>                                                      
                         </div>
                         <div>
-                            <input class="annuler-button" name="annuler-button" type="submit" value="Annuler">
+                            <a href="<%=request.getContextPath()%>/accueilnonconnecte.jsp"><input class="annuler-button" name="annuler-button" type="submit" value="Annuler"></a>
                         </div>
                         
                          

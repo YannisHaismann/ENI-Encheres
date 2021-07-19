@@ -17,6 +17,36 @@ public class Utilisateurs {
 	
 	public Utilisateurs() {}
 	
+	
+	
+	/**
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @param motDePasse
+	 * @param credit
+	 */
+	public Utilisateurs(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse, int credit) {
+		this.setPseudo(pseudo);
+		this.setNom(nom);
+		this.setPrenom(prenom);
+		this.setEmail(email);
+		this.setTelephone(telephone);
+		this.setRue(rue);
+		this.setCodePostal(codePostal);
+		this.setVille(ville);
+		this.setMotDePasse(motDePasse);
+		this.setCredit(credit);
+	}
+
+
+
 	public Utilisateurs(String pseudo, String nom, String prenom, String email,	String telephone, String rue, String codePostal, String ville,
 						String motDePasse, int credit, int administrateur, int desactiver) {
 		this.setPseudo(pseudo);
@@ -50,6 +80,8 @@ public class Utilisateurs {
 		this.setDesactiver(desactiver);
 	}
 	
+
+
 	public int getId() {
 		return id;
 	}

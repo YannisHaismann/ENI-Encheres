@@ -8,6 +8,9 @@
 <title>INSERER TITLE</title>
 </head>
 <body>
+
+<%@include file="header_logo_simple.jsp"%>
+
     <form action="" method="post">
     	<h2>Vous avez remporté l'enchère</h2>
         <p>{{NOM ARTICLE}}</p>
@@ -24,5 +27,8 @@
         </fieldset>
         <p>Retrait effectué</p>
     </form>
+    
+<%@include file="footer.jsp"%>
+    
 </body>
 </html>

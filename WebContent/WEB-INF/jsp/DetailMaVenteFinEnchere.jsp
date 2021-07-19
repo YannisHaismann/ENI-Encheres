@@ -8,6 +8,9 @@
 <title>INSERER TITLE</title>
 </head>
 <body>
+
+<%@include file="header_logo_simple.jsp"%>
+
     <form action="" method="post">
         <h2>{{PSEUDO ACHETEUR}} a remporté l'enchere</h2>
         <p>{{NOM ARTICLE}}</p>
@@ -23,5 +26,8 @@
         <a href="CONTACTER ACHETEUR">Contacter {{PSEUDO ACHETEUR}}</a>
         <a href="RETOUR">Back</a></p>
     </form>
+    
+<%@include file="footer.jsp"%>
+
 </body>
 </html>

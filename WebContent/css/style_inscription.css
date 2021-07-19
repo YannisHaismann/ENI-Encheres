@@ -7,10 +7,8 @@ html {
 }
  
 body { 
-    overflow: none;   
     margin: 0px;
     padding: 0px;
-    background: url(../lib/fond_page_connexion.jpg) ;
     background-size: cover ; background-attachment: fixed; 
     background-repeat: no-repeat; background-position: top center;
     font-family: sans-serif;    
@@ -18,8 +16,8 @@ body {
 
 .inscription-box {
     display: block;
-    width: 660px;
-    height: 380px;
+    width: 620px;
+    height: 290px;
     border-radius: 10px;
     background: rgb(103, 116, 189);
     color: #fff;

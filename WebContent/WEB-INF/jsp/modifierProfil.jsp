@@ -10,6 +10,9 @@
 <title>Modidier/Supprimer mon profil</title>
 </head>
 <body>
+
+<%@include file="header_logo_simple.jsp"%>
+
 	<c:if test="${!empty listeCodesErreur}">
 		<div class="alert alert-danger" role="alert">
 			<strong>Erreur!</strong>
@@ -130,5 +133,8 @@
 			</div>
 		</form>
 	</div>
+	
+<%@include file="footer.jsp"%>
+	
 </body>
 </html>

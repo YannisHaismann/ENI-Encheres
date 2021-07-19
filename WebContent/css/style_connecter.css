@@ -10,7 +10,7 @@ body {
     overflow: none;   
     margin: 0px;
     padding: 0px;
-    background: url(../lib/fond_page_connexion.jpg) ;
+    background-image:url("/images/fond_page_connexion.jpg"); 
     background-size: cover ; background-attachment: fixed; 
     background-repeat: no-repeat; background-position: top center;
     font-family: sans-serif;    

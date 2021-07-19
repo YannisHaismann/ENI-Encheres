@@ -8,6 +8,10 @@
 <title>INSERER TITLE</title>
 </head>
 <body>
+
+<%@include file="header_logo_simple.jsp"%>
+
+
     <form action="" method="post">
         <h2>{{NOM ARTICLE}}</h2>
         <div class="photoArticle">
@@ -21,5 +25,8 @@
         <p><a href="ANNULER">Annuler la vente</a>
         <a href="RETOUR">Back</a></p>
     </form>
+    
+<%@include file="footer.jsp"%>
+
 </body>
 </html>

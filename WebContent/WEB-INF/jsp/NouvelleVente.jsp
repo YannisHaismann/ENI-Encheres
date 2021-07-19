@@ -8,6 +8,9 @@
 <title>INSERER TITLE</title>
 </head>
 <body>
+
+<%@include file="header_logo_simple.jsp"%>
+
     <form action="" method="post">
         <h2>Nouvelle vente</h2>
         <p><label for="article">Article: </label><input type="text" name="article" id="article"></p>
@@ -24,5 +27,8 @@
         <p><input type="submit" value="ENREGISTRER" name="enregistrer">
         <input type="submit" value="ANNULER" name="annuler"></p>
     </form>
+    
+<%@include file="footer.jsp"%>
+    
 </body>
 </html>
