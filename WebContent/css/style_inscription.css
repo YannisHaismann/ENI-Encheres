@@ -1,115 +1,87 @@
-html {
-    margin: 0;
-}
-
-* {
-    box-sizing: border-box;
-}
- 
-body { 
-    margin: 0px;
-    padding: 0px;
-    background-size: cover ; background-attachment: fixed; 
-    background-repeat: no-repeat; background-position: top center;
-    font-family: sans-serif;   
-}
-
-.inscription-box {
-    width: 30%;
-    border-radius: 10px;
-    background: rgb(103, 116, 189);
-    color: #fff;
-    top: 40%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%,-50%);
-    box-sizing: border-box;
-    padding: 10px 10px;
-
-}
-
-.label-gauche {
-    display: inline-block;
-    width: 100px;
-}
-
-.label-droit {
-    display: inline-block;
-    width: 100px;
-}
-
-.flex-profil-elements {
-    display: flex;
-    flex-direction: row;  
-    flex-wrap: wrap;
-    justify-content: space-between;     
-    
-}
-
-.password-field a:hover {
-    color: blue;
-    background-color: white;
-}
-
-
-
-::placeholder{
-    opacity: 0.6;
-}
-
-.creer-button  {
-    
-    float: left;
-    background-color: #4CAF50; /* Green */
-    border: none;
-    border-radius: 6px;
-    color: white;
-    padding: 5px 20px;
-    margin-top: 15px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
-}
-
-.annuler-button  {
-    float: right;
-    background-color: #fff; 
-    border: none;
-    border-radius: 6px;
-    color: #000;
-    padding: 5px 13px;
-    margin-top: 15px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
-}
-
-.creer-button:hover , .annuler-button:hover {
-    opacity: 0.6;
-}
-
-@media only screen and (max-width:960px) {
-
-.inscription-box {
+	
+	html {
+		margin: 0;
+	}
+	
+	* {
+		box-sizing: border-box;
+	}
+	
+	body {
+		margin: 0px;
+		padding: 0px;
+		background-size: cover;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-position: top center;
+		font-family: sans-serif;
+	}
+	
+	.inscription-box {
+		width: 30%;
+		border-radius: 10px;
+		background: rgb(103, 116, 189);
+		color: #fff;
+		top: 40%;
+		left: 50%;
+		position: absolute;
+		transform: translate(-50%, -50%);
+		box-sizing: border-box;
+		padding: 10px 10px;
+	}
+	
+	.label-gauche-inscription {
+		display: inline-block;
+		width: 100px;
+	}
+	
+	.label-droit-inscription {
+		display: inline-block;
+		width: 100px;
+	}
+	
+	.flex-profil-elements {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+	
+	.password-field a:hover {
+		color: blue;
+		background-color: white;
+	}
+	
+	::placeholder {
+		opacity: 0.6;
+	}
+	
+.form-boutton {
 	display: flex;
-	flex-direction: column;
+	clear: left;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;	
+	
 }
+	
+.form-boutton:hover {
+		opacity: 0.6;
+	}
+	
 
-.creer-button {
-	flex:none
-	float: left;
-	margin: 5px 70px;
-}	
 
-.annuler-button {
-	flex:none
-	float: left;
-	margin: 5px 70px;
+@media all and (max-width:370px) {
+	.inscription-box {
+		display: flex;
+		flex-direction: column;
+	}
+	.creer-button {
+		flex: none float: left;
+		margin: 5px 70px;
+	}
+	.annuler-button {
+		flex: none float: left;
+		margin: 5px 70px;
+	}
 }
-
-}
-
-
-

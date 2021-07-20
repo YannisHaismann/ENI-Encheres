@@ -8,9 +8,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/Accueil.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+
+	<link rel="stylesheet" href="css/style_footer.css">
+	<link rel="stylesheet" href="css/style_header.css"> 
+
     <title>[Title]</title>
 </head>
 <body>
+
+<%@include file="header_page_connectee.jsp"%>
+
     <h1>Liste des enchères<div class="animation-underline__bottom"></div><div class="animation-underline__right"></div>
         <div class="animation-underline__top"></div><div class="animation-underline__left"></div></h1>
     <div class="search-top-nav">
@@ -41,5 +52,9 @@
             <input class="search-top-nav__form__input" type="submit" name="envoyer">
         </form>
     </div>
+    
+    
+<%@include file="footer.jsp"%>  
+    
 </body>
 </html>

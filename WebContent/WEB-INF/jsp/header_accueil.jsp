@@ -1,13 +1,13 @@
  
 
-  <header class="header"> 
+  <header class="header-black"> 
            
-        <nav class="nav">
+        <nav class="header-nav-bar">
 
-                     <a href="#" class="logo" ><img src="./images/logo-ENI.png" height="45" width="45" alt=""></a>
-                        <ul class="menu">
-                            <li><a href="#" target="_blank" >S'inscrire</a></li>
-                            <li><a href="#" target="_blank">Se connecter</a></li>                                                   
+                     <a href="#" class="header-logo-eni" ><img src="./images/logo-ENI.png" height="45" width="45" alt=""></a>
+                        <ul class="header-menu">
+                            <li><a class="header-nav-link" href="#" target="_blank" >S'inscrire</a></li>
+                            <li><a class="header-nav-link" href="#" target="_blank">Se connecter</a></li>                                                   
                         </ul>
         </nav>
         

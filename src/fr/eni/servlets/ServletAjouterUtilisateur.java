@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.bll.UtilisateursManager;
-import fr.eni.bo.Utilisateurs;
 import fr.eni.exception.BusinessException;
 import fr.eni.utils.BCrypt;
 
@@ -39,6 +38,8 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp");
 		rd.forward(request, response);
 	}
@@ -87,9 +88,11 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 				request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
 				
 			}
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecte.jsp"); 
+			rd.forward(request, response);
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil.jsp"); // A REVOIR 
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp"); // A REVOIR 
 		rd.forward(request, response);
 		
 	}
@@ -100,8 +103,8 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 
 	private String lireParametrePseudo(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String pseudo;
+		List<String> pseudos = new ArrayList<String>();
 		boolean alphanumerique;
-		Utilisateurs utilisateur = new Utilisateurs();
 		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 		pseudo = request.getParameter("pseudo");
 		if (pseudo == null || pseudo.trim().equals("")) {
@@ -112,12 +115,12 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		}
 		
 		try {
-			utilisateur = utilisateursManager.selectionnerTousParPseudo(pseudo);
+			pseudos = utilisateursManager.selectAllPseudo();
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			listeCodesErreur.add(CodesResultatServlets.ECHEC_RECUPERATION_PAR_PSEUDO);
 		}
-		if (utilisateur != null) {
+		if (pseudos.contains(pseudo)) {
 			listeCodesErreur.add(CodesResultatServlets.PSEUDO_DEJA_PRIS);
 		}
 		
@@ -154,27 +157,27 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 
 	private String lireParametreEmail(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String email;
-		Utilisateurs utilisateur = new Utilisateurs();
+		List<String> emails = new ArrayList<String>();
 		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 		email = request.getParameter("email");
 		if (email == null || email.trim().equals("")) {
 			listeCodesErreur.add(CodesResultatServlets.EMAIL_OBLIGATOIRE);
-		} else if (email.length() > 20) {
+		} else if (email.length() > 40) {
 			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_EMAIL_DEPASSER);
 		}
-		Pattern pattern = Pattern.compile("^ [ A - Z0 - 9 ._%+ - ] + @ [ A - Z 0 - 9 . - ] + \\. [ A - Z ] {2,} $");
+		Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[a-z]{2,}$");
 		Matcher matcher = pattern.matcher(email);
 		boolean emailValide = matcher.find();
 		if (emailValide == false) {
 			listeCodesErreur.add(CodesResultatServlets.EMAIL_NON_VALIDE);
 		}
 		try {
-			utilisateur = utilisateursManager.selectionnerTousParEmail(email);
+			emails = utilisateursManager.selectAllEmail();
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			listeCodesErreur.add(CodesResultatServlets.ECHEC_RECUPERATION_PAR_EMAIL);
 		}
-		if (utilisateur != null) {
+		if (emails.contains(email)) {
 			listeCodesErreur.add(CodesResultatServlets.EMAIL_DEJA_PRIS);
 		}
 		return email;
@@ -233,18 +236,19 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 	}
 
 	private String lireParametreMDP(HttpServletRequest request, List<Integer> listeCodesErreur){
-		String mdpactuel;
-		String confirmationMdp;
-		mdpactuel 		= request.getParameter("motDePasse");
-		confirmationMdp = request.getParameter("confirmation");
+
+		String motDePasse;
+		String confirmation;
+		motDePasse 		= request.getParameter("motDePasse");
+		confirmation = request.getParameter("confirmation");
 		
-		if(mdpactuel != null && mdpactuel.equals(confirmationMdp)) {
-			if(mdpactuel.length() < 12) {
+		if(motDePasse != null && motDePasse.equals(confirmation)) {
+			if(motDePasse.length() < 12) {
 				listeCodesErreur.add(CodesResultatServlets.TAILLE_MDP_TROP_COURT);
 			}
 			int compteurMaj = 0;
-			for (int i = 0; i < mdpactuel.length(); i++) {
-				char ch = mdpactuel.charAt(i);
+			for (int i = 0; i < motDePasse.length(); i++) {
+				char ch = motDePasse.charAt(i);
 				if (Character.isUpperCase(ch)) {
 					compteurMaj++;
 				}
@@ -252,21 +256,21 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 			if(compteurMaj <= 0) {
 				listeCodesErreur.add(CodesResultatServlets.AUCUNE_MAJ_DANS_MDP);
 			}
-			if(!mdpactuel.contains("[0-9]+")) {
+			if(!motDePasse.matches(".*\\d+.*")) {
 				listeCodesErreur.add(CodesResultatServlets.AUCUN_CHIFFRES_DANS_MDP);
 			}
-			Pattern p = Pattern.compile("[^A-Za-z0-9]");
-		    Matcher m = p.matcher(mdpactuel);
+			Pattern p = Pattern.compile("[A-Za-z0-9]");
+		    Matcher m = p.matcher(motDePasse);
 		    boolean b = m.find();
 		    if(b == false) {
 		    	listeCodesErreur.add(CodesResultatServlets.AUCUN_CARACTERE_SPECIAUX_DANS_MDP);
 		    }
-			String hashed = BCrypt.hashpw(confirmationMdp, BCrypt.gensalt(12));
-			confirmationMdp = hashed;
-		}else if(!mdpactuel.equals(confirmationMdp) ) {
+			String hashed = BCrypt.hashpw(confirmation, BCrypt.gensalt(12));
+			confirmation = hashed;
+		}else if(!motDePasse.equals(confirmation) ) {
 			listeCodesErreur.add(CodesResultatServlets.MDP_NON_IDENTIQUE);
 		}
-		return confirmationMdp;
+		return confirmation;
 	}
 
 	public boolean isAlphanumerique(String str) {
