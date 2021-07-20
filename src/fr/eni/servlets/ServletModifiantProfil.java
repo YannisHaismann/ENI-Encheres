@@ -98,6 +98,9 @@ public class ServletModifiantProfil extends HttpServlet {
 				request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
 			}
 		}
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil.jsp");
+		rd.forward(request, response);
+		
 	}
 
 	private int lireParametreId(HttpServletRequest request, List<Integer> listeCodesErreur) {
@@ -226,6 +229,9 @@ public class ServletModifiantProfil extends HttpServlet {
 			listeCodesErreur.add(CodesResultatServlets.CODE_POSTAL_OBLIGATOIRE);
 		} else if (codePostal.length() > 10) {
 			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_CODE_POSTAL_DEPASSER);
+		}
+		else if(!codePostal.contains("[0-9]+")) {
+			listeCodesErreur.add(CodesResultatServlets.CODE_POSTAL_INVALIDE);
 		}
 		return codePostal;
 	}
