@@ -11,13 +11,11 @@ body {
     padding: 0px;
     background-size: cover ; background-attachment: fixed; 
     background-repeat: no-repeat; background-position: top center;
-    font-family: sans-serif;    
+    font-family: sans-serif;   
 }
 
 .inscription-box {
-    display: block;
-    width: 620px;
-    height: 290px;
+    width: 30%;
     border-radius: 10px;
     background: rgb(103, 116, 189);
     color: #fff;
@@ -26,7 +24,7 @@ body {
     position: absolute;
     transform: translate(-50%,-50%);
     box-sizing: border-box;
-    padding: 25px 25px;
+    padding: 10px 10px;
 
 }
 
@@ -44,15 +42,8 @@ body {
     display: flex;
     flex-direction: row;  
     flex-wrap: wrap;
-    justify-content: space-between;   
-    width: 510px;
-    height: 100px; 
+    justify-content: space-between;     
     
-}
-
-.login-box a {
-    color: white;
-    font-size: 11px;
 }
 
 .password-field a:hover {
@@ -60,37 +51,12 @@ body {
     background-color: white;
 }
 
-.login-title {
-    margin: 0px;
-    padding: 0 0 20px;
-    text-align: center;
-    font-size: 22px;   
-}
 
-.full-width {
-    width: 100%;
-    margin-bottom: 15px;
-}
 
-.aligner-login {
-    display: flex;
-    align-content: space-between;
-    margin-bottom: 5px;
-}
-
-.checkbox {
-    margin-left: 20px;
-    display: flex;
-    flex-direction: row;    
-}
-
-.checkbox label {
-    font-size: 11px;
-    padding-right: 5px;
-}
 ::placeholder{
     opacity: 0.6;
 }
+
 .creer-button  {
     
     float: left;
@@ -98,7 +64,7 @@ body {
     border: none;
     border-radius: 6px;
     color: white;
-    padding: 15px 32px;
+    padding: 5px 20px;
     margin-top: 15px;
     text-align: center;
     text-decoration: none;
@@ -112,7 +78,7 @@ body {
     border: none;
     border-radius: 6px;
     color: #000;
-    padding: 15px 32px;
+    padding: 5px 13px;
     margin-top: 15px;
     text-align: center;
     text-decoration: none;
@@ -124,12 +90,26 @@ body {
     opacity: 0.6;
 }
 
-.avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    position: absolute;
-    top: -76px;
-    left: calc(50% - 40px);    
+@media only screen and (max-width:960px) {
+
+.inscription-box {
+	display: flex;
+	flex-direction: column;
 }
+
+.creer-button {
+	flex:none
+	float: left;
+	margin: 5px 70px;
+}	
+
+.annuler-button {
+	flex:none
+	float: left;
+	margin: 5px 70px;
+}
+
+}
+
+
 

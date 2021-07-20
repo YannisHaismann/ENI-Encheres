@@ -7,27 +7,27 @@ html {
 }
 
 body { 
-    overflow: none;   
     margin: 0px;
     padding: 0px;
-    background-image:url("/images/fond_page_connexion.jpg"); 
     background-size: cover ; background-attachment: fixed; 
     background-repeat: no-repeat; background-position: top center;
     font-family: sans-serif;    
 }
 
 .login-box {
-    width: 320px;
+    width: 275px;
     height: 380px;
     border-radius: 10px;
     background: rgb(103, 116, 189);
     color: #fff;
-    top: 60%;
+    box-sizing: border-box;
+    padding: 30px 10px;
+    top: 53% ;
     left: 50%;
     position: absolute;
     transform: translate(-50%,-50%);
-    box-sizing: border-box;
-    padding: 50px 25px;
+    box-sizing: border-box; 
+   
 
 }
 
@@ -98,5 +98,18 @@ body {
     top: -76px;
     left: calc(50% - 40px);
     
+}
+
+
+
+
+
+@media only screen and (max-width:565px) {
+.login-box {
+    width: 275px;
+    height: 360px;
+    top: 50% ;
+   
+
 }
 

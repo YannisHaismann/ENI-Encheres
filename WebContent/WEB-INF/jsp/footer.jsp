@@ -6,7 +6,6 @@
 		<div class="flex-elements">
 			<div class="list-inline">
 				<ul >
-					<li class="list-inline-item"><a href="#">Home</a></li>
 					<li class="list-inline-item"><a href="#">Services</a></li>
 					<li class="list-inline-item"><a href="#">Téléchargement</a></li>
 					<li class="list-inline-item"><a href="#">Contacts</a></li>
@@ -24,8 +23,6 @@
 
 
 		</div>
-
-		<p class="copyright">Eni-Enchère © 2021</p>
 
 	</footer>
 

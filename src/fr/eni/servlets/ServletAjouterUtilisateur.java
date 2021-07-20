@@ -3,6 +3,8 @@ package fr.eni.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,50 +47,246 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		//Je vais faire le traitement pour 
-		//ajouter un NOUVEAU utilisateur
 		
-		String pseudo 		= request.getParameter("pseudo");
-		String nom 			= request.getParameter("nom");
-		String prenom 		= request.getParameter("prenom");
-		String email 		= request.getParameter("email");	
-		String telephone 	= request.getParameter("telephone");	
-		String rue 			= request.getParameter("rue");	
-		String codePostal	= request.getParameter("codePostal") ;
-		String ville 		= request.getParameter("ville");
-		String motDePasse	= BCrypt.hashpw(request.getParameter("motDePasse"), BCrypt.gensalt());
-		int credit 			= 0;
-		int administrateur 	= 0;
-		int desactiver 		= 0;
+		String pseudo;
+		String nom;
+		String prenom;
+		String email;	
+		String telephone;	
+		String rue;	
+		String codePostal;
+		String ville;
+		String motDePasse;
+		int credit = 0;
+		int administrateur = 0;
+		int desactiver = 0;
+		
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		
+		pseudo = lireParametrePseudo(request, listeCodesErreur);
+		nom = lireParametreNom(request, listeCodesErreur);
+		prenom = lireParametrePrenom(request, listeCodesErreur);
+		email = lireParametreEmail(request, listeCodesErreur);
+		telephone = LireParametreTelephone(request, listeCodesErreur);
+		rue = lireParametreRue(request, listeCodesErreur);
+		codePostal = lireParametreCodePostal(request, listeCodesErreur);
+		ville = lireParametreVille(request, listeCodesErreur);
+		motDePasse = lireParametreMDP(request, listeCodesErreur);
+
 		
-		Utilisateurs utilisateur = new Utilisateurs();
-		utilisateur.setPseudo(pseudo);
-		utilisateur.setNom(prenom);
-		utilisateur.setPrenom(prenom);
-		utilisateur.setEmail(email);
-		utilisateur.setTelephone(telephone);
-		utilisateur.setRue(rue);
-		utilisateur.setCodePostal(codePostal);
-		utilisateur.setVille(ville);
-		utilisateur.setMotDePasse(motDePasse);
-		
-		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
-		
-		try {
-			utilisateursManager.ajouter(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur, desactiver);
-		} catch (BusinessException e) {
-			e.printStackTrace();
-			listeCodesErreur.add(CodesResultatServlets.ECHEC_INSERTION_NOUVEAU_UTILISATEUR);
-			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());			
-			
-		}		
+		if(listeCodesErreur.size()>0)
+		{
+			request.setAttribute("listeCodesErreur", listeCodesErreur);
+		}else {
+			try {
+				UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
+				utilisateursManager.ajouter(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, 
+				administrateur, desactiver);
+			}catch(BusinessException e) {
+				e.printStackTrace();
+				request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
+				
+			}
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil.jsp"); // A REVOIR 
 		rd.forward(request, response);
 		
+	}
+		
+		
+		
+		
+
+	private String lireParametrePseudo(HttpServletRequest request, List<Integer> listeCodesErreur){
+		String pseudo;
+		boolean alphanumerique;
+		Utilisateurs utilisateur = new Utilisateurs();
+		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
+		pseudo = request.getParameter("pseudo");
+		if (pseudo == null || pseudo.trim().equals("")) {
+			listeCodesErreur.add(CodesResultatServlets.PSEUDO_OBLIGATOIRE);
+		}
+		if (pseudo.length() > 30) {
+			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_PSEUDO_DEPASSER);
+		}
+		
+		try {
+			utilisateur = utilisateursManager.selectionnerTousParPseudo(pseudo);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			listeCodesErreur.add(CodesResultatServlets.ECHEC_RECUPERATION_PAR_PSEUDO);
+		}
+		if (utilisateur != null) {
+			listeCodesErreur.add(CodesResultatServlets.PSEUDO_DEJA_PRIS);
+		}
+		
+		// APRES TOUT VERIFICATION ON VERIFIE S'IL CONTIENT LES DEUX : CHIFFRES ET LETTRES
+		alphanumerique = isAlphanumerique(pseudo);
+		if (alphanumerique == false) {
+			listeCodesErreur.add(CodesResultatServlets.PSEUDO_NON_ALPHANUMERIQUE);
+		}
+
+		return pseudo;
+	}
+
+	private String lireParametreNom(HttpServletRequest request, List<Integer> listeCodesErreur){
+		String nom;
+		nom = request.getParameter("nom");
+		if (nom == null || nom.trim().equals("")) {
+			listeCodesErreur.add(CodesResultatServlets.NOM_OBLIGATOIRE);
+		} else if (nom.length() > 30) {
+			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_NOM_DEPASSER);
+		}
+		return nom;
+	}
+
+	private String lireParametrePrenom(HttpServletRequest request, List<Integer> listeCodesErreur){
+		String prenom;
+		prenom = request.getParameter("prenom");
+		if (prenom == null || prenom.trim().equals("")) {
+			listeCodesErreur.add(CodesResultatServlets.PRENOM_OBLIGATOIRE);
+		} else if (prenom.length() > 30) {
+			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_PRENOM_DEPASSER);
+		}
+		return prenom;
+	}
+
+	private String lireParametreEmail(HttpServletRequest request, List<Integer> listeCodesErreur){
+		String email;
+		Utilisateurs utilisateur = new Utilisateurs();
+		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
+		email = request.getParameter("email");
+		if (email == null || email.trim().equals("")) {
+			listeCodesErreur.add(CodesResultatServlets.EMAIL_OBLIGATOIRE);
+		} else if (email.length() > 20) {
+			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_EMAIL_DEPASSER);
+		}
+		Pattern pattern = Pattern.compile("^ [ A - Z0 - 9 ._%+ - ] + @ [ A - Z 0 - 9 . - ] + \\. [ A - Z ] {2,} $");
+		Matcher matcher = pattern.matcher(email);
+		boolean emailValide = matcher.find();
+		if (emailValide == false) {
+			listeCodesErreur.add(CodesResultatServlets.EMAIL_NON_VALIDE);
+		}
+		try {
+			utilisateur = utilisateursManager.selectionnerTousParEmail(email);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			listeCodesErreur.add(CodesResultatServlets.ECHEC_RECUPERATION_PAR_EMAIL);
+		}
+		if (utilisateur != null) {
+			listeCodesErreur.add(CodesResultatServlets.EMAIL_DEJA_PRIS);
+		}
+		return email;
+	}
+
+	private String LireParametreTelephone(HttpServletRequest request, List<Integer> listeCodesErreur) {
+		String telephone;
+		telephone = request.getParameter("telephone");
+		if (telephone.length() > 15) {
+			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_TELEPHONE_DEPASSER);
+		}
+		Pattern pattern = Pattern.compile("^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$");
+		Matcher matcher = pattern.matcher(telephone);
+		boolean telephoneValide = matcher.find();
+		if (telephoneValide == false) {
+			listeCodesErreur.add(CodesResultatServlets.TELEPHONE_NON_VALIDE);
+		}
+		return telephone;
+	}
+
+	private String lireParametreRue(HttpServletRequest request, List<Integer> listeCodesErreur){
+		String rue;
+		rue = request.getParameter("rue");
+		if (rue == null || rue.trim().equals("")) {
+			listeCodesErreur.add(CodesResultatServlets.RUE_OBLIGATOIRE);
+		} else if (rue.length() > 30) {
+			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_RUE_DEPASSER);
+		}
+		return rue;
+	}
+
+	private String lireParametreCodePostal(HttpServletRequest request, List<Integer> listeCodesErreur){
+		String codePostal;
+		codePostal = request.getParameter("codePostal");
+		if (codePostal == null || codePostal.trim().equals("")) {
+			listeCodesErreur.add(CodesResultatServlets.CODE_POSTAL_OBLIGATOIRE);
+		} else if (codePostal.length() > 10) {
+			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_CODE_POSTAL_DEPASSER);
+		} 
+		boolean num = isNumerique(codePostal);
+		if (num == false){
+			listeCodesErreur.add(CodesResultatServlets.FORMAT_CODE_POSTAL_NON_VALIDE);
+		}
+		return codePostal;
+	}
+
+	private String lireParametreVille(HttpServletRequest request, List<Integer> listeCodesErreur){
+		String ville;
+		ville = request.getParameter("ville");
+		if (ville == null || ville.trim().equals("")) {
+			listeCodesErreur.add(CodesResultatServlets.VILLE_OBLIGATOIRE);
+		} else if (ville.length() > 30) {
+			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_VILLE_DEPASSER);
+		}
+		return ville;
+	}
+
+	private String lireParametreMDP(HttpServletRequest request, List<Integer> listeCodesErreur){
+		String mdpactuel;
+		String confirmationMdp;
+		mdpactuel 		= request.getParameter("motDePasse");
+		confirmationMdp = request.getParameter("confirmationMdp");
+		
+		if(mdpactuel != null && mdpactuel.equals(confirmationMdp)) {
+			if(mdpactuel.length() < 12) {
+				listeCodesErreur.add(CodesResultatServlets.TAILLE_MDP_TROP_COURT);
+			}
+			int compteurMaj = 0;
+			for (int i = 0; i < mdpactuel.length(); i++) {
+				char ch = mdpactuel.charAt(i);
+				if (Character.isUpperCase(ch)) {
+					compteurMaj++;
+				}
+			}
+			if(compteurMaj <= 0) {
+				listeCodesErreur.add(CodesResultatServlets.AUCUNE_MAJ_DANS_MDP);
+			}
+			if(!mdpactuel.contains("[0-9]+")) {
+				listeCodesErreur.add(CodesResultatServlets.AUCUN_CHIFFRES_DANS_MDP);
+			}
+			Pattern p = Pattern.compile("[^A-Za-z0-9]");
+		    Matcher m = p.matcher(mdpactuel);
+		    boolean b = m.find();
+		    if(b == false) {
+		    	listeCodesErreur.add(CodesResultatServlets.AUCUN_CARACTERE_SPECIAUX_DANS_MDP);
+		    }
+			String hashed = BCrypt.hashpw(confirmationMdp, BCrypt.gensalt(12));
+			confirmationMdp = hashed;
+		}else if(!mdpactuel.equals(confirmationMdp) ) {
+			listeCodesErreur.add(CodesResultatServlets.MDP_NON_IDENTIQUE);
+		}
+		return confirmationMdp;
+	}
+
+	public boolean isAlphanumerique(String str) {
+		for (int i = 0; i < str.length(); i++) {
+			char c = str.charAt(i);
+			if (!Character.isDigit(c) && !Character.isLetter(c))
+				return false;
+		}
+
+		return true;
+	}
+	
+	public boolean isNumerique(String str) {
+		for (int i = 0; i < str.length(); i++) {
+			char c = str.charAt(i);
+			if (!Character.isDigit(c))
+				return false;
+		}
+
+		return true;
 	}
 
 }

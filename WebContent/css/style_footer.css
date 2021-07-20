@@ -4,11 +4,12 @@
     width: 100%;    
     background-color:rgb(64, 78, 160);
     color:#4b4c4d;
+    padding-bottom:10px;
   }
   
   .flex-elements{
   	display: flex;
-  	flex-direction: row;
+  	flex-direction: column;
   	justify-content: space-between;
   }
    
@@ -66,16 +67,32 @@
   }
   
   .footer-basic  {
-    margin-top:15px;
     text-align:center;
     font-size:13px;
     color:#fff;
-    margin-bottom:0;
   }
 
-  .copyright {
+  
+  
+  @media only screen and (max-width:380px) {
+  
+
+  .footer-basic .social {
     text-align:center;
-    font-size:13px;
-    color:#aaa;
-    margin-bottom:5px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+	justify-content: center;  
   }
+  
+  .list-inline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+ 
+ 
+	
+}
