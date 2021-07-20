@@ -7,8 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/modifierProfil.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+<link rel="stylesheet" href="css/style_footer.css">
+<link rel="stylesheet" href="css/style_header.css">
+
 <title>Modidier/Supprimer mon profil</title>
 </head>
+
 <body>
 
 <%@include file="header_logo_simple.jsp"%>

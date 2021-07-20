@@ -216,7 +216,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		} 
 		boolean num = isNumerique(codePostal);
 		if (num == false){
-			listeCodesErreur.add(CodesResultatServlets.FORMAT_CODE_POSTAL_NON_VALIDE);
+			listeCodesErreur.add(CodesResultatServlets.CODE_POSTAL_INVALIDE);
 		}
 		return codePostal;
 	}
@@ -236,7 +236,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		String mdpactuel;
 		String confirmationMdp;
 		mdpactuel 		= request.getParameter("motDePasse");
-		confirmationMdp = request.getParameter("confirmationMdp");
+		confirmationMdp = request.getParameter("confirmation");
 		
 		if(mdpactuel != null && mdpactuel.equals(confirmationMdp)) {
 			if(mdpactuel.length() < 12) {
