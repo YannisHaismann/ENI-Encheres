@@ -230,6 +230,9 @@ public class ServletModifiantProfil extends HttpServlet {
 		} else if (codePostal.length() > 10) {
 			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_CODE_POSTAL_DEPASSER);
 		}
+		else if(!codePostal.contains("[0-9]+")) {
+			listeCodesErreur.add(CodesResultatServlets.CODE_POSTAL_INVALIDE);
+		}
 		return codePostal;
 	}
 

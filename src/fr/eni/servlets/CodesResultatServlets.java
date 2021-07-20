@@ -60,4 +60,6 @@ public class CodesResultatServlets {
 
 	public static final Integer EMAIL_DEJA_PRIS = 30028;
 
+	public static final Integer CODE_POSTAL_INVALIDE = 30029;
+
 }
