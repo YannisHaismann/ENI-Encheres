@@ -132,7 +132,7 @@ public class ServletModifiantProfil extends HttpServlet {
 			e.printStackTrace();
 			listeCodesErreur.add(CodesResultatServlets.ECHEC_RECUPERATION_PAR_PSEUDO);
 		}
-		if (utilisateur == null) {
+		if (utilisateur != null) {
 			listeCodesErreur.add(CodesResultatServlets.PSEUDO_DEJA_PRIS);
 		}
 		alphanumerique = isAlphanumerique(pseudo);
@@ -187,8 +187,8 @@ public class ServletModifiantProfil extends HttpServlet {
 			e.printStackTrace();
 			listeCodesErreur.add(CodesResultatServlets.ECHEC_RECUPERATION_PAR_EMAIL);
 		}
-		if (utilisateur == null) {
-			listeCodesErreur.add(CodesResultatServlets.PSEUDO_DEJA_PRIS);
+		if (utilisateur != null) {
+			listeCodesErreur.add(CodesResultatServlets.EMAIL_DEJA_PRIS);
 		}
 		return email;
 	}
