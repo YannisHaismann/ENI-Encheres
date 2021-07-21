@@ -27,12 +27,22 @@
 
 
 <body style="background-image: url('./images/fond_page_connexion.jpg');"> 
-
-
   
 <%@include file="header_logo_simple.jsp"%>
-    
-    <div class="login-box"> 
+
+	<c:if test="${!empty listeCodesErreur}">
+		<div class="alert alert-danger" role="alert">
+			<strong>Erreur!</strong>
+			<ul>
+				<c:forEach var="code" items="${listeCodesErreur}">
+					<li>${LecteurMessage.getMessageErreur(code)}</li>
+				</c:forEach>
+			</ul>
+		</div>
+	</c:if>
+
+
+	<div class="login-box"> 
     
         <img src="./images/avatar_connexion.png" alt="avatar" class="avatar">        
         
@@ -41,8 +51,8 @@
 	        	<fieldset > <p class=login-title>Se connecter</p>  
 	        
 	                    <div class="full-width">
-			                <label for="username">Identifiant</label><br>
-			                <input type="text" id="username" placeholder="votre mail ou pseudo" name="pseudo">
+			                <label for="pseudo">Identifiant</label><br>
+			                <input type="text" id="pseudo" placeholder="votre mail ou pseudo" name="pseudo">
 			            </div> 
 			            
 			            <div class="full-width">
@@ -62,6 +72,13 @@
 			            <a href="#" class="password-field">Password oublié?</a><br>
 			            <a class="creer-button" href="#">Créer un Compte</a>
 	             </fieldset>
+	             
+	             
+	             <%-- Vérification de la présence d'un objet utilisateur en session --%>
+                <c:if test="${!empty sessionScope.session}">
+                    <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
+                    <p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionUtilisateur.email}</p>
+                </c:if>
 	        
 	        </form>        
    

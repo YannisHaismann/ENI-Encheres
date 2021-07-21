@@ -62,4 +62,10 @@ public class CodesResultatServlets {
 
 	public static final Integer CODE_POSTAL_INVALIDE = 30029;
 
+	public static final Integer EMAIL_INEXISTANT = 30030;
+
+	public static final Integer PSEUDO_INEXISTANT = 30031;
+
+	public static final Integer MOT_DE_PASSE_OBLIGATOIRE = 30032;
+
 }
