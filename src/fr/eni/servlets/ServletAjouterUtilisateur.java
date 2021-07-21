@@ -42,6 +42,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp");
+		
 		rd.forward(request, response);
 	}
 
@@ -52,6 +53,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		HttpSession session = request.getSession(true);
 		
 		int idUtilisateur = 0;
+
 		String pseudo;
 		String nom;
 		String prenom;
