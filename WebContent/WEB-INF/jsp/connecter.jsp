@@ -12,31 +12,31 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <link rel="stylesheet" href="css/style_connecter.css">    
+    <link rel="stylesheet" href="css/style_footer.css">
+    <link rel="stylesheet" href="css/style_header.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/style_connecter.css">
-    <link rel="stylesheet" href="../../css/style_footer.css">
-    <link rel="stylesheet" href="../../css/style_header.css">
+
     
     <title>Connecter au compte</title> 
+    
 </head> 
 
 
 
-<body> 
+<body style="background-image: url('./images/fond_page_connexion.jpg');"> 
 
 
-<h1><b>Bienvenue sur Troc Enchère </b></h1>
-  <p><b>Le site de bonnes affaires</b></p> 
   
 <%@include file="header_logo_simple.jsp"%>
     
     <div class="login-box"> 
     
-        <img src="../../photos/avatar_connexion.png" alt="avatar" class="avatar">        
+        <img src="./images/avatar_connexion.png" alt="avatar" class="avatar">        
         
-	        <form action="./index.html" method="post">
+	        <form action="/ServletConnexion" method="post">
 	        
 	        	<fieldset > <p class=login-title>Se connecter</p>  
 	        

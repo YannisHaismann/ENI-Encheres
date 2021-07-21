@@ -1,3 +1,5 @@
+
+	
 * {
     box-sizing: border-box;
 }
@@ -7,51 +9,50 @@ html {
 }
  
 
-.header {
+.header-black {
     background-color: #1f2029;
     color: white;    
 }
 
-a {
+.header-nav-link {
     color: white;
     text-decoration: none;
     font-size: 1.6rem;
     padding: 5px 10px;
     border-radius: 4px;
+    opacity: 1;
 }
 
-li a:hover{
-    opacity: 0.7;
-    background-color: white;
-    color: black;
+.header-nav-link:hover{
+    opacity: 0.9;
     text-decoration: none;
 }
 
-.nav {
+.header-nav-bar {
     display: flex;           
     align-items: center; 
     justify-content: space-between;  
-    width: 90%;
+    width: auto;
     height:70px;
-    margin:auto;
 
 }
 
-.menu { 
+.header-menu { 
     display: flex;
-    flex: 1 1 40rem;
     justify-content: space-around; 
     align-items: center;   
     list-style: none;
 }
 
-.logo {
-    flex: 2 1 40rem;
+.header-logo-eni {
+    float: left;
+    margin-left: 10px;
 }
 
-.logo img:hover {
+.header-logo-eni img:hover {
     opacity: 0.8;
 }
+
 
 
 

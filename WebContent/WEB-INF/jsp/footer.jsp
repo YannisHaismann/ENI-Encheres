@@ -4,28 +4,29 @@
 <div class="footer-basic">
 	<footer>
 		<div class="flex-elements">
-			<div class="list-inline">
-				<ul >
-					<li class="list-inline-item"><a href="#">Home</a></li>
-					<li class="list-inline-item"><a href="#">Services</a></li>
-					<li class="list-inline-item"><a href="#">Téléchargement</a></li>
-					<li class="list-inline-item"><a href="#">Contacts</a></li>
-					<li class="list-inline-item"><a href="#">Mentions Légales</a></li>
+			<div class="footer-list-inline">
+				<ul>
+					<li class="footer-list-inline-item"><a
+						class="footer-list-link" href="#">Services</a></li>
+					<li class="footer-list-inline-item"><a
+						class="footer-list-link" href="#">Téléchargement</a></li>
+					<li class="footer-list-inline-item"><a
+						class="footer-list-link" href="#">Contacts</a></li>
+					<li class="footer-list-inline-item"><a
+						class="footer-list-link" href="#">Mentions Légales</a></li>
 				</ul>
 
 			</div>
-			<div class="social">
-				<a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
-					class="icon ion-social-snapchat"></i></a><a href="#"><i
-					class="icon ion-social-twitter"></i></a><a href="#"><i
-					class="icon ion-social-facebook"></i></a>
+			<div class="footer-social">
+					<a href="#" class="footer-social-link"><i class="icon ion-social-instagram"></i></a>
+					<a href="#" class="footer-social-link"><i class="icon ion-social-snapchat"></i></a>
+					<a href="#" class="footer-social-link"><i class="icon ion-social-twitter"></i></a>
+					<a href="#" class="footer-social-link"><i class="icon ion-social-facebook"></i></a>
 			</div>
-			
+
 
 
 		</div>
-
-		<p class="copyright">Eni-Enchère © 2021</p>
 
 	</footer>
 
