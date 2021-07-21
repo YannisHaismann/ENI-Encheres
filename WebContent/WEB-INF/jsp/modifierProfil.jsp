@@ -40,15 +40,15 @@
 					<label for="pseudo">Pseudo : </label>
 				</div>
 				<div class="form-champ">
-					<input type="text" name="pseudo"
-						value="<%=request.getParameter("pseudo")%>" />
+					<input type="text" name="pseudo" placeholder="${utilisateur.pseudo}"
+						value="" />
 				</div>
 				<div class="form-label-d">
 					<label for="nom">Nom : </label>
 				</div>
 				<div class="form-champ">
-					<input type="text" name="nom"
-						value="<%=request.getParameter("nom")%>" />
+					<input type="text" name="nom" placeholder="${utilisateur.nom}"
+						value="" />
 				</div>
 			</div>
 			<div class="form-ligne">
@@ -56,15 +56,15 @@
 					<label for="prenom">Prénom : </label>
 				</div>
 				<div class="form-champ">
-					<input type="text" name="prenom"
-						value="<%=request.getParameter("prenom")%>" />
+					<input type="text" name="prenom" placeholder="${utilisateur.prenom}"
+						value="" />
 				</div>
 				<div class="form-label-d">
 					<label for="email">Email : </label>
 				</div>
 				<div class="form-champ">
-					<input type="email" name="email"
-						value="<%=request.getParameter("email")%>" />
+					<input type="email" name="email" placeholder="${utilisateur.email}"
+						value="" />
 				</div>
 			</div>
 			<div class="form-ligne">
@@ -72,15 +72,15 @@
 					<label for="telephone">Téléphone : </label>
 				</div>
 				<div class="form-champ">
-					<input type="text" name="telephone"
-						value="<%=request.getParameter("telephone")%>" />
+					<input type="text" name="telephone" placeholder="${utilisateur.telephone}"
+						value="" />
 				</div>
 				<div class="form-label-d">
 					<label for="rue">Rue : </label>
 				</div>
 				<div class="form-champ">
-					<input type="text" name="rue"
-						value="<%=request.getParameter("rue")%>" />
+					<input type="text" name="rue" placeholder="${utilisateur.rue}"
+						value="" />
 				</div>
 			</div>
 			<div class="form-ligne">
@@ -88,15 +88,15 @@
 					<label for="codePostal">Code postal : </label>
 				</div>
 				<div class="form-champ">
-					<input type="text" name="codePostal"
-						value="<%=request.getParameter("codePostal")%>" />
+					<input type="text" name="codePostal" placeholder="${utilisateur.codePostal}"
+						value="" />
 				</div>
 				<div class="form-label-d">
 					<label for="ville">Ville : </label>
 				</div>
 				<div class="form-champ">
-					<input type="text" name="ville"
-						value="<%=request.getParameter("ville")%>" />
+					<input type="text" name="ville" placeholder="${utilisateur.ville}"
+						value="" />
 				</div>
 			</div>
 			<div class="form-ligne">
@@ -105,7 +105,7 @@
 				</div>
 				<div class="form-champ">
 					<input type="password" name="mdpa"
-						value="<%=request.getParameter("motDePasse")%>" />
+						value="${utilisateur.motDePasse}" />
 				</div>
 			</div>
 			<div class="form-ligne">
@@ -114,14 +114,14 @@
 				</div>
 				<div class="form-champ nmdp">
 					<input type="password" name="nouveauMdp"
-						value="<%=request.getParameter("nouveauMdp")%>" />
+						value="${utilisateur.motDePasse}" />
 				</div>
 				<div class="form-label-d">
 					<label for="confirmation">Confirmation : </label>
 				</div>
 				<div class="form-champ">
 					<input type="password" name="confirmationMdp"
-						value="<%=request.getParameter("confirmationMdp")%>" />
+						value="${utilisateur.motDePasse}" />
 				</div>
 			</div>
 			<div class="form-label-g">Crédit : ${utilisateur.credit}</div>

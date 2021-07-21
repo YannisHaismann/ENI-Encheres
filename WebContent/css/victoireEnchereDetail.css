@@ -1,0 +1,16 @@
+
+html {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+ 
+body { 
+    margin: 0px;
+    padding: 0px;
+    background-size: cover ; background-attachment: fixed; 
+    background-repeat: no-repeat; background-position: top center;
+    font-family: sans-serif;   
+}

@@ -12,11 +12,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.bll.UtilisateursManager;
+import fr.eni.bo.Utilisateurs;
 import fr.eni.exception.BusinessException;
 import fr.eni.utils.BCrypt;
-
 
 
 /**
@@ -41,6 +42,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp");
+		
 		rd.forward(request, response);
 	}
 
@@ -48,7 +50,10 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
 		
+		int idUtilisateur = 0;
+
 		String pseudo;
 		String nom;
 		String prenom;
@@ -78,28 +83,52 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		if(listeCodesErreur.size()>0)
 		{
 			request.setAttribute("listeCodesErreur", listeCodesErreur);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp"); // A REVOIR 
+			rd.forward(request, response);
 		}else {
 			try {
 				UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
+				Utilisateurs utilisateur = new Utilisateurs();
 				utilisateursManager.ajouter(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, 
 				administrateur, desactiver);
+				utilisateur = utilisateursManager.selectByPseudo(pseudo);
+				session.setAttribute("utilisateur", utilisateur);
+				idUtilisateur = utilisateur.getId();
+				session.setAttribute("id", idUtilisateur);
+				pseudo = utilisateur.getPseudo();
+				session.setAttribute("pseudo", pseudo);
+				nom = utilisateur.getNom();
+				session.setAttribute("nom", nom);
+				prenom = utilisateur.getPrenom();
+				session.setAttribute("prenom", prenom);
+				email = utilisateur.getEmail();
+				session.setAttribute("email", email);
+				telephone = utilisateur.getTelephone();
+				session.setAttribute("telephone", telephone);
+				rue = utilisateur.getRue();
+				session.setAttribute("rue", rue);
+				codePostal = utilisateur.getCodePostal();
+				session.setAttribute("codePostal", codePostal);
+				ville = utilisateur.getVille();
+				session.setAttribute("ville", ville);
+				motDePasse = utilisateur.getMotDePasse();
+				session.setAttribute("motDePasse", motDePasse);
+				credit = utilisateur.getCredit();
+				session.setAttribute("credit", credit);
+				administrateur = utilisateur.getAdministrateur();
+				session.setAttribute("administrateur", administrateur);
+				desactiver = utilisateur.getDesactiver();
+				session.setAttribute("desactiver", desactiver);
+				
 			}catch(BusinessException e) {
 				e.printStackTrace();
 				request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
 				
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecte.jsp"); 
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AcceuilConnecte.jsp"); 
 			rd.forward(request, response);
 		}
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp"); // A REVOIR 
-		rd.forward(request, response);
-		
 	}
-		
-		
-		
-		
 
 	private String lireParametrePseudo(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String pseudo;
@@ -259,7 +288,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 			if(!motDePasse.matches(".*\\d+.*")) {
 				listeCodesErreur.add(CodesResultatServlets.AUCUN_CHIFFRES_DANS_MDP);
 			}
-			Pattern p = Pattern.compile("[A-Za-z0-9]");
+			Pattern p = Pattern.compile("[^A-Za-z0-9]");
 		    Matcher m = p.matcher(motDePasse);
 		    boolean b = m.find();
 		    if(b == false) {

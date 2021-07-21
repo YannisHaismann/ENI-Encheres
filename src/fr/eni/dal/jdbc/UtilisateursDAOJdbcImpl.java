@@ -18,7 +18,8 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 	public static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?;";
 	public static final String SELECT_ALL = "SELECT * FROM UTILISATEURS";
 	public static final String SELECT_ALL_EMAIL = "SELECT email FROM UTILISATEURS";
-	private static final String SELECT_ALL_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
+	public static final String SELECT_ALL_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
+	public static final String SELECT_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
 	public static final String UPDATE_BY_ID = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?,"
 			+ " code_postal = ?, ville = ?, mot_de_passe = ?, credit = ?, administrateur = ?, desactiver = ?  WHERE no_utilisateur = ?;";
 	public static final String DELETE_BY_ID = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
@@ -266,7 +267,7 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SELECT_BY_EMAIL_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_EMAIL_ECHEC);
 			throw businessException;
 		}
 	}
@@ -295,9 +296,49 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.SELECT_BY_PSEUDO_ECHEC);
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_ALL_PSEUDO_ECHEC);
 			throw businessException;
 		}
 	}
+	
+	public Utilisateurs selectByPseudo(String pseudo) throws BusinessException {
 
+		try (Connection con = ConnectionProvider.getConnection()) {
+			try {
+				PreparedStatement pstmt;
+				pstmt = con.prepareStatement(SELECT_BY_PSEUDO);
+				pstmt.setString(1, pseudo);
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				Utilisateurs nouvelUtilisateur = new Utilisateurs();
+				nouvelUtilisateur.setId(rs.getInt("no_utilisateur"));
+				nouvelUtilisateur.setPseudo(rs.getString("pseudo"));
+				nouvelUtilisateur.setNom(rs.getString("nom"));
+				nouvelUtilisateur.setPrenom(rs.getString("prenom"));
+				nouvelUtilisateur.setEmail(rs.getString("email"));
+				nouvelUtilisateur.setTelephone(rs.getString("telephone"));
+				nouvelUtilisateur.setRue(rs.getString("rue"));
+				nouvelUtilisateur.setCodePostal(rs.getString("code_postal"));
+				nouvelUtilisateur.setVille(rs.getString("ville"));
+				nouvelUtilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+				nouvelUtilisateur.setCredit(rs.getInt("credit"));
+				nouvelUtilisateur.setAdministrateur(rs.getInt("administrateur"));
+				nouvelUtilisateur.setDesactiver(rs.getInt("desactiver"));
+
+				rs.close();
+				pstmt.close();
+
+				return nouvelUtilisateur;
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_BY_PSEUDO_OBJET_ECHEC);
+			throw businessException;
+		}
+	}
+	
 }

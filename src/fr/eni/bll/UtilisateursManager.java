@@ -103,4 +103,8 @@ public class UtilisateursManager {
 	public List<String> selectAllPseudo() throws BusinessException {
 		return this.utilisateursDao.selectAllPseudo();
 	}
+	
+	public Utilisateurs selectByPseudo(String pseudo) throws BusinessException {
+		return this.utilisateursDao.selectByPseudo(pseudo);
+	}
 }

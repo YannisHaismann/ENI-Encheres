@@ -22,6 +22,17 @@
 
 <%@include file="header_page_connectee.jsp"%>
 
+<c:if test="${!empty listeCodesErreur}">
+			<div class="alert alert-danger" role="alert">
+			  <strong>Erreur!</strong>
+			  <ul>
+			  	<c:forEach var="code" items="${listeCodesErreur}">
+			  		<li>${LecteurMessage.getMessageErreur(code)}</li>
+			  	</c:forEach>
+			  </ul>
+			</div>
+		</c:if>
+
     <h1>Liste des enchères<div class="animation-underline__bottom"></div><div class="animation-underline__right"></div>
         <div class="animation-underline__top"></div><div class="animation-underline__left"></div></h1>
     <div class="search-top-nav">

@@ -68,4 +68,6 @@ public class CodesResultatServlets {
 
 	public static final Integer MOT_DE_PASSE_OBLIGATOIRE = 30032;
 
+	public static final Integer CHARGEMENT_UTILISATEUR_ERREUR = 30033;
+
 }

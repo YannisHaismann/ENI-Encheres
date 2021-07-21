@@ -30,6 +30,7 @@
   
 <%@include file="header_logo_simple.jsp"%>
 
+
 	<c:if test="${!empty listeCodesErreur}">
 		<div class="alert alert-danger" role="alert">
 			<strong>Erreur!</strong>
@@ -43,6 +44,8 @@
 
 
 	<div class="login-box"> 
+
+
     
         <img src="./images/avatar_connexion.png" alt="avatar" class="avatar">        
         
@@ -72,13 +75,6 @@
 			            <a href="#" class="password-field">Password oublié?</a><br>
 			            <a class="creer-button" href="#">Créer un Compte</a>
 	             </fieldset>
-	             
-	             
-	             <%-- Vérification de la présence d'un objet utilisateur en session --%>
-                <c:if test="${!empty sessionScope.session}">
-                    <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
-                    <p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionUtilisateur.email}</p>
-                </c:if>
 	        
 	        </form>        
    

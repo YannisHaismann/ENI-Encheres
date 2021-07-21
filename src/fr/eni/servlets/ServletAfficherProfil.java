@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.bll.UtilisateursManager;
 import fr.eni.bo.Utilisateurs;
@@ -29,18 +30,21 @@ public class ServletAfficherProfil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Je lis les paramètres
-		int idutilisateur = 0;
+		HttpSession session = request.getSession();
+		
+		int idUtilisateur = 0;
 		List<Integer> listeCodesErreur = new ArrayList<>();
 
-		idutilisateur = lireParametreId(request, listeCodesErreur);
+		idUtilisateur = lireParametreId(session, listeCodesErreur);
 
 		if (listeCodesErreur.size() > 0) {
 			request.setAttribute("listeCodesErreur", listeCodesErreur);
-		} else if (idutilisateur > 0) {
+			
+		} else if (idUtilisateur > 0) {
 			// J'ai un id au bon format, je récupère l'utilisateur eventuel
-			UtilisateursManager utilisateurManager = new UtilisateursManager();
-			chargerUtilisateur(request, utilisateurManager);
-			request.setAttribute("utilisateur", utilisateurManager);
+			Utilisateurs utilisateurs = new Utilisateurs();
+			chargerUtilisateur(session, utilisateurs, listeCodesErreur);
+			
 		}
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/afficherProfil.jsp");
@@ -56,30 +60,30 @@ public class ServletAfficherProfil extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private int lireParametreId(HttpServletRequest request, List<Integer> listeCodesErreur) {
-		int idutilisateur = 0;
+	private int lireParametreId(HttpSession session, List<Integer> listeCodesErreur) {
+		int idUtilisateur = 0;
 		try {
-			if (request.getParameter("id") != null) {
-				idutilisateur = Integer.parseInt(request.getParameter("id"));
+			if (session.getAttribute("id") != null) {
+				idUtilisateur = (int)session.getAttribute("id");
 			}
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			listeCodesErreur.add(CodesResultatServlets.FORMAT_ID_UTILISATEUR_ERREUR);
 		}
-		return idutilisateur;
+		return idUtilisateur;
 	}
 
-	private void chargerUtilisateur(HttpServletRequest request, UtilisateursManager utilisateurManager) {
-		Utilisateurs utilisateur;
+	private void chargerUtilisateur(HttpSession session, Utilisateurs utilisateurs, List<Integer> listeCodesErreur) {
+		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 
 		try {
-			int idUtilisateur = lireParametreId(request, null);
-			utilisateur = utilisateurManager.selectionner(idUtilisateur);
-			request.setAttribute("utilisateur", utilisateur);
+			int idUtilisateur = lireParametreId(session, null);
+			utilisateurs = utilisateursManager.selectionner(idUtilisateur);
+			session.setAttribute("utilisateur", utilisateurs);
 
 		} catch (BusinessException e) {
 			e.printStackTrace();
-			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+			listeCodesErreur.add(CodesResultatServlets.CHARGEMENT_UTILISATEUR_ERREUR);
 		}
 	}
 
