@@ -49,7 +49,7 @@
     
         <img src="./images/avatar_connexion.png" alt="avatar" class="avatar">        
         
-	        <form action="/ServletConnexion" method="post">
+	        <form action="<%=request.getContextPath()%>/ServletConnexion" method="post">
 	        
 	        	<fieldset > <p class=login-title>Se connecter</p>  
 	        

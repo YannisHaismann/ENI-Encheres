@@ -86,7 +86,7 @@ public class ServletConnexion extends HttpServlet {
 				if(listeCodesErreur.size()>0)
 				{
 					request.setAttribute("listeCodesErreur", listeCodesErreur);
-					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Connecter.jsp"); 
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connecter.jsp"); 
 					rd.forward(request, response);
 				}
 			
@@ -136,7 +136,7 @@ public class ServletConnexion extends HttpServlet {
 				if(listeCodesErreur.size()>0)
 				{
 					request.setAttribute("listeCodesErreur", listeCodesErreur);
-					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Connecter.jsp"); 
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connecter.jsp"); 
 					rd.forward(request, response);
 				}
 			} 
@@ -168,9 +168,6 @@ public class ServletConnexion extends HttpServlet {
 				
 }
 		
-		
-
-	
 	
 	
 	private String lireParametrePseudo(HttpServletRequest request, List<Integer> listeCodesErreur){
