@@ -41,6 +41,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp");
+		
 		rd.forward(request, response);
 	}
 
@@ -48,7 +49,6 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String pseudo;
 		String nom;
 		String prenom;
