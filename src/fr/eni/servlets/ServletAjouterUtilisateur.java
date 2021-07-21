@@ -259,7 +259,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 			if(!motDePasse.matches(".*\\d+.*")) {
 				listeCodesErreur.add(CodesResultatServlets.AUCUN_CHIFFRES_DANS_MDP);
 			}
-			Pattern p = Pattern.compile("[A-Za-z0-9]");
+			Pattern p = Pattern.compile("[^A-Za-z0-9]");
 		    Matcher m = p.matcher(motDePasse);
 		    boolean b = m.find();
 		    if(b == false) {
