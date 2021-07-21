@@ -96,11 +96,11 @@ public class UtilisateursManager {
 		return this.utilisateursDao.selectBy(id);
 	}
 	
-	public Utilisateurs selectionnerTousParPseudo(String pseudo) throws BusinessException{
-		return this.utilisateursDao.selectByPseudo(pseudo);
+	public List<String> selectAllEmail() throws BusinessException {
+		return this.utilisateursDao.selectAllEmail();
 	}
 	
-	public Utilisateurs selectionnerTousParEmail(String email) throws BusinessException{
-		return this.utilisateursDao.selectByEmail(email);
+	public List<String> selectAllPseudo() throws BusinessException {
+		return this.utilisateursDao.selectAllPseudo();
 	}
 }

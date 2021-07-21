@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -15,6 +16,16 @@
 <link rel="stylesheet" href="css/style_header.css">
 <link rel="stylesheet" href="css/victoireEnchereDetail.css">
 <title>Enchère remportée</title>
+=======
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+<link rel="stylesheet" href="css/style_footer.css">
+<link rel="stylesheet" href="css/style_header.css">
+
+<title>INSERER TITLE</title>
+>>>>>>> branch 'master' of https://github.com/YannisHaismann/ENI-Encheres.git
 </head>
 <body style="background-image: url('./images/fond_page_connexion.jpg');">
 

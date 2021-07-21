@@ -31,6 +31,7 @@ public class ServletModifiantProfil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Je lis les paramètres
+		
 		int idutilisateur = 0;
 		List<Integer> listeCodesErreur = new ArrayList<>();
 
@@ -97,8 +98,10 @@ public class ServletModifiantProfil extends HttpServlet {
 				e.printStackTrace();
 				request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
 			}
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecte.jsp");
+			rd.forward(request, response);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/modifierProfil.jsp");
 		rd.forward(request, response);
 		
 	}
@@ -118,8 +121,8 @@ public class ServletModifiantProfil extends HttpServlet {
 
 	private String lireParametrePseudo(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String pseudo;
+		List<String> pseudos = new ArrayList<String>();
 		boolean alphanumerique;
-		Utilisateurs utilisateur = new Utilisateurs();
 		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 		pseudo = request.getParameter("pseudo");
 		if (pseudo == null || pseudo.trim().equals("")) {
@@ -130,12 +133,12 @@ public class ServletModifiantProfil extends HttpServlet {
 		}
 		
 		try {
-			utilisateur = utilisateursManager.selectionnerTousParPseudo(pseudo);
+			pseudos = utilisateursManager.selectAllPseudo();
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			listeCodesErreur.add(CodesResultatServlets.ECHEC_RECUPERATION_PAR_PSEUDO);
 		}
-		if (utilisateur != null) {
+		if (pseudos.contains(pseudo)) {
 			listeCodesErreur.add(CodesResultatServlets.PSEUDO_DEJA_PRIS);
 		}
 		alphanumerique = isAlphanumerique(pseudo);
@@ -170,27 +173,27 @@ public class ServletModifiantProfil extends HttpServlet {
 
 	private String lireParametreEmail(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String email;
-		Utilisateurs utilisateur = new Utilisateurs();
+		List<String> emails = new ArrayList<String>();
 		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 		email = request.getParameter("email");
 		if (email == null || email.trim().equals("")) {
 			listeCodesErreur.add(CodesResultatServlets.EMAIL_OBLIGATOIRE);
-		} else if (email.length() > 20) {
+		} else if (email.length() > 40) {
 			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_EMAIL_DEPASSER);
 		}
-		Pattern pattern = Pattern.compile("^ [ A - Z0 - 9 ._%+ - ] + @ [ A - Z 0 - 9 . - ] + \\. [ A - Z ] {2,} $");
+		Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[a-z]{2,}$");
 		Matcher matcher = pattern.matcher(email);
 		boolean emailValide = matcher.find();
 		if (emailValide == false) {
 			listeCodesErreur.add(CodesResultatServlets.EMAIL_NON_VALIDE);
 		}
 		try {
-			utilisateur = utilisateursManager.selectionnerTousParEmail(email);
+			emails = utilisateursManager.selectAllEmail();
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			listeCodesErreur.add(CodesResultatServlets.ECHEC_RECUPERATION_PAR_EMAIL);
 		}
-		if (utilisateur != null) {
+		if (emails.contains(email)) {
 			listeCodesErreur.add(CodesResultatServlets.EMAIL_DEJA_PRIS);
 		}
 		return email;
