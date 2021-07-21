@@ -125,7 +125,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 				request.setAttribute("listeCodesErreur",e.getListeCodesErreur());
 				
 			}
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AcceuilConnecte.jsp"); 
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecte.jsp"); 
 			rd.forward(request, response);
 		}
 	}
