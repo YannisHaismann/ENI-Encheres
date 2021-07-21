@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.bll.UtilisateursManager;
 import fr.eni.bo.Utilisateurs;
@@ -31,20 +32,18 @@ public class ServletModifiantProfil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Je lis les paramètres
-		
+		HttpSession session = request.getSession();
 		int idutilisateur = 0;
 		List<Integer> listeCodesErreur = new ArrayList<>();
 
-		idutilisateur = lireParametreId(request, listeCodesErreur);
+		idutilisateur = lireParametreId(session, listeCodesErreur);
 
 		if (listeCodesErreur.size() > 0) {
 			request.setAttribute("listeCodesErreur", listeCodesErreur);
 		} else if (idutilisateur > 0) {
 			// J'ai un id au bon format, je récupère l'utilisateur associée eventuelle
-			UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
-			chargerUtilisateur(request, utilisateursManager);
-
-			request.setAttribute("utilisateur", utilisateursManager);
+			Utilisateurs utilisateurs = new Utilisateurs();
+			chargerUtilisateur(session, utilisateurs, listeCodesErreur);
 		}
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/modifierProfil.jsp");
@@ -57,6 +56,7 @@ public class ServletModifiantProfil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		int idutilisateur;
 		String pseudo;
 		String nom;
@@ -73,23 +73,49 @@ public class ServletModifiantProfil extends HttpServlet {
 		
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		
-		idutilisateur = lireParametreId(request, listeCodesErreur);
+		idutilisateur = lireParametreId(session, listeCodesErreur);
 		pseudo = lireParametrePseudo(request, listeCodesErreur);
+		if(pseudo.trim().equals("")) {
+			pseudo = (String) session.getAttribute("pseudo");
+		}
 		nom = lireParametreNom(request, listeCodesErreur);
+		if(nom.trim().equals("")) {
+			nom = (String) session.getAttribute("nom");
+		}
 		prenom = lireParametrePrenom(request, listeCodesErreur);
+		if(prenom.trim().equals("")) {
+			prenom = (String) session.getAttribute("prenom");
+		}
 		email = lireParametreEmail(request, listeCodesErreur);
+		if(email.trim().equals("")) {
+			email = (String) session.getAttribute("email");
+		}
 		telephone = LireParametreTelephone(request, listeCodesErreur);
+		if(telephone.trim().equals("")) {
+			telephone = (String) session.getAttribute("telephone");
+		}
 		rue = lireParametreRue(request, listeCodesErreur);
+		if(rue.trim().equals("")) {
+			rue = (String) session.getAttribute("rue");
+		}
 		codePostal = lireParametreCodePostal(request, listeCodesErreur);
+		if(codePostal.trim().equals("")) {
+			codePostal = (String) session.getAttribute("codePostal");
+		}
 		ville = lireParametreVille(request, listeCodesErreur);
+		if(ville.trim().equals("")) {
+			ville = (String) session.getAttribute("ville");
+		}
 		motDePasse = lireParametreMDP(request, listeCodesErreur);
-		credit = Integer.parseInt(request.getParameter("credit"));
-		administrateur = Integer.parseInt(request.getParameter("administrateur"));
-		desactiver = Integer.parseInt(request.getParameter("desactiver"));
+		credit = (int)session.getAttribute("credit");
+		administrateur = (int) session.getAttribute("administrateur");
+		desactiver = (int) session.getAttribute("desactiver");
 		
 		if(listeCodesErreur.size()>0)
 		{
 			request.setAttribute("listeCodesErreur", listeCodesErreur);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/modifierProfil.jsp");
+			rd.forward(request, response);
 		}else {
 			try {
 				UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
@@ -101,22 +127,19 @@ public class ServletModifiantProfil extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecte.jsp");
 			rd.forward(request, response);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/modifierProfil.jsp");
-		rd.forward(request, response);
-		
 	}
 
-	private int lireParametreId(HttpServletRequest request, List<Integer> listeCodesErreur) {
-		int idutilisateur = 0;
+	private int lireParametreId(HttpSession session, List<Integer> listeCodesErreur) {
+		int idUtilisateur = 0;
 		try {
-			if (request.getParameter("id") != null) {
-				idutilisateur = Integer.parseInt(request.getParameter("id"));
+			if (session.getAttribute("id") != null) {
+				idUtilisateur = (int)session.getAttribute("id");
 			}
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			listeCodesErreur.add(CodesResultatServlets.FORMAT_ID_UTILISATEUR_ERREUR);
 		}
-		return idutilisateur;
+		return idUtilisateur;
 	}
 
 	private String lireParametrePseudo(HttpServletRequest request, List<Integer> listeCodesErreur){
@@ -125,37 +148,36 @@ public class ServletModifiantProfil extends HttpServlet {
 		boolean alphanumerique;
 		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 		pseudo = request.getParameter("pseudo");
-		if (pseudo == null || pseudo.trim().equals("")) {
-			listeCodesErreur.add(CodesResultatServlets.PSEUDO_OBLIGATOIRE);
-		}
-		if (pseudo.length() > 30) {
-			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_PSEUDO_DEPASSER);
-		}
+		if (!pseudo.trim().equals("")) {
+			
+			if (pseudo.length() > 30) {
+				listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_PSEUDO_DEPASSER);
+			}
 		
-		try {
-			pseudos = utilisateursManager.selectAllPseudo();
-		} catch (BusinessException e) {
-			e.printStackTrace();
-			listeCodesErreur.add(CodesResultatServlets.ECHEC_RECUPERATION_PAR_PSEUDO);
+			try {
+				pseudos = utilisateursManager.selectAllPseudo();
+			} catch (BusinessException e) {
+				e.printStackTrace();
+				listeCodesErreur.add(CodesResultatServlets.ECHEC_RECUPERATION_PAR_PSEUDO);
+			}
+			if (pseudos.contains(pseudo)) {
+				listeCodesErreur.add(CodesResultatServlets.PSEUDO_DEJA_PRIS);
+			}
+			alphanumerique = isAlphanumerique(pseudo);
+			if (alphanumerique == false) {
+				listeCodesErreur.add(CodesResultatServlets.PSEUDO_NON_ALPHANUMERIQUE);
+			}
 		}
-		if (pseudos.contains(pseudo)) {
-			listeCodesErreur.add(CodesResultatServlets.PSEUDO_DEJA_PRIS);
-		}
-		alphanumerique = isAlphanumerique(pseudo);
-		if (alphanumerique == false) {
-			listeCodesErreur.add(CodesResultatServlets.PSEUDO_NON_ALPHANUMERIQUE);
-		}
-
 		return pseudo;
 	}
 
 	private String lireParametreNom(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String nom;
 		nom = request.getParameter("nom");
-		if (nom == null || nom.trim().equals("")) {
-			listeCodesErreur.add(CodesResultatServlets.NOM_OBLIGATOIRE);
-		} else if (nom.length() > 30) {
+		if (!nom.trim().equals("")) {
+			if (nom.length() > 30) {
 			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_NOM_DEPASSER);
+			}
 		}
 		return nom;
 	}
@@ -163,10 +185,10 @@ public class ServletModifiantProfil extends HttpServlet {
 	private String lireParametrePrenom(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String prenom;
 		prenom = request.getParameter("prenom");
-		if (prenom == null || prenom.trim().equals("")) {
-			listeCodesErreur.add(CodesResultatServlets.PRENOM_OBLIGATOIRE);
-		} else if (prenom.length() > 30) {
+		if (!prenom.trim().equals("")) {
+			if (prenom.length() > 30) {
 			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_PRENOM_DEPASSER);
+			}
 		}
 		return prenom;
 	}
@@ -176,40 +198,45 @@ public class ServletModifiantProfil extends HttpServlet {
 		List<String> emails = new ArrayList<String>();
 		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 		email = request.getParameter("email");
-		if (email == null || email.trim().equals("")) {
-			listeCodesErreur.add(CodesResultatServlets.EMAIL_OBLIGATOIRE);
-		} else if (email.length() > 40) {
+		if (!email.trim().equals("")) {
+			
+			if (email.length() > 40) {
 			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_EMAIL_DEPASSER);
-		}
-		Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[a-z]{2,}$");
-		Matcher matcher = pattern.matcher(email);
-		boolean emailValide = matcher.find();
-		if (emailValide == false) {
-			listeCodesErreur.add(CodesResultatServlets.EMAIL_NON_VALIDE);
-		}
-		try {
-			emails = utilisateursManager.selectAllEmail();
-		} catch (BusinessException e) {
-			e.printStackTrace();
-			listeCodesErreur.add(CodesResultatServlets.ECHEC_RECUPERATION_PAR_EMAIL);
-		}
-		if (emails.contains(email)) {
-			listeCodesErreur.add(CodesResultatServlets.EMAIL_DEJA_PRIS);
+			}
+			Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[a-z]{2,}$");
+			Matcher matcher = pattern.matcher(email);
+			boolean emailValide = matcher.find();
+			if (emailValide == false) {
+				listeCodesErreur.add(CodesResultatServlets.EMAIL_NON_VALIDE);
+			}
+			try {
+				emails = utilisateursManager.selectAllEmail();
+			} catch (BusinessException e) {
+				e.printStackTrace();
+				listeCodesErreur.add(CodesResultatServlets.ECHEC_RECUPERATION_PAR_EMAIL);
+			}
+			if (emails.contains(email)) {
+				listeCodesErreur.add(CodesResultatServlets.EMAIL_DEJA_PRIS);
+			}
 		}
 		return email;
 	}
+	
 
 	private String LireParametreTelephone(HttpServletRequest request, List<Integer> listeCodesErreur) {
 		String telephone;
 		telephone = request.getParameter("telephone");
-		if (telephone.length() > 15) {
-			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_TELEPHONE_DEPASSER);
-		}
-		Pattern pattern = Pattern.compile("^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$");
-		Matcher matcher = pattern.matcher(telephone);
-		boolean telephoneValide = matcher.find();
-		if (telephoneValide == false) {
-			listeCodesErreur.add(CodesResultatServlets.TELEPHONE_NON_VALIDE);
+		if (!telephone.trim().equals("")) {
+			
+			if (telephone.length() > 15) {
+				listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_TELEPHONE_DEPASSER);
+			}
+			Pattern pattern = Pattern.compile("^(?:(?:\\+|00)33|0)\\s*[1-9](?:[\\s.-]*\\d{2}){4}$");
+			Matcher matcher = pattern.matcher(telephone);
+			boolean telephoneValide = matcher.find();
+			if (telephoneValide == false) {
+				listeCodesErreur.add(CodesResultatServlets.TELEPHONE_NON_VALIDE);
+			}
 		}
 		return telephone;
 	}
@@ -217,10 +244,11 @@ public class ServletModifiantProfil extends HttpServlet {
 	private String lireParametreRue(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String rue;
 		rue = request.getParameter("rue");
-		if (rue == null || rue.trim().equals("")) {
-			listeCodesErreur.add(CodesResultatServlets.RUE_OBLIGATOIRE);
-		} else if (rue.length() > 30) {
+		if (!rue.trim().equals("")) {
+			
+			if (rue.length() > 30) {
 			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_RUE_DEPASSER);
+			}
 		}
 		return rue;
 	}
@@ -228,13 +256,14 @@ public class ServletModifiantProfil extends HttpServlet {
 	private String lireParametreCodePostal(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String codePostal;
 		codePostal = request.getParameter("codePostal");
-		if (codePostal == null || codePostal.trim().equals("")) {
-			listeCodesErreur.add(CodesResultatServlets.CODE_POSTAL_OBLIGATOIRE);
-		} else if (codePostal.length() > 10) {
-			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_CODE_POSTAL_DEPASSER);
-		}
-		else if(!codePostal.contains("[0-9]+")) {
-			listeCodesErreur.add(CodesResultatServlets.CODE_POSTAL_INVALIDE);
+		if (!codePostal.trim().equals("")) {
+			
+			if (codePostal.length() > 10) {
+				listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_CODE_POSTAL_DEPASSER);
+			}
+			if(!codePostal.contains("[0-9]+")) {
+				listeCodesErreur.add(CodesResultatServlets.CODE_POSTAL_INVALIDE);
+			}
 		}
 		return codePostal;
 	}
@@ -242,10 +271,11 @@ public class ServletModifiantProfil extends HttpServlet {
 	private String lireParametreVille(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String ville;
 		ville = request.getParameter("ville");
-		if (ville == null || ville.trim().equals("")) {
-			listeCodesErreur.add(CodesResultatServlets.VILLE_OBLIGATOIRE);
-		} else if (ville.length() > 30) {
-			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_VILLE_DEPASSER);
+		if (!ville.trim().equals("")) {
+			
+			if (ville.length() > 30) {
+				listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_VILLE_DEPASSER);
+			}
 		}
 		return ville;
 	}
@@ -272,7 +302,7 @@ public class ServletModifiantProfil extends HttpServlet {
 			if(compteurMaj <= 0) {
 				listeCodesErreur.add(CodesResultatServlets.AUCUNE_MAJ_DANS_MDP);
 			}
-			if(!nouveauMdp.contains("[0-9]+")) {
+			if(!nouveauMdp.matches(".*\\d+.*")) {
 				listeCodesErreur.add(CodesResultatServlets.AUCUN_CHIFFRES_DANS_MDP);
 			}
 			Pattern p = Pattern.compile("[^A-Za-z0-9]");
@@ -283,23 +313,23 @@ public class ServletModifiantProfil extends HttpServlet {
 		    }
 			String hashed = BCrypt.hashpw(confirmationMdp, BCrypt.gensalt(12));
 			confirmationMdp = hashed;
-		}else if(!mdpactuel.equals(confirmationMdp) || !nouveauMdp.equals(confirmationMdp)) {
+		}else if((!mdpactuel.equals(confirmationMdp)) || (!nouveauMdp.equals(confirmationMdp))) {
 			listeCodesErreur.add(CodesResultatServlets.MDP_NON_IDENTIQUE);
 		}
 		return confirmationMdp;
 	}
 
-	private void chargerUtilisateur(HttpServletRequest request, UtilisateursManager utilisateurManager){
-		Utilisateurs utilisateur;
+	private void chargerUtilisateur(HttpSession session, Utilisateurs utilisateurs, List<Integer> listeCodesErreur) {
+		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 
 		try {
-			int idUtilisateur = lireParametreId(request, null);
-			utilisateur = utilisateurManager.selectionner(idUtilisateur);
-			request.setAttribute("utilisateur", utilisateur);
+			int idUtilisateur = lireParametreId(session, null);
+			utilisateurs = utilisateursManager.selectionner(idUtilisateur);
+			session.setAttribute("utilisateur", utilisateurs);
 
 		} catch (BusinessException e) {
 			e.printStackTrace();
-			request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+			listeCodesErreur.add(CodesResultatServlets.CHARGEMENT_UTILISATEUR_ERREUR);
 		}
 	}
 

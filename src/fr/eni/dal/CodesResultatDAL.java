@@ -14,7 +14,10 @@ public class CodesResultatDAL {
 	
 	public static final Integer DELETE_OBJET_ECHEC = 10005;
 
-	public static final Integer SELECT_BY_PSEUDO_ECHEC = 10006;
+	public static final Integer SELECT_ALL_PSEUDO_ECHEC = 10006;
 
-	public static final int SELECT_BY_EMAIL_ECHEC = 10007;
+	public static final Integer SELECT_ALL_EMAIL_ECHEC = 10007;
+
+	public static final Integer SELECT_BY_PSEUDO_OBJET_ECHEC = 10008;
+
 }

@@ -62,4 +62,6 @@ public class CodesResultatServlets {
 
 	public static final Integer CODE_POSTAL_INVALIDE = 30029;
 
+	public static final Integer CHARGEMENT_UTILISATEUR_ERREUR = 30033;
+
 }
