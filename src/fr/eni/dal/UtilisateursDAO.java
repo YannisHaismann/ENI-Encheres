@@ -14,4 +14,5 @@ public interface UtilisateursDAO {
 	public List<String> selectAllEmail() throws BusinessException;
 	public List<String> selectAllPseudo() throws BusinessException;
 	public Utilisateurs selectByPseudo(String pseudo) throws BusinessException;
+	public Utilisateurs selectByEmail(String email) throws BusinessException;
 }

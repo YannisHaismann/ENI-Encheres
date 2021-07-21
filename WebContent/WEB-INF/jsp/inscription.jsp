@@ -97,18 +97,30 @@
 					required maxlength="20" placeholder="entrer le mot De Passe"
 					name="motDePasse" value="">
 			</div>
-			<div>
-				<label class="label-droit-inscription" for="confirmation">Confirmation
-					<span class="requis">*</span></label> <input type="password" id="confirmation" 
-					maxlength="20" required	placeholder="confirmer le password" value="" name="confirmation"><br>
+			
+			<div >
+					<label class="label-droit-inscription" for="confirmation">Confirmation
+						<span class="requis">*</span>
+					</label> <input type="password" id="confirmation" maxlength="20" required
+						placeholder="confirmer le password" value=""  name="confirmation"><br>
+			</div>
+			
+			
+				
+			<div class="form-boutton" class="label-gauche-inscription">
+					<input   name="creer-button" type="submit" 
+					value="Créer"> 
+			</div>
+				
+			<div class="form-boutton" class="label-droit-inscription">
+					<input   name="annuler-button" type="button" 
+					value="Annuler">
 			</div>
 
-			<div class="form-boutton">
-				<input class="creer-button" name="creer-button" type="submit" value="Créer">	
-				<input class="annuler-button" name="annuler-button" type="button" value="Annuler">			
-			</div>	
-			
-	
+		
+
+
+
 
 
 		</form>

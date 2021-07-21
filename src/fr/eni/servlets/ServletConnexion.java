@@ -48,8 +48,6 @@ public class ServletConnexion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	
-		String motDePasseSaisie;
-		
 	
 		HttpSession session = request.getSession(true);
 		
@@ -60,18 +58,25 @@ public class ServletConnexion extends HttpServlet {
 		// on Verifie la saisie s'il est un email ou pseudo
 		
 		String saisie = "";
+		String motDePasseSaisie = request.getParameter("motDePasse") ;
 		
 		Pattern pattern = Pattern.compile("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[a-z]{2,}$");
 		Matcher matcher = pattern.matcher(saisie);
 		boolean saisieValide = matcher.find();   
 		
-		if (saisieValide == true) {  // veut dire c un email
+		if (saisieValide == true) { 
+			// veut dire c un email
 			saisie = lireParametreEmail(request, listeCodesErreur);
 			
 			UtilisateursManager utilisateursManager = UtilisateursManager.getInstance() ;
 			Utilisateurs utilisateur = new Utilisateurs();
 			
-			utilisateur = utilisateursManager.selectByEmail(saisie);
+			try {
+				utilisateur = utilisateursManager.selectByEmail(saisie);
+			} catch (BusinessException e) {
+				e.printStackTrace();
+				request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+			}
 			String motDePasse = utilisateur.getMotDePasse();
 			
 			Boolean verification = false;
@@ -116,7 +121,12 @@ public class ServletConnexion extends HttpServlet {
 			saisie = lireParametrePseudo(request, listeCodesErreur);
 			UtilisateursManager utilisateursManager = UtilisateursManager.getInstance() ;
 			Utilisateurs utilisateur = new Utilisateurs();
-			utilisateur = utilisateursManager.selectByPseudo(saisie);
+			try {
+				utilisateur = utilisateursManager.selectByPseudo(saisie);
+			} catch (BusinessException e) {
+				e.printStackTrace();
+				request.setAttribute("listeCodesErreur", e.getListeCodesErreur());
+			}
 			String motDePasse = utilisateur.getMotDePasse();
 			
 			Boolean verification = false;

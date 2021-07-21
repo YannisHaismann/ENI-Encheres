@@ -75,3 +75,25 @@ a.footer-list-link {
 }
 
 
+@media all and (max-width:560px) {
+
+.footer-basic ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+.footer-basic ul {
+    font-size: 12px;
+}
+
+.footer-basic .footer-social {
+    text-align: center;
+    margin-top: 5px;
+}
+.inscription-box {
+    top: 44%;
+}
+
+}

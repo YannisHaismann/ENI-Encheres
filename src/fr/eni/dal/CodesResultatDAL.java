@@ -20,4 +20,6 @@ public class CodesResultatDAL {
 
 	public static final Integer SELECT_BY_PSEUDO_OBJET_ECHEC = 10008;
 
+	public static final Integer SELECT_BY_EMAIL_OBJET_ECHEC = 10009;
+
 }

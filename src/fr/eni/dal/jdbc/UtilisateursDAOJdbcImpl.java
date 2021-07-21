@@ -23,6 +23,8 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 	public static final String UPDATE_BY_ID = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?,"
 			+ " code_postal = ?, ville = ?, mot_de_passe = ?, credit = ?, administrateur = ?, desactiver = ?  WHERE no_utilisateur = ?;";
 	public static final String DELETE_BY_ID = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
+	private static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email = ?";
+	
 
 	@Override
 	public Utilisateurs insert(Utilisateurs utilisateur) throws BusinessException {
@@ -337,6 +339,47 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.SELECT_BY_PSEUDO_OBJET_ECHEC);
+			throw businessException;
+		}
+	}
+	
+	
+	public Utilisateurs selectByEmail(String email) throws BusinessException {
+
+		try (Connection con = ConnectionProvider.getConnection()) {
+			try {
+				PreparedStatement pstmt;
+				pstmt = con.prepareStatement(SELECT_BY_EMAIL);
+				pstmt.setString(1, email);
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				Utilisateurs nouvelUtilisateur = new Utilisateurs();
+				nouvelUtilisateur.setId(rs.getInt("no_utilisateur"));
+				nouvelUtilisateur.setPseudo(rs.getString("pseudo"));
+				nouvelUtilisateur.setNom(rs.getString("nom"));
+				nouvelUtilisateur.setPrenom(rs.getString("prenom"));
+				nouvelUtilisateur.setEmail(rs.getString("email"));
+				nouvelUtilisateur.setTelephone(rs.getString("telephone"));
+				nouvelUtilisateur.setRue(rs.getString("rue"));
+				nouvelUtilisateur.setCodePostal(rs.getString("code_postal"));
+				nouvelUtilisateur.setVille(rs.getString("ville"));
+				nouvelUtilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+				nouvelUtilisateur.setCredit(rs.getInt("credit"));
+				nouvelUtilisateur.setAdministrateur(rs.getInt("administrateur"));
+				nouvelUtilisateur.setDesactiver(rs.getInt("desactiver"));
+
+				rs.close();
+				pstmt.close();
+
+				return nouvelUtilisateur;
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_BY_EMAIL_OBJET_ECHEC);
 			throw businessException;
 		}
 	}

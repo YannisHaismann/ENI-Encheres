@@ -107,4 +107,8 @@ public class UtilisateursManager {
 	public Utilisateurs selectByPseudo(String pseudo) throws BusinessException {
 		return this.utilisateursDao.selectByPseudo(pseudo);
 	}
+	
+	public Utilisateurs selectByEmail(String email) throws BusinessException {
+		return this.utilisateursDao.selectByEmail(email);
+	}
 }

@@ -18,7 +18,7 @@
 	}
 	
 	.inscription-box {
-		width: 30%;
+		width: 45%;
 		border-radius: 10px;
 		background: rgb(103, 116, 189);
 		color: #fff;
@@ -42,9 +42,10 @@
 	
 	.flex-profil-elements {
 		display: flex;
+		justify-content:space-between;
 		flex-direction: row;
 		flex-wrap: wrap;
-		justify-content: space-between;
+		
 	}
 	
 	.password-field a:hover {
@@ -56,32 +57,35 @@
 		opacity: 0.6;
 	}
 	
-.form-boutton {
-	display: flex;
-	clear: left;
-	flex-wrap: wrap;
-	flex-direction: row;
-	justify-content: center;	
-	
+
+
+.form-boutton {	
+	width: 228px;
+    margin-top: 10px;	
 }
 	
 .form-boutton:hover {
 		opacity: 0.6;
 	}
+
 	
 
 
-@media all and (max-width:370px) {
-	.inscription-box {
+@media all and (max-width:375px) {
+
+.inscription-box {
 		display: flex;
 		flex-direction: column;
 	}
-	.creer-button {
-		flex: none float: left;
-		margin: 5px 70px;
-	}
-	.annuler-button {
-		flex: none float: left;
-		margin: 5px 70px;
-	}
+
+.form-boutton 	{	
+	width: auto;
+}	
+
+
+.label {
+    display: inline-block;
+    margin-bottom: auto;
+	
+
 }
