@@ -1,97 +1,129 @@
+
+
 html {
-	margin: 0;
+    margin: 0;
 }
 
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-body {
-	margin: 0px;
-	padding: 0px;
-	background-size: cover;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	background-position: top center;
-	font-family: sans-serif;
+
+ 
+body { 
+    margin: 0px;
+    padding: 0px;
+    background-size: cover ; background-attachment: fixed; 
+    background-repeat: no-repeat; background-position: top center;
+    font-family: sans-serif;   
 }
 
-.img-article {
-	vertical-align: middle;
-	border-style: none;
-	position: relative;
-	top: 30px;
-	left: 30px;
-	vertical-align: middle;
-	border-style: none;
-	position: relative;
-	top: 30px;
-	left: 30px;
-}
-
-.nouvelle-box {
-	width: 30%;
-	border-radius: 10px;
-	background: rgb(103, 116, 189);
-	color: #fff;
-	top: 50%;
-	left: 50%;
-	position: absolute;
-	transform: translate(-50%, -50%);
-	box-sizing: border-box;
-	padding: 10px 10px;
+.main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .side-bar {
-	float: left;
-	width: 300px;
-	background-color: white;
-	height: 800px;
+    float: left;
+    width: 20%;
+    height: 495px;
+}
+.nouvelle-vente-main {
+	float:right;
+	width: 80%
 }
 
-.enregistrer-button {
-	float: left;
-	background-color: #4CAF50; /* Green */
-	border: none;
-	border-radius: 6px;
-	color: white;
-	padding: 5px 20px;
-	margin-top: 15px;
-	text-align: center;
-	text-decoration: none;
-	display: block;
-	font-size: 16px;
+.nouvelle-box {
+    height: 88%;
+    width: 40%;
+    margin: auto;
+    text-align: left;
+    border-radius: 10px;
+    background: rgb(103, 116, 189);
+    color: #fff;
+    box-sizing: border-box;
+    padding: 10px 10px;
 }
 
-.annuler-button {
-	float: right;
-	background-color: #fff;
-	border: none;
-	border-radius: 6px;
-	color: #000;
-	padding: 5px 13px;
-	margin-top: 15px;
-	text-align: center;
-	text-decoration: none;
-	display: block;
-	font-size: 16px;
+.label-vente {
+	width: 135px;
 }
 
-.enregistrer-button:hover, .annuler-button:hover {
-	opacity: 0.6;
+.img-article {
+    position: relative;
+    height:200px;
+    width:200px;
 }
 
-@media only screen and (max-width:960px) {
-	.nouvelle-box {
-		display: flex;
-		flex-direction: column;
-	}
-	.enregistrer-button {
-		flex: none float: left;
-		margin: 5px 70px;
-	}
-	.annuler-button {
-		flex: none float: left;
-		margin: 5px 70px;
-	}
+
+.enregistrer-button  {
+    
+    float: left;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    border-radius: 6px;
+    color: white;
+    padding: 5px 20px;
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+
+.annuler-button  {
+    float: right;
+    background-color: #fff; 
+    border: none;
+    border-radius: 6px;
+    color: #000;
+    padding: 5px 13px;
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+
+.enregistrer-button:hover , .annuler-button:hover {
+    opacity: 0.6;
+}
+
+@media only screen and (max-width:415px) {
+
+.main {
+    display: flex;
+    flex-direction: column-reverse;    
+}
+
+.img-article {
+	position: absolute;
+	bottom: 20px;
+}
+
+textarea {
+min-height: 60px;
+overflow-y: auto;
+word-wrap:break-word
+}
+
+.nouvelle-box {
+    width: auto;
+    margin-top: 65px;
+    padding-bottom: 57px;
+}
+
+.side-bar {
+    width: 20%;
+    height: auto
+}
+
+.footer-basic {
+    position: absolute;
+    bottom: -85px;
+}
+
+.label-vente {
+    width: 100px;
 }
