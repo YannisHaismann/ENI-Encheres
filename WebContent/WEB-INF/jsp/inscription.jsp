@@ -113,7 +113,7 @@
 			</div>
 				
 			<div class="form-boutton" class="label-droit-inscription">
-					<a href="/ENI-Encheres/ServletAccueil"> <input   name="annuler-button" type="button" 
+					<a href="<%=request.getContextPath()%>/ServletAccueil"> <input   name="annuler-button" type="button" 
 					value="Annuler"></a>
 			</div>
 
