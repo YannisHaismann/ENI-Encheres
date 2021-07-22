@@ -1,121 +1,136 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
 
-body{
-    text-align: center;
-    font-family: 'Raleway', sans-serif;
-    background-color: beige;
-}
-.search-top-nav{
-    background-color: cornflowerblue;
-    text-align: left;
-    padding: 50px;
+@import
+	url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap')
+	;
+
+body {
+	text-align: center;
+	font-family: 'Raleway', sans-serif;
+	background-color: beige;
 }
 
-.search-top-nav__form > div{
-    margin: 10px;
+.search-top-nav {
+	background-color: cornflowerblue;
+	text-align: left;
+	padding: 50px;
+}
+
+.search-top-nav__form>div {
+	margin: 10px;
 }
 
 .search-top-nav__form__input {
-    margin: 5px;
-}
-.search-top-nav__form__label{
-    margin: 5px;
+	margin: 5px;
 }
 
-.search-top-nav__form__input{
-    padding: 5px;
-    border-radius: 10px;
+.search-top-nav__form__label {
+	margin: 5px;
 }
 
-.search-top-nav__form__achats, .search-top-nav__form__ventes{
-    display: flex;
-    flex-direction: column;
+.search-top-nav__form__input {
+	padding: 5px;
+	border-radius: 10px;
 }
 
-@media screen and (min-width: 1024px) {
-    @keyframes animation-border-width {
-        0%{
-            width: 0%;
-        }
-
-        100%{
-            width: 100%;
-        }
-    }
-
-    @keyframes animation-border-height {
-        0%{
-            height: 0%;
-        }
-
-        100%{
-            height: 100%;
-        }
-    }
-
-    @keyframes background-color {
-        0%{
-            background-color: rgba(0, 139, 139, 0);
-        }
-
-        100%{
-            background-color: rgba(0, 139, 139, 1);
-        }
-    }
-
-    h1{
-        background-color: rgba(0, 139, 139, 0);
-        position: relative;
-        display: inline-block;
-        padding: 15px;
-        animation: background-color 700ms ease-in-out forwards 700ms;
-    }
-    h1 > div{
-        position: absolute;
-        background-color: darkcyan;
-        z-index: -10;
-    }
-
-    h1 > .animation-underline__bottom{
-        width: 0%;
-        height: 2px;
-        left: 0px;
-        bottom: 0px;
-        animation: animation-border-width 400ms ease-in-out forwards;
-    }
-
-    h1 > .animation-underline__left{
-        width: 2px;
-        height: 0%;
-        right: 0px;
-        bottom: 0px;
-        animation: animation-border-height 200ms ease-in-out forwards 400ms;
-    }
-
-    h1 > .animation-underline__top{
-        width: 0%;
-        height: 2px;
-        right: 0px;
-        top: 0px;
-        animation: animation-border-width 400ms ease-in-out forwards 600ms;
-    }
-
-    h1 > .animation-underline__right{
-        width: 2px;
-        height: 0%;
-        left: 0px;
-        top: 0px;
-        animation: animation-border-height 200ms ease-in-out forwards 900ms;
-    }
+.search-top-nav__form__achats, .search-top-nav__form__ventes {
+	display: flex;
+	flex-direction: column;
 }
 
-@media (min-width: 1024px) {
-    body{
-        margin: auto;
-    }
+@media screen and (min-width: 1024px) { @
+	keyframes animation-border-width { 0%{
+		width: 0%;
+	}
+	100%{
+	width
+	:
+	 
+	100%;
+}
 
-    .search-top-nav{
-        font-size: 20px;
-    }
+}
+@
+keyframes animation-border-height { 0%{
+	height: 0%;
+}
+
+100%{
+height
+:
+ 
+100%;
+}
+}
+@
+keyframes background-color { 0%{
+	background-color: rgba(0, 139, 139, 0);
+}
+
+100%{
+background-color
+:
+ 
+rgba
+(0
+,
+139,
+139,
+1);
+}
+}
+h1 {
+	background-color: rgba(0, 139, 139, 0);
+	position: relative;
+	display: inline-block;
+	padding: 15px;
+	animation: background-color 700ms ease-in-out forwards 700ms;
+}
+
+h1>div {
+	position: absolute;
+	background-color: darkcyan;
+	z-index: -10;
+}
+
+h1>.animation-underline__bottom {
+	width: 0%;
+	height: 2px;
+	left: 0px;
+	bottom: 0px;
+	animation: animation-border-width 400ms ease-in-out forwards;
+}
+
+h1>.animation-underline__left {
+	width: 2px;
+	height: 0%;
+	right: 0px;
+	bottom: 0px;
+	animation: animation-border-height 200ms ease-in-out forwards 400ms;
+}
+
+h1>.animation-underline__top {
+	width: 0%;
+	height: 2px;
+	right: 0px;
+	top: 0px;
+	animation: animation-border-width 400ms ease-in-out forwards 600ms;
+}
+
+h1>.animation-underline__right {
+	width: 2px;
+	height: 0%;
+	left: 0px;
+	top: 0px;
+	animation: animation-border-height 200ms ease-in-out forwards 900ms;
+}
+
+}
+@media ( min-width : 1024px) {
+	body {
+		margin: auto;
+	}
+	.search-top-nav {
+		font-size: 20px;
+	}
 }

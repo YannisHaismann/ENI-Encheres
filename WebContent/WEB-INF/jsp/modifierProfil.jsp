@@ -6,8 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <link rel="stylesheet" href="css/modifierProfil.css">
 
 <link rel="stylesheet" href="css/style_footer.css">
@@ -40,8 +42,8 @@
 					<label for="pseudo">Pseudo : </label>
 				</div>
 				<div class="form-champ">
-					<input type="text" name="pseudo" placeholder="${utilisateur.pseudo}"
-						value="" />
+					<input type="text" name="pseudo"
+						placeholder="${utilisateur.pseudo}" value="" />
 				</div>
 				<div class="form-label-d">
 					<label for="nom">Nom : </label>
@@ -56,8 +58,8 @@
 					<label for="prenom">Prénom : </label>
 				</div>
 				<div class="form-champ">
-					<input type="text" name="prenom" placeholder="${utilisateur.prenom}"
-						value="" />
+					<input type="text" name="prenom"
+						placeholder="${utilisateur.prenom}" value="" />
 				</div>
 				<div class="form-label-d">
 					<label for="email">Email : </label>
@@ -72,8 +74,8 @@
 					<label for="telephone">Téléphone : </label>
 				</div>
 				<div class="form-champ">
-					<input type="text" name="telephone" placeholder="${utilisateur.telephone}"
-						value="" />
+					<input type="text" name="telephone"
+						placeholder="${utilisateur.telephone}" value="" />
 				</div>
 				<div class="form-label-d">
 					<label for="rue">Rue : </label>
@@ -88,8 +90,8 @@
 					<label for="codePostal">Code postal : </label>
 				</div>
 				<div class="form-champ">
-					<input type="text" name="codePostal" placeholder="${utilisateur.codePostal}"
-						value="" />
+					<input type="text" name="codePostal"
+						placeholder="${utilisateur.codePostal}" value="" />
 				</div>
 				<div class="form-label-d">
 					<label for="ville">Ville : </label>

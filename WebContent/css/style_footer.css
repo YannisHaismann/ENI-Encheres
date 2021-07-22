@@ -1,4 +1,3 @@
-
 .footer-basic {
 	position: absolute;
 	bottom: 0;
@@ -15,8 +14,8 @@
 }
 
 .footer-basic ul {
-	display:flex;
-	justify-content:center;
+	display: flex;
+	justify-content: center;
 	padding: 0;
 	list-style: none;
 	text-align: center;
@@ -25,7 +24,7 @@
 	margin-bottom: 0;
 }
 
-.footer-list-inline {	
+.footer-list-inline {
 	margin-top: 18px;
 }
 
@@ -34,7 +33,7 @@
 }
 
 a.footer-list-link {
-	color:white;
+	color: white;
 	text-decoration: none;
 	opacity: 0.8;
 }
@@ -50,7 +49,7 @@ a.footer-list-link {
 }
 
 .footer-social-link {
-	color:white;
+	color: white;
 	font-size: 24px;
 	width: 40px;
 	height: 40px;
@@ -64,7 +63,7 @@ a.footer-list-link {
 }
 
 .footer-social-link:hover {
-	color:white;
+	color: white;
 	opacity: 1;
 }
 
@@ -74,26 +73,20 @@ a.footer-list-link {
 	color: #fff;
 }
 
-
 @media all and (max-width:560px) {
-
-.footer-basic ul {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-
-}
-
-.footer-basic ul {
-    font-size: 12px;
-}
-
-.footer-basic .footer-social {
-    text-align: center;
-    margin-top: 5px;
-}
-.inscription-box {
-    top: 44%;
-}
-
+	.footer-basic ul {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	.footer-basic ul {
+		font-size: 12px;
+	}
+	.footer-basic .footer-social {
+		text-align: center;
+		margin-top: 5px;
+	}
+	.inscription-box {
+		top: 44%;
+	}
 }

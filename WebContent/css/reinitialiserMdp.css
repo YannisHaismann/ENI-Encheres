@@ -29,6 +29,11 @@ body {
 	position: absolute;
 	transform: translate(-50%, -50%);
 	box-sizing: border-box;
+	text-align: center;
+}
+
+.champ {
+	margin-top: 50px;
 }
 
 .login-box a {
@@ -36,38 +41,11 @@ body {
 	font-size: 11px;
 }
 
-.password-field a:hover {
-	color: blue;
-	background-color: white;
-}
-
 .login-title {
 	margin: 0px;
 	padding: 0 0 20px;
 	text-align: center;
 	font-size: 22px;
-}
-
-.full-width {
-	width: 100%;
-	margin-bottom: 15px;
-}
-
-.aligner-login {
-	display: flex;
-	align-content: space-between;
-	margin-bottom: 5px;
-}
-
-.checkbox {
-	margin-left: 20px;
-	display: flex;
-	flex-direction: row;
-}
-
-.checkbox label {
-	font-size: 11px;
-	padding-right: 5px;
 }
 
 .creer-button {
@@ -88,21 +66,4 @@ body {
 
 .creer-button:hover {
 	opacity: 0.6;
-}
-
-.avatar {
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-	position: absolute;
-	top: -76px;
-	left: calc(50% - 40px);
-}
-
-@media only screen and (max-width:565px) {
-	.login-box {
-		width: 275px;
-		height: 360px;
-		top: 50%;
-	}
 }
