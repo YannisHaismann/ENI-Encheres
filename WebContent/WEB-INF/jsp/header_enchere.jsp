@@ -10,7 +10,7 @@
                             <li><a href="<%=request.getContextPath()%>/ServletEncherirArticleDetail" >Enchères</a></li>
                             <li><a href="<%=request.getContextPath()%>/ServletNouvelleVente" >Vendre un article</a></li> 
                             <li><a href="<%=request.getContextPath()%>/ServletAfficherProfil" >Mon Profil</a></li>
-                            <li><a href="<%=request.getContextPath()%>/ServletAccueil" >Déconnexion</a></li>                                                  
+                            <li><a href="<%=request.getContextPath()%>/ServletDeconnecter" >Déconnexion</a></li>                                                  
                         </ul>
         </nav>
         
