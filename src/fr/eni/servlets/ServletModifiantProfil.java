@@ -32,7 +32,11 @@ public class ServletModifiantProfil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Je lis les paramètres
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
+			rd.forward(request, response);
+	     }
 		int idutilisateur = 0;
 		List<Integer> listeCodesErreur = new ArrayList<>();
 

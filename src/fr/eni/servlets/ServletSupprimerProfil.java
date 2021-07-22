@@ -26,8 +26,11 @@ public class ServletSupprimerProfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
+			rd.forward(request, response);
+	     }
 		int idUtilisateur = 0;
 		List<Integer> listeCodesErreur = new ArrayList<>();
 

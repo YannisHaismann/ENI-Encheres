@@ -51,6 +51,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
+		session.setMaxInactiveInterval(300);
 		request.setCharacterEncoding("UTF-8");
 		int idUtilisateur = 0;
 

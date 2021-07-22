@@ -52,6 +52,7 @@ public class ServletConnexion extends HttpServlet {
 			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession(true);
+		session.setMaxInactiveInterval(300);
 		request.setCharacterEncoding("UTF-8");
 		// On verifie les information de cet utilisateur
 
