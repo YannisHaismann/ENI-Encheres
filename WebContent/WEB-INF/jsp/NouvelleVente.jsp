@@ -5,33 +5,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 <link rel="stylesheet" href="css/style_footer.css">
 <link rel="stylesheet" href="css/style_header.css">
 <link rel="stylesheet" href="css/nouvelleVente.css">
+
 <title>Vendre un article</title>
-=======
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-<link rel="stylesheet" href="css/style_footer.css">
-<link rel="stylesheet" href="css/style_header.css">
 
-<title>INSERER TITLE</title>
->>>>>>> branch 'master' of https://github.com/YannisHaismann/ENI-Encheres.git
+
+
+<title>Nouvelle Vente</title>
+
 </head>
+
 <body style="background-image: url('./images/fond_page_connexion.jpg');">
 
-<%@include file="header_logo_simple.jsp"%>
+<%@include file="header_logo_seul.jsp"%>
 
 <c:if test="${!empty listeCodesErreur}">
 			<div class="alert alert-danger" role="alert">
@@ -65,7 +61,7 @@
     
     </div>
     
-<%@include file="footer.jsp"%>
+
 
 </body>
 </html>

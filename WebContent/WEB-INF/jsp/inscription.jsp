@@ -113,8 +113,8 @@
 			</div>
 				
 			<div class="form-boutton" class="label-droit-inscription">
-					<input   name="annuler-button" type="button" 
-					value="Annuler">
+					<a href="/ENI-Encheres/ServletAccueil"> <input   name="annuler-button" type="button" 
+					value="Annuler"></a>
 			</div>
 
 		

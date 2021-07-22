@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="css/style_footer.css">
 	<link rel="stylesheet" href="css/style_header.css"> 
 
-    <title>[Title]</title>
+    <title>Accueil</title>
 </head>
 <body>
 

@@ -14,3 +14,10 @@ body {
     background-repeat: no-repeat; background-position: top center;
     font-family: sans-serif;   
 }
+
+.photoArticle {
+	margin-left: 20px;
+	height: 120px;
+	width: 120px;
+	background-color: white;
+}

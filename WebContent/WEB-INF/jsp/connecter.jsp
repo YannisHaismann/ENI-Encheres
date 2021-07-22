@@ -73,7 +73,7 @@
 			            </div>
 			            
 			            <a href="#" class="password-field">Password oublié?</a><br>
-			            <a class="creer-button" href="#">Créer un Compte</a>
+			            <a class="creer-button" href="/ENI-Encheres/ServletAjouterUtilisateur" target="_blank">Créer un Compte</a>
 	             </fieldset>
 	        
 	        </form>        

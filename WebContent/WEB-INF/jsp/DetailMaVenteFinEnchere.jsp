@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="css/style_footer.css">
 <link rel="stylesheet" href="css/style_header.css">
 
-<title>INSERER TITLE</title>
+<title>Détail fin Enchère</title>
 </head>
 
 <body>

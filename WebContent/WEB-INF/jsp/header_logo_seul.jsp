@@ -1,6 +1,5 @@
 
-
-	<header class="header-black">
+	<header class="header-transparent">
 
 		<nav class="header-nav-link">
 
@@ -10,5 +9,4 @@
 		</nav>
 
 	</header>
-
 
