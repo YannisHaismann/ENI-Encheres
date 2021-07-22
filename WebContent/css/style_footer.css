@@ -1,0 +1,99 @@
+
+.footer-basic {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: rgb(64, 78, 160);
+	color: #4b4c4d;
+	padding-bottom: 10px;
+}
+
+.flex-elements {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.footer-basic ul {
+	display:flex;
+	justify-content:center;
+	padding: 0;
+	list-style: none;
+	text-align: center;
+	font-size: 18px;
+	line-height: 1.6;
+	margin-bottom: 0;
+}
+
+.footer-list-inline {	
+	margin-top: 18px;
+}
+
+.footer-basic .footer-list-inline-item {
+	padding: 0 10px;
+}
+
+a.footer-list-link {
+	color:white;
+	text-decoration: none;
+	opacity: 0.8;
+}
+
+.footer-list-link:hover {
+	opacity: 1;
+	text-decoration: none;
+}
+
+.footer-basic .footer-social {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.footer-social-link {
+	color:white;
+	font-size: 24px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	display: inline-block;
+	text-align: center;
+	border-radius: 50%;
+	border: 1px solid #ccc;
+	margin: 0 8px;
+	opacity: 0.75;
+}
+
+.footer-social-link:hover {
+	color:white;
+	opacity: 1;
+}
+
+.footer-basic {
+	text-align: center;
+	font-size: 13px;
+	color: #fff;
+}
+
+
+@media all and (max-width:560px) {
+
+.footer-basic ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+.footer-basic ul {
+    font-size: 12px;
+}
+
+.footer-basic .footer-social {
+    text-align: center;
+    margin-top: 5px;
+}
+.inscription-box {
+    top: 44%;
+}
+
+}
