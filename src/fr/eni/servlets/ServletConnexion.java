@@ -50,9 +50,9 @@ public class ServletConnexion extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		HttpSession session = request.getSession(true);
-
+		request.setCharacterEncoding("UTF-8");
 		// On verifie les information de cet utilisateur
 
 		List<Integer> listeCodesErreur = new ArrayList<>();
@@ -79,7 +79,7 @@ public class ServletConnexion extends HttpServlet {
 
 				Boolean verification = false;
 
-				if (!verification.equals(BCrypt.checkpw(motDePasseSaisie, motDePasse))) {
+				if (verification.equals(BCrypt.checkpw(motDePasseSaisie, motDePasse))) {
 					listeCodesErreur.add(CodesResultatServlets.MDP_NON_IDENTIQUE);
 					if (listeCodesErreur.size() > 0) {
 						request.setAttribute("listeCodesErreur", listeCodesErreur);
@@ -89,7 +89,7 @@ public class ServletConnexion extends HttpServlet {
 
 				}
 
-				if (verification.equals(BCrypt.checkpw(motDePasseSaisie, motDePasse))) {
+				if (!verification.equals(BCrypt.checkpw(motDePasseSaisie, motDePasse))) {
 
 					// Ajout des informations utilisateur sur sa session
 
@@ -120,6 +120,11 @@ public class ServletConnexion extends HttpServlet {
 
 		else {
 			saisie = lireParametrePseudo(request, listeCodesErreur);
+			if (listeCodesErreur.size() > 0) {
+				request.setAttribute("listeCodesErreur", listeCodesErreur);
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connecter.jsp");
+				rd.forward(request, response);
+			}
 			UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 			Utilisateurs utilisateur = new Utilisateurs();
 			try {
@@ -129,7 +134,7 @@ public class ServletConnexion extends HttpServlet {
 
 				Boolean verification = false;
 
-				if (!verification.equals(BCrypt.checkpw(motDePasseSaisie, motDePasse))) {
+				if (verification.equals(BCrypt.checkpw(motDePasseSaisie, motDePasse))) {
 					listeCodesErreur.add(CodesResultatServlets.MDP_NON_IDENTIQUE);
 					if (listeCodesErreur.size() > 0) {
 						request.setAttribute("listeCodesErreur", listeCodesErreur);
@@ -139,7 +144,7 @@ public class ServletConnexion extends HttpServlet {
 
 				}
 
-				if (verification.equals(BCrypt.checkpw(motDePasseSaisie, motDePasse))) {
+				if (!verification.equals(BCrypt.checkpw(motDePasseSaisie, motDePasse))) {
 
 					// Ajout des informations utilisateur sur sa session
 
