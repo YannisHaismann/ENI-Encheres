@@ -134,7 +134,7 @@
 						type="button" value="Supprimer mon compte" class="taille-btn" /></a>
 				</div>
 				<div class="boutton boutton-retour">
-					<a href="<%=request.getContextPath()%>/acceuil"><input
+					<a href="<%=request.getContextPath()%>/ServletAccueil"><input
 						type="button" value="retour" class="taille-btn" /></a>
 				</div>
 			</div>

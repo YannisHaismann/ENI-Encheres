@@ -15,11 +15,11 @@ import javax.servlet.http.HttpSession;
 import fr.eni.bll.UtilisateursManager;
 import fr.eni.bo.Utilisateurs;
 import fr.eni.exception.BusinessException;
-
+ 
 /**
  * Servlet implementation class ServletAfficherProfil
  */
-@WebServlet("/Profil")
+@WebServlet("/ServletAfficherProfil")
 public class ServletAfficherProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -70,4 +70,6 @@ public class CodesResultatServlets {
 
 	public static final Integer CHARGEMENT_UTILISATEUR_ERREUR = 30033;
 
+	public static final Integer ERREUR_SUPPRESSION_PROFIL = 30034;
+
 }
