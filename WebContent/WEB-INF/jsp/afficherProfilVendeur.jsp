@@ -63,7 +63,7 @@
 	<div class="btn-modif">
 		<a href="<%=request.getContextPath()%>/"><input type="button" value="Retour"/></a>
 	</div>
-
+	
 	<%@include file="footer.jsp"%>
 
 </body>
