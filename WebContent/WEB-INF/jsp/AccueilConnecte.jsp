@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="css/style_footer.css">
 <link rel="stylesheet" href="css/style_header.css">
 
-<title>Accueil</title>
+<title>Accueil</title> 
 </head>
 <body style="background-image: url('./images/fond_page_connexion.jpg');">
 
