@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="css/style_header.css">
 <link rel="stylesheet" href="css/nouvelleVente.css">
 
-<title>Vendre un article</title> 
+<title>Vendre un article</title>  
 
 
 </head>
