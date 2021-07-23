@@ -16,13 +16,6 @@ body {
 	font-family: sans-serif;
 }
 
-.photoArticle {
-	margin-left: 20px;
-	height: 120px;
-	width: 120px;
-	background-color: white;
-}
-
 .login-box {
 	width: 275px;
 	height: 380px;
@@ -39,11 +32,9 @@ body {
 	text-align: center;
 }
 
-.champ {
-	margin-top: 50px;
-}
-
-.login-box a {
-	color: white;
-	font-size: 11px;
+.photoArticle {
+	margin-left: 20px;
+	height: 120px;
+	width: 120px;
+	background-color: white;
 }

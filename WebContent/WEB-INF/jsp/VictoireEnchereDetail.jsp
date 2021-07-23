@@ -6,8 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-<title>Enchère remportée</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
@@ -36,8 +35,8 @@
 		</div>
 	</c:if>
 
-	<div class="inscription-box">
-
+	<div class="login-box">
+<fieldset>
 		<form
 			action="<%=request.getContextPath()%>/ServletVictoireEnchereDetail"
 			method="post">
@@ -67,6 +66,7 @@
 			</fieldset>
 			<p style="text-align: center;">Retrait effectué</p>
 		</form>
+		</fieldset>
 	</div>
 
 	<%@include file="footer.jsp"%>

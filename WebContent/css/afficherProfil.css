@@ -32,22 +32,6 @@ body {
 	text-align: center;
 }
 
-.champ {
-	margin-top: 50px;
-}
-
-.login-box a {
-	color: white;
-	font-size: 11px;
-}
-
-.login-title {
-	margin: 0px;
-	padding: 0 0 20px;
-	text-align: center;
-	font-size: 22px;
-}
-
 .btn-modif {
 	margin-top: 15px;
 }
