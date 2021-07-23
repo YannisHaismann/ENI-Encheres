@@ -82,4 +82,6 @@ public class CodesResultatServlets {
 	
 	public static final Integer PRIX_INCORRECT = 30039;
 
+	public static final Integer CHOIX_INCORRECT = 30040;
+
 }

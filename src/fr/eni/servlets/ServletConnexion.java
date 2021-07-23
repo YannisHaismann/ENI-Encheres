@@ -107,7 +107,11 @@ public class ServletConnexion extends HttpServlet {
 					session.setAttribute("credit", utilisateur.getCredit());
 					session.setAttribute("administrateur", utilisateur.getAdministrateur());
 					session.setAttribute("desactiver", utilisateur.getDesactiver());
-
+					int admin = (int) session.getAttribute("administrateur");
+					if( admin == 1) {
+						RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecterAdmin.jsp");
+						rd.forward(request, response);
+					}
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecte.jsp");
 					rd.forward(request, response);
 
@@ -142,7 +146,6 @@ public class ServletConnexion extends HttpServlet {
 						RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/connecter.jsp");
 						rd.forward(request, response);
 					}
-
 				}
 
 				if (!verification.equals(BCrypt.checkpw(motDePasseSaisie, motDePasse))) {
@@ -162,7 +165,12 @@ public class ServletConnexion extends HttpServlet {
 					session.setAttribute("credit", utilisateur.getCredit());
 					session.setAttribute("administrateur", utilisateur.getAdministrateur());
 					session.setAttribute("desactiver", utilisateur.getDesactiver());
-
+					
+					int admin = (int) session.getAttribute("administrateur");
+					if( admin == 1) {
+						RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecterAdmin.jsp");
+						rd.forward(request, response);
+					}
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecte.jsp");
 					rd.forward(request, response);
 

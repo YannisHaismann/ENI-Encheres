@@ -111,4 +111,16 @@ public class UtilisateursManager {
 	public Utilisateurs selectByEmail(String email) throws BusinessException {
 		return this.utilisateursDao.selectByEmail(email);
 	}
+	
+	public void SupprimerByPseudo(String pseudo) throws BusinessException{
+		this.utilisateursDao.deleteByPseudo(pseudo);
+	}
+	
+	public void updateDesactiverByPseudo(int choix, String pseudo) throws BusinessException{
+		this.utilisateursDao.updateDesactiverByPseudo(choix, pseudo);
+	}
+	
+	public void updateAdminByPseudo(int choix,String pseudo) throws BusinessException{
+		this.utilisateursDao.updateAdminByPseudo(choix, pseudo);
+	}
 }

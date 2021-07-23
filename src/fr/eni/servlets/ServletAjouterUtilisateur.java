@@ -273,7 +273,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		confirmation = request.getParameter("confirmation");
 		
 		if(motDePasse != null && motDePasse.equals(confirmation)) {
-			if(motDePasse.length() < 12) {
+			if(motDePasse.length() <= 12) {
 				listeCodesErreur.add(CodesResultatServlets.TAILLE_MDP_TROP_COURT);
 			}
 			int compteurMaj = 0;

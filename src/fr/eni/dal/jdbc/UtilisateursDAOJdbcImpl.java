@@ -22,8 +22,11 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 	public static final String SELECT_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
 	public static final String UPDATE_BY_ID = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?,"
 			+ " code_postal = ?, ville = ?, mot_de_passe = ?, credit = ?, administrateur = ?, desactiver = ?  WHERE no_utilisateur = ?;";
+	public static final String UPDATE_DESACTIVER_BY_PSEUDO = "UPDATE UTILISATEURS SET desactiver = ? WHERE pseudo = ?";
+	public static final String UPDATE_ADMIN_BY_PSEUDO = "UPDATE UTILISATEURS SET administrateur = ? WHERE pseudo = ?";
 	public static final String DELETE_BY_ID = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
-	private static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email = ?";
+	public static final String DELETE_BY_PSEUDO = "DELETE FROM UTILISATEURS WHERE pseudo = ?";
+	public static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email = ?";
 	
 
 	@Override
@@ -382,6 +385,95 @@ public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
 			businessException.ajouterErreur(CodesResultatDAL.SELECT_BY_EMAIL_OBJET_ECHEC);
 			throw businessException;
 		}
+	}
+	
+	@Override
+	public void deleteByPseudo(String pseudo) throws BusinessException {
+
+		try (Connection con = ConnectionProvider.getConnection()) {
+			try {
+				con.setAutoCommit(false);
+				PreparedStatement pstmt = con.prepareStatement(DELETE_BY_PSEUDO);
+
+				pstmt.setString(1, pseudo);
+
+				pstmt.executeUpdate();
+
+				pstmt.close();
+
+				con.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				con.rollback();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_OBJET_ECHEC);
+			throw businessException;
+		}
+
+	}
+	
+	@Override
+	public void updateDesactiverByPseudo(int choix, String pseudo) throws BusinessException {
+
+		try (Connection con = ConnectionProvider.getConnection()) {
+			try {
+				con.setAutoCommit(false);
+				PreparedStatement pstmt = con.prepareStatement(UPDATE_DESACTIVER_BY_PSEUDO);
+				
+				pstmt.setInt(1, choix);
+				pstmt.setString(2, pseudo);
+
+				pstmt.executeUpdate();
+
+				pstmt.close();
+
+				con.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				con.rollback();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_ECHEC);
+			throw businessException;
+		}
+
+	}
+	
+	@Override
+	public void updateAdminByPseudo(int choix, String pseudo) throws BusinessException {
+
+		try (Connection con = ConnectionProvider.getConnection()) {
+			try {
+				con.setAutoCommit(false);
+				PreparedStatement pstmt = con.prepareStatement(UPDATE_ADMIN_BY_PSEUDO);
+
+				pstmt.setInt(1, choix);
+				pstmt.setString(2, pseudo);
+
+				pstmt.executeUpdate();
+
+				pstmt.close();
+
+				con.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				con.rollback();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_OBJET_ECHEC);
+			throw businessException;
+		}
+
 	}
 	
 }

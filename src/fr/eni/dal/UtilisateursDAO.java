@@ -15,4 +15,7 @@ public interface UtilisateursDAO {
 	public List<String> selectAllPseudo() throws BusinessException;
 	public Utilisateurs selectByPseudo(String pseudo) throws BusinessException;
 	public Utilisateurs selectByEmail(String email) throws BusinessException;
+	public void deleteByPseudo(String pseudo) throws BusinessException;
+	public void updateDesactiverByPseudo(int choix, String pseudo) throws BusinessException;
+	public void updateAdminByPseudo(int choix, String pseudo) throws BusinessException;
 }
