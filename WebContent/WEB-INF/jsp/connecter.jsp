@@ -70,7 +70,7 @@
 			                </div>
 			            </div>
 			            
-			            <a href="#" class="password-field">Password oublié?</a><br>
+			            <a href="<%=request.getContextPath()%>/ReinitialiserMdp" class="password-field">Password oublié?</a><br>
 			            <a class="creer-button" href="<%=request.getContextPath()%>/ServletAjouterUtilisateur" >Créer un Compte</a>
 	             </fieldset>
 	        
