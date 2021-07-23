@@ -63,8 +63,9 @@
 		        
 			        <div>
 			        	<label class="label-vente" for="categorie">Categorie: </label>
-			        	<input required="required" list="Categorie" name="categorie" id="Categorie"> 
-						<datalist id="Categorie">
+			        	<input   list="liste-categories" name="categorie" id="categorie">
+			        	 
+						<datalist id="liste-categories" >
 						  <option value="Informatique">
 						  <option value="Ameublement">
 						  <option value="Vetements">

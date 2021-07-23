@@ -8,6 +8,7 @@ body {
 	text-align: center;
 	font-family: 'Raleway', sans-serif;
 	background-color: beige;
+	min-height:100%;
 }
 
 .search-top-nav {
@@ -38,47 +39,32 @@ body {
 	flex-direction: column;
 }
 
-@media screen and (min-width: 1024px) { @
-	keyframes animation-border-width { 0%{
+@media screen and (min-width: 1024px) { 
+	@	keyframes animation-border-width { 0%{
 		width: 0%;
 	}
-	100%{
-	width
-	:
-	 
-	100%;
-}
+	100%{	width	:	100%;}
 
 }
-@
-keyframes animation-border-height { 0%{
+
+@keyframes animation-border-height { 0%{
 	height: 0%;
 }
 
 100%{
-height
-:
- 
-100%;
+height: 100%; }
 }
-}
-@
-keyframes background-color { 0%{
+
+@keyframes background-color { 0%{
 	background-color: rgba(0, 139, 139, 0);
 }
 
 100%{
-background-color
-:
- 
-rgba
-(0
-,
-139,
-139,
-1);
+background-color : rgba (0,139,139,1);
 }
+
 }
+
 h1 {
 	background-color: rgba(0, 139, 139, 0);
 	position: relative;
@@ -125,10 +111,15 @@ h1>.animation-underline__right {
 	animation: animation-border-height 200ms ease-in-out forwards 900ms;
 }
 
+body {
+	min-height:100%;
+}
+
 }
 @media ( min-width : 1024px) {
 	body {
-		margin: auto;
+		margin: 0;
+		min-height:100%;
 	}
 	.search-top-nav {
 		font-size: 20px;

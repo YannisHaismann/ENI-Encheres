@@ -14,7 +14,6 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-<link rel="stylesheet" href="assets/css/style.css">
 
 <link rel="stylesheet" href="css/style_footer.css">
 <link rel="stylesheet" href="css/style_header.css">
@@ -43,19 +42,25 @@
 		<div class="animation-underline__top"></div>
 		<div class="animation-underline__left"></div>
 	</h1>
+	
 	<div class="search-top-nav">
 		<p class="search-top-nav__title">Filtres:</p>
 		<form class="search-top-nav__form">
 			<input placeholder="Le nom de l'article contient"
 				class="search-top-nav__form__input" type="text" name="nom-article">
 			<div>
-				<label class="search-top-nav__form__label" for="categorie">Catégorie:
-				</label> <select class="search-top-nav__form__input" id="categorie"
-					name="categorie">
-					<option value="">Toutes</option>
-					<option value="">Autres options à définir</option>
-				</select>
+				<label class="search-top-nav__form__label" for="categorie">Catégories:</label> 
+				<input  list="liste-categories" name="categorie" id="categorie">
+				
+				<datalist class="search-top-nav__form__input" id="liste-categories">
+					<option value="Toutes" selected="selected">
+ 					<option value="Informatique">
+				    <option value="Ameublement">
+					<option value="Vetements">
+					<option value="Sport et loisirs">
+				</datalist>
 			</div>
+			
 			<div>
 				<div class="search-top-nav__form__achats">
 					<div>
