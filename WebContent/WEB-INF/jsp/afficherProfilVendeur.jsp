@@ -34,28 +34,28 @@
 	
 	<div class="info">
 	<p>
-		Pseudo : ${utilisateur.pseudo}
+		Pseudo : ${vendeur.pseudo}
 	</p>
 	<p>
-		Nom : ${utilisateur.nom}
+		Nom : ${vendeur.nom}
 	</p>
 	<p>
-		Prénom : ${utilisateur.prenom}
+		Prénom : ${vendeur.prenom}
 	</p>
 	<p>
-		Email : ${utilisateur.email}
+		Email : ${vendeur.email}
 	</p>
 	<p>
-		Téléphone : ${utilisateur.telephone}
+		Téléphone : ${vendeur.telephone}
 	</p>
 	<p>
-		Rue : ${utilisateur.rue}
+		Rue : ${vendeur.rue}
 	</p>
 	<p>
-		Code Postal : ${utilisateur.codePostal}
+		Code Postal : ${vendeur.codePostal}
 	</p>
 	<p>
-		Ville : ${utilisateur.ville}
+		Ville : ${vendeur.ville}
 	</p>
 	
 	<div class="btn-modif">
