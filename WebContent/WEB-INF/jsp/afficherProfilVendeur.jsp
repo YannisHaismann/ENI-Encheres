@@ -35,7 +35,6 @@
 	</c:if>
 
 	<div class="info">
-<<<<<<< HEAD
 	<p>
 		Pseudo : ${vendeur.pseudo}
 	</p>
@@ -63,21 +62,6 @@
 	
 	<div class="btn-modif">
 		<a href="<%=request.getContextPath()%>/"><input type="button" value="Retour"/></a>
-=======
-		<p>Pseudo : ${utilisateur.pseudo}</p>
-		<p>Nom : ${utilisateur.nom}</p>
-		<p>Prénom : ${utilisateur.prenom}</p>
-		<p>Email : ${utilisateur.email}</p>
-		<p>Téléphone : ${utilisateur.telephone}</p>
-		<p>Rue : ${utilisateur.rue}</p>
-		<p>Code Postal : ${utilisateur.codePostal}</p>
-		<p>Ville : ${utilisateur.ville}</p>
-
-		<div class="btn-modif">
-			<a href="<%=request.getContextPath()%>/"><input type="button"
-				value="Retour" /></a>
-		</div>
->>>>>>> branch 'master' of https://github.com/YannisHaismann/ENI-Encheres.git
 	</div>
 
 	<%@include file="footer.jsp"%>
