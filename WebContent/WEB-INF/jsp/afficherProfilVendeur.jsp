@@ -35,21 +35,35 @@
 	</c:if>
 
 	<div class="info">
-		<p>Pseudo : ${utilisateur.pseudo}</p>
-		<p>Nom : ${utilisateur.nom}</p>
-		<p>Prénom : ${utilisateur.prenom}</p>
-		<p>Email : ${utilisateur.email}</p>
-		<p>Téléphone : ${utilisateur.telephone}</p>
-		<p>Rue : ${utilisateur.rue}</p>
-		<p>Code Postal : ${utilisateur.codePostal}</p>
-		<p>Ville : ${utilisateur.ville}</p>
-
-		<div class="btn-modif">
-			<a href="<%=request.getContextPath()%>/"><input type="button"
-				value="Retour" /></a>
-		</div>
+	<p>
+		Pseudo : ${vendeur.pseudo}
+	</p>
+	<p>
+		Nom : ${vendeur.nom}
+	</p>
+	<p>
+		Prénom : ${vendeur.prenom}
+	</p>
+	<p>
+		Email : ${vendeur.email}
+	</p>
+	<p>
+		Téléphone : ${vendeur.telephone}
+	</p>
+	<p>
+		Rue : ${vendeur.rue}
+	</p>
+	<p>
+		Code Postal : ${vendeur.codePostal}
+	</p>
+	<p>
+		Ville : ${vendeur.ville}
+	</p>
+	
+	<div class="btn-modif">
+		<a href="<%=request.getContextPath()%>/"><input type="button" value="Retour"/></a>
 	</div>
-
+	
 	<%@include file="footer.jsp"%>
 
 </body>
