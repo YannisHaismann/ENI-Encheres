@@ -1,0 +1,129 @@
+
+
+html {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+ 
+body { 
+    margin: 0px;
+    padding: 0px;
+    background-size: cover ; background-attachment: fixed; 
+    background-repeat: no-repeat; background-position: top center;
+    font-family: sans-serif;   
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.side-bar {
+    float: left;
+    width: 20%;
+    height: 495px;
+}
+.nouvelle-vente-main {
+	float:right;
+	width: 80%
+}
+
+.nouvelle-box {
+    height: 88%;
+    width: 40%;
+    margin: auto;
+    text-align: left;
+    border-radius: 10px;
+    background: rgb(103, 116, 189);
+    color: #fff;
+    box-sizing: border-box;
+    padding: 10px 10px;
+}
+
+.label-vente {
+	width: 135px;
+}
+
+.img-article {
+    position: relative;
+    height:200px;
+    width:200px;
+}
+
+
+.enregistrer-button  {
+    
+    float: left;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    border-radius: 6px;
+    color: white;
+    padding: 5px 20px;
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+
+.annuler-button  {
+    float: right;
+    background-color: #fff; 
+    border: none;
+    border-radius: 6px;
+    color: #000;
+    padding: 5px 13px;
+    margin-top: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+
+.enregistrer-button:hover , .annuler-button:hover {
+    opacity: 0.6;
+}
+
+@media only screen and (max-width:415px) {
+
+.main {
+    display: flex;
+    flex-direction: column-reverse;    
+}
+
+.img-article {
+	position: absolute;
+	bottom: 20px;
+}
+
+textarea {
+min-height: 60px;
+overflow-y: auto;
+word-wrap:break-word
+}
+
+.nouvelle-box {
+    width: auto;
+    margin-top: 65px;
+    padding-bottom: 57px;
+}
+
+.side-bar {
+    width: 20%;
+    height: auto
+}
+
+.footer-basic {
+    position: absolute;
+    bottom: -85px;
+}
+
+.label-vente {
+    width: 100px;
+}

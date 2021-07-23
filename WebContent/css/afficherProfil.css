@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.info {
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 358px;
+	top: 17px;
+}
+
+.btn-modif {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: 30px;
+}
