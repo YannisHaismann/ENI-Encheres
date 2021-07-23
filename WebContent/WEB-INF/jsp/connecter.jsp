@@ -45,8 +45,6 @@
 
 	<div class="login-box"> 
 
-
-    
         <img src="./images/avatar_connexion.png" alt="avatar" class="avatar">        
         
 	        <form action="<%=request.getContextPath()%>/ServletConnexion" method="post">

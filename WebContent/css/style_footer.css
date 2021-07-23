@@ -1,11 +1,29 @@
 
+*{
+
+margin:0;
+padding:0;
+}
+
+body, html{height:100%;}
+
+body{
+
+text-align:center;
+
+}
+
+ 
 .footer-basic {
-	position: absolute;
+	position:absolute;
 	bottom: 0;
 	width: 100%;
 	background-color: rgb(64, 78, 160);
 	color: #4b4c4d;
 	padding-bottom: 10px;
+	text-align: center;
+	font-size: 13px;
+	color: #fff;
 }
 
 .flex-elements {
@@ -68,11 +86,7 @@ a.footer-list-link {
 	opacity: 1;
 }
 
-.footer-basic {
-	text-align: center;
-	font-size: 13px;
-	color: #fff;
-}
+
 
 
 @media all and (max-width:560px) {

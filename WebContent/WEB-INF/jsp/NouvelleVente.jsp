@@ -19,11 +19,6 @@
 <title>Vendre un article</title>
 
 
-
-
-
-<title>Nouvelle Vente</title>
-
 </head>
 
 <body style="background-image: url('./images/fond_page_connexion.jpg');">
@@ -41,28 +36,90 @@
 			</div>
 		</c:if>
 
-	<div class="nouvelle-box">
 	
-    <form action="<%=request.getContextPath()%>/ServletNouvelleVente" method="post">
-        <h2 style="text-align: center;"> Nouvelle vente</h2>
-        <p style="text-align: center;"><label for="article">Article: </label><input  type="text" name="article" id="article"></p>
-        <p><label for="photo">Photo de l'article: </label><input style="text-align: left;" id="photoUpload" type="file" id="photo" name="photo" value="UPLOADER"></p>
-        <div style="text-align: left;" class="photoArticle">
-            <img src="" alt="photo-article" title="photo-article" id="photoArticle">
-        </div>
-        <p style="text-align: center;"><label for="categorie">Categorie: </label><input type="text" name="categorie" id="categorie"></p>
-        <p style="text-align: center;"><label for="description">Description: </label><textarea id="description" name="description" rows="10" cols="50"></textarea></p>
-        <p style="text-align: center;"><label for="prixInitial">Prix initial: </label><input type="number" id="prixInitial" name="prixInitial"></p>
-        <p style="text-align: center;"><label for="dateDebut">Début de l'enchère: </label><input type="date" name="dateDebut" id="dateDebut"></p>
-        <p style="text-align: center;"><label for="dateFin">Fin de l'enchère: </label><input type="date" name="dateFin" id="dateFin"></p>
-        <p style="text-align: center;"><label>Retrait: </label><span>ADRESSE DE RETRAIT</span></p>
-        <input class="enregistrer-button" type="submit" value="ENREGISTRER" name="enregistrer">
-        <input class="annuler-button" type="submit" value="ANNULER" name="annuler">
-    </form>
-    
-    </div>
-    
+	
+<div class="main">
+	
+	<aside class="side-bar">
+	
+		<img  class="img-article" alt="photoArticle" src="https://via.placeholder.com/200C/O https://placeholder.com/ ">
+	
+	</aside>
+	
+	<div class="nouvelle-vente-main">
+	
+		<div class="nouvelle-box">
+	
+    		<form action="<%=request.getContextPath()%>/ServletNouvelleVente" method="post">
+			        <h2 style="text-align: center;"> Nouvelle vente</h2>
+			        <div>
+			        	<label class="label-vente" for="article">Article: </label><input  type="text" name="article" id="article">
+			        </div>
+			        
+			        <div>
+			            <label class="label-vente" for="description">Description: </label><textarea class="textarea" id="description" 
+			            name="description" rows="5" cols="30"></textarea>
+			        </div>
+		        
+			        <div>
+			        	<label class="label-vente" for="categorie">Categorie: </label>
+			        	<input list="Categorie" name="categorie" id="Categorie"> 
+						<datalist id="Categorie">
+						  <option value="Informatique">
+						  <option value="Ameublement">
+						  <option value="Vetements">
+						  <option value="Sport et loisirs">
+						</datalist>       	
+			        </div>
+			        
+			        <div>
+			        	<label  class="label-vente" for="photo">Photo de l'article: </label>
+			        	<input   type="file" id="photo" name="photo" value="UPLOADER">
+			        </div>
+			        
+			        <div>
+			        	<label class="label-vente" for="mise a prix">Prix initial: </label>
+			       		<input type="number" min="0" max="100000" step="10" id="mise a prix" name="mise a prix" >
+			        </div>
+			        
+			        <div>
+			         	<label class="label-vente" for="dateDebut">Début de l'enchère: </label>
+			       		<input type="date" name="dateDebut" id="dateDebut">
+			        </div>
+			        
+			        <div>
+			         	<label class="label-vente" for="dateFin">Fin de l'enchère: </label>
+			       		<input type="date" name="dateFin" id="dateFin">
+			        </div>
+			
+					<fieldset>
+						<legend>Retrait</legend>
+						<label class="label-vente" for="rue">Rue</label> <input type="text" name="rue" id="rue"> <br>
+						<label class="label-vente" for="codePostal">Code Postal</label> <input type="text" name="codePostal" id="codePostal"><br>
+						<label class="label-vente" for="ville">Ville</label> <input type="text" name="ville" id="ville">
+					</fieldset>
+			
+			
+					<div class="form-boutton" class="label-gauche-inscription">
+							<a><input class="enregistrer-button" type="submit" value="Enregistrer" name="enregistrer"></a> 
+					</div>
+			
+					<div class="form-boutton" class="label-droit-inscription">
+							<a href="<%=request.getContextPath()%>/AccueilConnecte"> <input class="annuler-button" type="button"
+							 value="Annuler" name="annuler"></a>
+					</div>
 
+			</form>
+    
+  		  </div>  
+  	  
+  	 </div>
+  	  
+    
+  </div> 
+
+<%@include file="footer.jsp"%>
 
 </body>
+
 </html>

@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+/build/
+=======
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -37,3 +40,4 @@ build/
 /bin1/
 java/build/**
 
+>>>>>>> branch 'master' of https://github.com/YannisHaismann/ENI-Encheres.git

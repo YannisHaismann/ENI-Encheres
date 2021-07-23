@@ -18,10 +18,12 @@
 
 			</div>
 			<div class="footer-social">
-					<a href="#" class="footer-social-link"><i class="icon ion-social-instagram"></i></a>
-					<a href="#" class="footer-social-link"><i class="icon ion-social-snapchat"></i></a>
-					<a href="#" class="footer-social-link"><i class="icon ion-social-twitter"></i></a>
-					<a href="#" class="footer-social-link"><i class="icon ion-social-facebook"></i></a>
+				<a href="#" class="footer-social-link"><i
+					class="icon ion-social-instagram"></i></a> <a href="#"
+					class="footer-social-link"><i class="icon ion-social-snapchat"></i></a>
+				<a href="#" class="footer-social-link"><i
+					class="icon ion-social-twitter"></i></a> <a href="#"
+					class="footer-social-link"><i class="icon ion-social-facebook"></i></a>
 			</div>
 
 

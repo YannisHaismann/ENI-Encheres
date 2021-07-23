@@ -1,91 +1,79 @@
-	
-	html {
-		margin: 0;
-	}
-	
-	* {
-		box-sizing: border-box;
-	}
-	
-	body {
-		margin: 0px;
-		padding: 0px;
-		background-size: cover;
-		background-attachment: fixed;
-		background-repeat: no-repeat;
-		background-position: top center;
-		font-family: sans-serif;
-	}
-	
-	.inscription-box {
-		width: 45%;
-		border-radius: 10px;
-		background: rgb(103, 116, 189);
-		color: #fff;
-		top: 40%;
-		left: 50%;
-		position: absolute;
-		transform: translate(-50%, -50%);
-		box-sizing: border-box;
-		padding: 10px 10px;
-	}
-	
-	.label-gauche-inscription {
-		display: inline-block;
-		width: 100px;
-	}
-	
-	.label-droit-inscription {
-		display: inline-block;
-		width: 100px;
-	}
-	
-	.flex-profil-elements {
-		display: flex;
-		justify-content:space-between;
-		flex-direction: row;
-		flex-wrap: wrap;
-		
-	}
-	
-	.password-field a:hover {
-		color: blue;
-		background-color: white;
-	}
-	
-	::placeholder {
-		opacity: 0.6;
-	}
-	
-
-
-.form-boutton {	
-	width: 228px;
-    margin-top: 10px;	
+html {
+	margin: 0;
 }
-	
-.form-boutton:hover {
-		opacity: 0.6;
-	}
 
-	
+* {
+	box-sizing: border-box;
+}
 
-
-@media all and (max-width:375px) {
+body {
+	margin: 0px;
+	padding: 0px;
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: top center;
+	font-family: sans-serif;
+}
 
 .inscription-box {
+	width: 45%;
+	border-radius: 10px;
+	background: rgb(103, 116, 189);
+	color: #fff;
+	top: 40%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	box-sizing: border-box;
+	padding: 10px 10px;
+}
+
+.label-gauche-inscription {
+	display: inline-block;
+	width: 100px;
+}
+
+.label-droit-inscription {
+	display: inline-block;
+	width: 100px;
+}
+
+.flex-profil-elements {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.password-field a:hover {
+	color: blue;
+	background-color: white;
+}
+
+::placeholder {
+	opacity: 0.6;
+}
+
+.form-boutton {
+	width: 228px;
+	margin-top: 10px;
+}
+
+.form-boutton:hover {
+	opacity: 0.6;
+}
+
+@media all and (max-width:375px) {
+	.inscription-box {
 		display: flex;
 		flex-direction: column;
 	}
-
-.form-boutton 	{	
-	width: auto;
-}	
-
-
-.label {
-    display: inline-block;
-    margin-bottom: auto;
-	
-
+	.form-boutton {
+		width: auto;
+	}
+	.label {
+		display: inline-block;
+		margin-bottom: auto;
+	}
 }
