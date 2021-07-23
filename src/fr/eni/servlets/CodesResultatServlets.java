@@ -71,5 +71,15 @@ public class CodesResultatServlets {
 	public static final Integer CHARGEMENT_UTILISATEUR_ERREUR = 30033;
 
 	public static final Integer ERREUR_SUPPRESSION_PROFIL = 30034;
+	
+	public static final Integer NOM_INVALIDE = 30035;
+	
+	public static final Integer DESC_OBLIGATOIRE = 30036;
+	
+	public static final Integer TAILLE_MAX_DESC_DEPASSER = 30037;
+	
+	public static final Integer DESC_INVALIDE = 30038;
+	
+	public static final Integer PRIX_INCORRECT = 30039;
 
 }
