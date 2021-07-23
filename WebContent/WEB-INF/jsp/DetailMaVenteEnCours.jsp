@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" href="css/victoireEnchereDetail.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -18,7 +19,7 @@
 <title>Détail de ma vente</title>
 
 </head>
-<body>
+<body style="background-image: url('./images/fond_page_connexion.jpg');">
 
 	<%@include file="header_logo_simple.jsp"%>
 	<c:if test="${!empty listeCodesErreur}">
