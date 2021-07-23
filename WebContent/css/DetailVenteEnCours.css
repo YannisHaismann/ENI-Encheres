@@ -1,0 +1,40 @@
+html {
+	margin: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: top center;
+	font-family: sans-serif;
+}
+
+.login-box {
+	width: 275px;
+	height: 380px;
+	border-radius: 10px;
+	background: rgb(103, 116, 189);
+	color: #fff;
+	box-sizing: border-box;
+	padding: 30px 10px;
+	top: 53%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	box-sizing: border-box;
+	text-align: center;
+}
+
+.photoArticle {
+	margin-left: 20px;
+	height: 120px;
+	width: 120px;
+	background-color: white;
+}
