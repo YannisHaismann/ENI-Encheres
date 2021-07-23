@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" href="css/Encherir.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -17,7 +18,7 @@
 
 <title>Enchérir</title>
 </head>
-<body>
+<body style="background-image: url('./images/fond_page_connexion.jpg');">
 
 	<%@include file="header_logo_simple.jsp"%>
 
@@ -31,7 +32,9 @@
 			</ul>
 		</div>
 	</c:if>
-
+	
+	<div class="login-box">
+<fieldset>
 	<form action="" method="post">
 		<h2>Détail vente</h2>
 		<p>{{NOM ARTICLE}}</p>
@@ -70,7 +73,8 @@
 		<a href="RETOUR">Back</a>
 		</p>
 	</form>
-
+	</fieldset>
+	</div>
 	<%@include file="footer.jsp"%>
 
 </body>

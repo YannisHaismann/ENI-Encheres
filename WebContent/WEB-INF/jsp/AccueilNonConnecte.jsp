@@ -20,7 +20,7 @@
 
 <title>[Title]</title>
 </head>
-<body>
+<body style="background-image: url('./images/fond_page_connexion.jpg');">
 
 	<%@include file="header_accueil.jsp"%>
 

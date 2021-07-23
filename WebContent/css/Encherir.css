@@ -15,7 +15,6 @@ body {
 	background-position: top center;
 	font-family: sans-serif;
 }
-
 .login-box {
 	width: 275px;
 	height: 380px;
@@ -31,7 +30,6 @@ body {
 	box-sizing: border-box;
 	text-align: center;
 }
-
 .photoArticle {
 	margin-left: 20px;
 	height: 120px;
