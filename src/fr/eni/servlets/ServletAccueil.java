@@ -1,6 +1,9 @@
 package fr.eni.servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import fr.eni.bll.ArticleVenduManager;
+import fr.eni.bll.UtilisateursManager;
+import fr.eni.bo.ArticleVendu;
+import fr.eni.exception.BusinessException;
 
 /**
  * Servlet implementation class ServletAccueil
@@ -22,6 +30,27 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
+		ArticleVenduManager articleManager = new ArticleVenduManager();
+		UtilisateursManager utilisateurManager = new UtilisateursManager();
+		try {
+			List<ArticleVendu> listArticles = articleManager.selectionnerTous();
+			Map[] articles = new Map[listArticles.size()];
+			int i = 0;
+			for(ArticleVendu article : listArticles) {
+				Map<String, String> articleActual = new HashMap<String, String>();
+				articleActual.put("nom", article.getNom());
+				articleActual.put("prix", String.valueOf(article.getPrixVente()));
+				articleActual.put("dateFin", article.getDateFin().toString());
+				articleActual.put("vendeur", utilisateurManager.selectionner(article.getIdUtilisateur()).getNom());
+				articleActual.put("id", String.valueOf(article.getId()));
+				articles[i] = articleActual;
+				i++;
+			}
+			request.setAttribute("articles", articles);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		
 		if (session == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
 			rd.forward(request, response);
@@ -34,6 +63,7 @@ public class ServletAccueil extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecterAdmin.jsp");
 			rd.forward(request, response);
 		}
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecte.jsp");
 		rd.forward(request, response);
 	}

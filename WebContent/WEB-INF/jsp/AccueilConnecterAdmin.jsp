@@ -108,6 +108,16 @@
 				name="envoyer">
 		</form>
 	</div>
+	<div class="liste-article">
+		<c:forEach var="article" items="${requestScope.articles}">
+			 <div class="article-div">
+			 	<p><c:out value="${article.nom}"/></p>
+			 	<p>Prix: <c:out value="${article.prix}"/></p>
+			 	<p>Fin de l'enchère: <c:out value="${article.dateFin}"/></p>
+			 	<p>Vendeur: <c:out value="${article.vendeur}"/></p>
+			 </div>
+		</c:forEach>	
+	</div>
 
 
 

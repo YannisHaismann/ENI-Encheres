@@ -50,7 +50,7 @@
 	
 		<div class="nouvelle-box">
 	
-    		<form action="<%=request.getContextPath()%>/NouvelleVente" method="post">
+    		<form action="<%=request.getContextPath()%>/NouvelleVente" method="post" enctype="multipart/form-data">
 			        <h2 style="text-align: center;"> Nouvelle vente</h2>
 			        <div>
 			        	<label class="label-vente" for="article">Article: </label><input required="required" type="text" name="nom" id="article">

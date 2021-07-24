@@ -1,6 +1,10 @@
  package fr.eni.servlets;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,13 +12,16 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import fr.eni.bll.ArticleVenduManager;
 import fr.eni.bll.CategoriesManager;
@@ -28,6 +35,7 @@ import fr.eni.exception.BusinessException;
  * Servlet implementation class NouvelleVente
  */
 @WebServlet("/NouvelleVente")
+@MultipartConfig
 public class ServletNouvelleVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -68,12 +76,12 @@ public class ServletNouvelleVente extends HttpServlet {
 			Date dateFin 			= new Date(timeFin);
 			int prixInitial			= 0;
 			Retraits retrait		= null;
+			//GERER L ENREGISTREMENT D IMAGE
 					
 			prixInitial 	= lirePrixInitial(request, listeCodesErreur);
 			nom 			= lireNomArticle(request, listeCodesErreur);
 			description 	= lireDescriptionArticle(request, listeCodesErreur);
 			retrait 		= lireRetraitArticle(request, listeCodesErreur);
-			System.out.println(request.getParameter("photo"));
 			
 			ArticleVenduManager articleManager = new ArticleVenduManager();	
 			CategoriesManager categorieManager = new CategoriesManager();

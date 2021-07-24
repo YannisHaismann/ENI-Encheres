@@ -110,6 +110,16 @@
 				name="envoyer">
 		</form>
 	</div>
+	<div class="liste-article">
+		<c:forEach var="article" items="${requestScope.articles}">
+			 <div class="article-div">
+			 	<p><a href="<%=request.getContextPath()%>/ServletEncherirArticleDetail?id=${article.id}"><c:out value="${article.nom}"/></a></p>
+			 	<p>Prix: <c:out value="${article.prix}"/></p>
+			 	<p>Fin de l'enchère: <c:out value="${article.dateFin}"/></p>
+			 	<p>Vendeur: <c:out value="${article.vendeur}"/></p>
+			 </div>
+		</c:forEach>	
+	</div>
 
 
 	<%@include file="footer.jsp"%>

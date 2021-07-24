@@ -37,32 +37,32 @@
 <fieldset>
 	<form action="" method="post">
 		<h2>Détail vente</h2>
-		<p>{{NOM ARTICLE}}</p>
+		<p>${article.nom}</p>
 		<div class="photoArticle">
 			<img src="" alt="photo-article" title="photo-article"
 				id="photoArticle">
 		</div>
 		<p>
-			<span>Description: </span><span>{{DESCRIPTION}}</span>
+			<span>Description: </span><span>${article.description}</span>
 		</p>
 		<p>
-			<span>Catégorie: </span><span>{{CATEGORIE}}</span>
+			<span>Catégorie: </span><span>${article.description}</span>
 		</p>
 		<p>
-			<span>Meilleur offre: </span><span>{{POINTS}} points par
-				{{PSEUDO}}</span>
+			<span>Meilleur offre: </span><span>${prixTopEnchere} points par
+				${utilisateurTopEnchere}</span>
 		</p>
 		<p>
-			<span>Mise à prix: </span><span>{{POINTS}} points</span>
+			<span>Mise à prix: </span><span>${article.prixInitial} points</span>
 		</p>
 		<p>
-			<span>Fin de l'enchère: </span><span>{{DATE XX/XX/XXXX}}</span>
+			<span>Fin de l'enchère: </span><span>${article.dateFin}</span>
 		</p>
 		<p>
-			<span>Retrait: </span><span>{{ADRESSE RETRAIT}}</span>
+			<span>Retrait: </span><span>Rue: ${retrait.rue}, Code postal: ${retrait.codePostal}, Ville: ${retrait.ville}</span>
 		</p>
 		<p>
-			<span>Vendeur: </span><span>{{PSEUDO VENDEUR}}</span>
+			<span>Vendeur: </span><span>${vendeur.nom}</span>
 		</p>
 		<form action="" method="post">
 			<p>
