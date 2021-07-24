@@ -9,7 +9,7 @@
 			<li><a class="header-nav-link"
 				href="<%=request.getContextPath()%>/ServletEncherirArticleDetail">Enchères</a></li>
 			<li><a class="header-nav-link"
-				href="<%=request.getContextPath()%>/ServletNouvelleVente">Vendre
+				href="<%=request.getContextPath()%>/NouvelleVente">Vendre
 					un article</a></li>
 			<li><a class="header-nav-link"
 				href="<%=request.getContextPath()%>/ServletAfficherProfil">Mon

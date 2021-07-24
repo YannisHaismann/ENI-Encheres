@@ -9,7 +9,7 @@
 		<ul class="menu">
 			<li><a
 				href="<%=request.getContextPath()%>/ServletEncherirArticleDetail">Enchères</a></li>
-			<li><a href="<%=request.getContextPath()%>/ServletNouvelleVente">Vendre
+			<li><a href="<%=request.getContextPath()%>/NouvelleVente">Vendre
 					un article</a></li>
 			<li><a
 				href="<%=request.getContextPath()%>/ServletAfficherProfil">Mon

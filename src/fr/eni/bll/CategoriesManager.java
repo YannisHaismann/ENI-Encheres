@@ -47,6 +47,10 @@ public class CategoriesManager {
 		}
 	}
 	
+	public Categories selectionner(String libelle) throws BusinessException{
+		return this.categoriesDao.selectBy(libelle);
+	}
+	
 	public List<Categories> selectionnerTous() throws BusinessException{
 		return this.categoriesDao.selectAll();
 	}

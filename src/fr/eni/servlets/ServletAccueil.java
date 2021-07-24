@@ -26,7 +26,10 @@ public class ServletAccueil extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
 			rd.forward(request, response);
 	     }
-		int admin = (int) session.getAttribute("administrateur");
+		int admin = 0;
+		if(session.getAttribute("administrateur") != null) {
+			admin = (int) session.getAttribute("administrateur");
+		}
 		if( admin == 1) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecterAdmin.jsp");
 			rd.forward(request, response);

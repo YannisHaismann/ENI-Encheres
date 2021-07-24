@@ -19,6 +19,7 @@ public class CategorieDAOJdbcImpl implements CategoriesDAO {
 	public static final String SELECT_ALL			= "SELECT * FROM CATEGORIES";
 	public static final String UPDATE 				= "UPDATE CATEGORIES SET libelle = ? WHERE no_categorie = ?";
 	public static final String DELETE 				= "DELETE FROM CATEGORIES WHERE no_categorie = ?";
+	public static final String SELECT_BY 			= "SELECT * FROM CATEGORIES WHERE libelle = ?";
 	
 	
 	@Override
@@ -107,6 +108,47 @@ public class CategorieDAOJdbcImpl implements CategoriesDAO {
 				pstmt.close();
 				
 				con.commit();
+			}catch(Exception e) {
+				e.printStackTrace();
+				con.rollback();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_OBJET_ECHEC);
+			throw businessException;
+		}
+		
+	}
+	
+	@Override
+	public Categories selectBy(String libelle) throws BusinessException {
+
+		if(libelle == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.NULL_PARAM);
+			throw businessException;
+		}
+		
+		try(Connection con = ConnectionProvider.getConnection()) {
+			try {	
+				con.setAutoCommit(false);
+				PreparedStatement pstmt = con.prepareStatement(SELECT_BY);
+				
+				pstmt.setString(1, libelle);
+				
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				
+				Categories categorie = new Categories();
+				categorie.setId(rs.getInt("no_categorie"));
+				categorie.setLibelle(rs.getString("libelle"));
+				
+				pstmt.close();
+				con.commit();
+				
+				return categorie;
 			}catch(Exception e) {
 				e.printStackTrace();
 				con.rollback();

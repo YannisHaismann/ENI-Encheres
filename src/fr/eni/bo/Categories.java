@@ -2,7 +2,7 @@ package fr.eni.bo;
 
 public class Categories {
 	
-	public String[] listeLibelle = {"VETEMENTS", "ACCESSOIRES", "JEUX", "SPORT", "ANIMAUX", "ENFANTS", "HIGH-TECH"};
+	public static String[] listeLibelle = {"VETEMENTS", "ACCESSOIRES", "JEUX", "SPORT", "ANIMAUX", "ENFANTS", "HIGH-TECH"};
 	
 	private int id;
 	private String libelle;

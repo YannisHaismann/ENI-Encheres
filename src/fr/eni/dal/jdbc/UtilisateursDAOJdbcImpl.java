@@ -14,19 +14,19 @@ import fr.eni.dal.UtilisateursDAO;
 import fr.eni.exception.BusinessException;
 
 public class UtilisateursDAOJdbcImpl implements UtilisateursDAO {
-	public static final String INSERT = "INSERT INTO UTILISATEURS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-	public static final String SELECT_BY_ID = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?;";
-	public static final String SELECT_ALL = "SELECT * FROM UTILISATEURS";
-	public static final String SELECT_ALL_EMAIL = "SELECT email FROM UTILISATEURS";
-	public static final String SELECT_ALL_PSEUDO = "SELECT pseudo FROM UTILISATEURS";
-	public static final String SELECT_BY_PSEUDO = "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
-	public static final String UPDATE_BY_ID = "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?,"
+	public static final String INSERT 					= "INSERT INTO UTILISATEURS VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+	public static final String SELECT_BY_ID 			= "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?;";
+	public static final String SELECT_ALL 				= "SELECT * FROM UTILISATEURS";
+	public static final String SELECT_ALL_EMAIL 		= "SELECT email FROM UTILISATEURS";
+	public static final String SELECT_ALL_PSEUDO 		= "SELECT pseudo FROM UTILISATEURS";
+	public static final String SELECT_BY_PSEUDO 		= "SELECT * FROM UTILISATEURS WHERE pseudo = ?";
+	public static final String UPDATE_BY_ID 					= "UPDATE UTILISATEURS SET pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?,"
 			+ " code_postal = ?, ville = ?, mot_de_passe = ?, credit = ?, administrateur = ?, desactiver = ?  WHERE no_utilisateur = ?;";
-	public static final String UPDATE_DESACTIVER_BY_PSEUDO = "UPDATE UTILISATEURS SET desactiver = ? WHERE pseudo = ?";
-	public static final String UPDATE_ADMIN_BY_PSEUDO = "UPDATE UTILISATEURS SET administrateur = ? WHERE pseudo = ?";
-	public static final String DELETE_BY_ID = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
-	public static final String DELETE_BY_PSEUDO = "DELETE FROM UTILISATEURS WHERE pseudo = ?";
-	public static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email = ?";
+	public static final String UPDATE_DESACTIVER_BY_PSEUDO 		= "UPDATE UTILISATEURS SET desactiver = ? WHERE pseudo = ?";
+	public static final String UPDATE_ADMIN_BY_PSEUDO	= "UPDATE UTILISATEURS SET administrateur = ? WHERE pseudo = ?";
+	public static final String DELETE_BY_ID 			= "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
+	public static final String DELETE_BY_PSEUDO 		= "DELETE FROM UTILISATEURS WHERE pseudo = ?";
+	public static final String SELECT_BY_EMAIL 			= "SELECT * FROM UTILISATEURS WHERE email = ?";
 	
 
 	@Override
