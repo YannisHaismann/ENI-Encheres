@@ -29,7 +29,7 @@ public class ServletAfficherProfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Je lis les paramètres
+		// Je verifie si une session est active
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
@@ -38,14 +38,16 @@ public class ServletAfficherProfil extends HttpServlet {
 		
 		int idUtilisateur = 0;
 		List<Integer> listeCodesErreur = new ArrayList<>();
-
+		
+		//Je recupère l'id de l'utilisateur de la session
 		idUtilisateur = lireParametreId(session, listeCodesErreur);
-
+		
+		//Je verifie si une erreur est stocker dans la liste pour l'afficher 
 		if (listeCodesErreur.size() > 0) {
 			request.setAttribute("listeCodesErreur", listeCodesErreur);
 			
 		} else if (idUtilisateur > 0) {
-			// J'ai un id au bon format, je récupère l'utilisateur eventuel
+			// J'ai un id au bon format, je récupère l'utilisateur eventuel et j'affiche son profil
 			Utilisateurs utilisateurs = new Utilisateurs();
 			chargerUtilisateur(session, utilisateurs, listeCodesErreur);
 			
@@ -63,7 +65,8 @@ public class ServletAfficherProfil extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
+	
+	//Permet de récuper l'id utilisateur et de le renvoyer
 	private int lireParametreId(HttpSession session, List<Integer> listeCodesErreur) {
 		int idUtilisateur = 0;
 		try {
@@ -76,7 +79,8 @@ public class ServletAfficherProfil extends HttpServlet {
 		}
 		return idUtilisateur;
 	}
-
+	
+	//Permet de récuperer les infos de l'utilisateur et de les afficher via son id
 	private void chargerUtilisateur(HttpSession session, Utilisateurs utilisateurs, List<Integer> listeCodesErreur) {
 		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 

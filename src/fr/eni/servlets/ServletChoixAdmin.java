@@ -28,6 +28,7 @@ public class ServletChoixAdmin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// Je verifie si une session est active
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
@@ -44,19 +45,23 @@ public class ServletChoixAdmin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// Je verifie si une session est active
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
 			rd.forward(request, response);
 		}
 
-		List<Integer> listeCodesErreur = new ArrayList<>();
+		//Récupération des saisies de l'utilisateur
 		String pseudoAdmin = request.getParameter("pseudoAdmin");
 		int choixAdmin = Integer.parseInt(request.getParameter("choixAdmin"));
-
+		
+		//Déclaration des variables
+		List<Integer> listeCodesErreur = new ArrayList<>();
 		List<String> pseudos = new ArrayList<String>();
 		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 
+		//Verification de la conformiter des infos saisies
 		if (!pseudoAdmin.trim().equals("")) {
 			try {
 				pseudos = utilisateursManager.selectAllPseudo();

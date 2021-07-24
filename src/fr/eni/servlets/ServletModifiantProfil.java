@@ -31,17 +31,22 @@ public class ServletModifiantProfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Je lis les paramètres
+		
+		// Je verifie si une session est active
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
 			rd.forward(request, response);
 	     }
+		
+		//Déclaration des variables
 		int idutilisateur = 0;
 		List<Integer> listeCodesErreur = new ArrayList<>();
 
+		//Je recupère l'id de l'utilisateur de la session
 		idutilisateur = lireParametreId(session, listeCodesErreur);
-
+		
+		//Je verifie si une erreur est stocker dans la liste pour l'afficher 
 		if (listeCodesErreur.size() > 0) {
 			request.setAttribute("listeCodesErreur", listeCodesErreur);
 		} else if (idutilisateur > 0) {
@@ -60,11 +65,14 @@ public class ServletModifiantProfil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// Je verifie si une session est active
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
 			rd.forward(request, response);
 	     }
+		
+		//Déclaration des variables
 		int idutilisateur;
 		String pseudo;
 		String nom;
@@ -81,6 +89,7 @@ public class ServletModifiantProfil extends HttpServlet {
 		
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		
+		//Verification de la conformiter des infos saisies via ses méthodes
 		idutilisateur = lireParametreId(session, listeCodesErreur);
 		pseudo = lireParametrePseudo(request, listeCodesErreur);
 		if(pseudo.trim().equals("")) {
@@ -119,6 +128,7 @@ public class ServletModifiantProfil extends HttpServlet {
 		administrateur = (int) session.getAttribute("administrateur");
 		desactiver = (int) session.getAttribute("desactiver");
 		
+		//Je verifie si une erreur est stocker dans la liste pour l'afficher 
 		if(listeCodesErreur.size()>0)
 		{
 			request.setAttribute("listeCodesErreur", listeCodesErreur);
@@ -126,6 +136,7 @@ public class ServletModifiantProfil extends HttpServlet {
 			rd.forward(request, response);
 		}else {
 			try {
+				//J'actualise les nouvelles infos lié a cet utilisateur
 				UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 				utilisateursManager.update(idutilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur, desactiver);
 			}catch(BusinessException e) {
@@ -136,7 +147,8 @@ public class ServletModifiantProfil extends HttpServlet {
 			rd.forward(request, response);
 		}
 	}
-
+	
+	//Permet de récuper l'id utilisateur et de le renvoyer
 	private int lireParametreId(HttpSession session, List<Integer> listeCodesErreur) {
 		int idUtilisateur = 0;
 		try {
@@ -150,6 +162,7 @@ public class ServletModifiantProfil extends HttpServlet {
 		return idUtilisateur;
 	}
 
+	//Permet de vérifier le pseudo saisie par l'utilisateur et de le renvoyer
 	private String lireParametrePseudo(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String pseudo;
 		List<String> pseudos = new ArrayList<String>();
@@ -179,6 +192,7 @@ public class ServletModifiantProfil extends HttpServlet {
 		return pseudo;
 	}
 
+	//Permet de vérifier le nom saisie par l'utilisateur et de le renvoyer
 	private String lireParametreNom(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String nom;
 		nom = request.getParameter("nom");
@@ -190,6 +204,7 @@ public class ServletModifiantProfil extends HttpServlet {
 		return nom;
 	}
 
+	//Permet de vérifier le prenom saisie par l'utilisateur et de le renvoyer
 	private String lireParametrePrenom(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String prenom;
 		prenom = request.getParameter("prenom");
@@ -201,6 +216,7 @@ public class ServletModifiantProfil extends HttpServlet {
 		return prenom;
 	}
 
+	//Permet de vérifier l'email saisie par l'utilisateur et de le renvoyer
 	private String lireParametreEmail(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String email;
 		List<String> emails = new ArrayList<String>();
@@ -230,7 +246,7 @@ public class ServletModifiantProfil extends HttpServlet {
 		return email;
 	}
 	
-
+	//Permet de vérifier le téléphone saisie par l'utilisateur et de le renvoyer
 	private String LireParametreTelephone(HttpServletRequest request, List<Integer> listeCodesErreur) {
 		String telephone;
 		telephone = request.getParameter("telephone");
@@ -249,6 +265,7 @@ public class ServletModifiantProfil extends HttpServlet {
 		return telephone;
 	}
 
+	//Permet de vérifier la rue saisie par l'utilisateur et de le renvoyer
 	private String lireParametreRue(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String rue;
 		rue = request.getParameter("rue");
@@ -261,6 +278,7 @@ public class ServletModifiantProfil extends HttpServlet {
 		return rue;
 	}
 
+	//Permet de vérifier le code postal saisie par l'utilisateur et de le renvoyer
 	private String lireParametreCodePostal(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String codePostal;
 		codePostal = request.getParameter("codePostal");
@@ -275,7 +293,8 @@ public class ServletModifiantProfil extends HttpServlet {
 		}
 		return codePostal;
 	}
-
+	
+	//Permet de vérifier la ville saisie par l'utilisateur et de le renvoyer
 	private String lireParametreVille(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String ville;
 		ville = request.getParameter("ville");
@@ -288,6 +307,7 @@ public class ServletModifiantProfil extends HttpServlet {
 		return ville;
 	}
 
+	//Permet de vérifier le mdp saisie par l'utilisateur, de le crypter et de le renvoyer
 	private String lireParametreMDP(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String mdpactuel;
 		String nouveauMdp;
@@ -326,7 +346,8 @@ public class ServletModifiantProfil extends HttpServlet {
 		}
 		return confirmationMdp;
 	}
-
+	
+	//Permet de récuperer les infos de l'utilisateur et de les afficher via son id
 	private void chargerUtilisateur(HttpSession session, Utilisateurs utilisateurs, List<Integer> listeCodesErreur) {
 		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 
@@ -340,7 +361,8 @@ public class ServletModifiantProfil extends HttpServlet {
 			listeCodesErreur.add(CodesResultatServlets.CHARGEMENT_UTILISATEUR_ERREUR);
 		}
 	}
-
+	
+	//Permet de vérifier si la saisie par l'utilisateur est uniquement alphanumérique
 	public boolean isAlphanumerique(String str) {
 		for (int i = 0; i < str.length(); i++) {
 			char c = str.charAt(i);

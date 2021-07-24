@@ -26,16 +26,22 @@ public class ServletSupprimerProfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// Je verifie si une session est active
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
 			rd.forward(request, response);
 	     }
+		
+		//Déclaration des variables
 		int idUtilisateur = 0;
 		List<Integer> listeCodesErreur = new ArrayList<>();
-
+		
+		//Je recupère l'id de l'utilisateur de la session
 		idUtilisateur = lireParametreId(session, listeCodesErreur);
-
+		
+		//Je verifie si une erreur est stocker dans la liste pour l'afficher
 		if (listeCodesErreur.size() > 0) {
 			request.setAttribute("listeCodesErreur", listeCodesErreur);
 			
@@ -61,7 +67,7 @@ public class ServletSupprimerProfil extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	//Permet de verifier et recuperer l'id au bon format
+	//Permet de récuper l'id utilisateur et de le renvoyer
 	private int lireParametreId(HttpSession session, List<Integer> listeCodesErreur) {
 		int idUtilisateur = 0;
 		try {

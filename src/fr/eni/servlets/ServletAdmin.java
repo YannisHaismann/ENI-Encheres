@@ -28,6 +28,7 @@ public class ServletAdmin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// Je verifie si une session est active
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");

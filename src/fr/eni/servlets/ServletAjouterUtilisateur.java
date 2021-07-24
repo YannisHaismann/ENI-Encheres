@@ -50,9 +50,15 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// J'active une session qui se fermera automatiquement aprés 5min d'inactiviter
 		HttpSession session = request.getSession(true);
 		session.setMaxInactiveInterval(300);
+		
+		//Permet la bonne lecture des accents
 		request.setCharacterEncoding("UTF-8");
+		
+		//Déclaration des variables
 		int idUtilisateur = 0;
 
 		String pseudo;
@@ -70,6 +76,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		
+		//Verification de la conformiter des infos saisies via ses méthodes
 		pseudo = lireParametrePseudo(request, listeCodesErreur);
 		nom = lireParametreNom(request, listeCodesErreur);
 		prenom = lireParametrePrenom(request, listeCodesErreur);
@@ -80,18 +87,20 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		ville = lireParametreVille(request, listeCodesErreur);
 		motDePasse = lireParametreMDP(request, listeCodesErreur);
 
-		
+		//Je verifie si une erreur est stocker dans la liste pour l'afficher 
 		if(listeCodesErreur.size()>0)
 		{
 			request.setAttribute("listeCodesErreur", listeCodesErreur);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp"); // A REVOIR 
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/inscription.jsp"); 
 			rd.forward(request, response);
 		}else {
 			try {
+				//Je créer un nouvelle utilisateur avec les infos saisies
 				UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
 				Utilisateurs utilisateur = new Utilisateurs();
 				utilisateursManager.ajouter(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, 
 				administrateur, desactiver);
+				//J'ajoute les infos aux attributs de session pour pouvoir les utiliser durant toute le durée de vie de la session
 				utilisateur = utilisateursManager.selectByPseudo(pseudo);
 				session.setAttribute("utilisateur", utilisateur);
 				idUtilisateur = utilisateur.getId();
@@ -130,7 +139,8 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 			rd.forward(request, response);
 		}
 	}
-
+	
+	//Permet de vérifier le pseudo saisie par l'utilisateur et de le renvoyer
 	private String lireParametrePseudo(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String pseudo;
 		List<String> pseudos = new ArrayList<String>();
@@ -162,7 +172,8 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 
 		return pseudo;
 	}
-
+	
+	//Permet de vérifier le nom saisie par l'utilisateur et de le renvoyer
 	private String lireParametreNom(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String nom;
 		nom = request.getParameter("nom");
@@ -173,7 +184,8 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		}
 		return nom;
 	}
-
+	
+	//Permet de vérifier le prenom saisie par l'utilisateur et de le renvoyer
 	private String lireParametrePrenom(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String prenom;
 		prenom = request.getParameter("prenom");
@@ -184,7 +196,8 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		}
 		return prenom;
 	}
-
+	
+	//Permet de vérifier l'email saisie par l'utilisateur et de le renvoyer
 	private String lireParametreEmail(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String email;
 		List<String> emails = new ArrayList<String>();
@@ -213,6 +226,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		return email;
 	}
 
+	//Permet de vérifier le téléphone saisie par l'utilisateur et de le renvoyer
 	private String LireParametreTelephone(HttpServletRequest request, List<Integer> listeCodesErreur) {
 		String telephone;
 		telephone = request.getParameter("telephone");
@@ -227,7 +241,8 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		}
 		return telephone;
 	}
-
+	
+	//Permet de vérifier la rue saisie par l'utilisateur et de le renvoyer
 	private String lireParametreRue(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String rue;
 		rue = request.getParameter("rue");
@@ -239,6 +254,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		return rue;
 	}
 
+	//Permet de vérifier le code postal saisie par l'utilisateur et de le renvoyer
 	private String lireParametreCodePostal(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String codePostal;
 		codePostal = request.getParameter("codePostal");
@@ -254,6 +270,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		return codePostal;
 	}
 
+	//Permet de vérifier la ville saisie par l'utilisateur et de le renvoyer
 	private String lireParametreVille(HttpServletRequest request, List<Integer> listeCodesErreur){
 		String ville;
 		ville = request.getParameter("ville");
@@ -265,6 +282,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		return ville;
 	}
 
+	//Permet de vérifier le mdp saisie par l'utilisateur, de le crypter et de le renvoyer
 	private String lireParametreMDP(HttpServletRequest request, List<Integer> listeCodesErreur){
 
 		String motDePasse;
@@ -303,6 +321,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 		return confirmation;
 	}
 
+	//Permet de vérifier si la saisie par l'utilisateur est uniquement alphanumérique
 	public boolean isAlphanumerique(String str) {
 		for (int i = 0; i < str.length(); i++) {
 			char c = str.charAt(i);
@@ -312,7 +331,7 @@ public class ServletAjouterUtilisateur extends HttpServlet  {
 
 		return true;
 	}
-	
+	//Permet de vérifier si la saisie par l'utilisateur est uniquement numérique
 	public boolean isNumerique(String str) {
 		for (int i = 0; i < str.length(); i++) {
 			char c = str.charAt(i);
