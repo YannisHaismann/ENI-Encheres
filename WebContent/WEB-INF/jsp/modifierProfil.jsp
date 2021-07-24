@@ -19,7 +19,7 @@
 <title>Modidier/Supprimer mon profil</title>
 </head>
 
-<body style="background-image: url('./images/fond_page_connexion.jpg');">
+<body style="background-color: #F0F0E8;">
 
 	<%@include file="header_logo_simple.jsp"%>
 

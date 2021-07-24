@@ -63,18 +63,19 @@
 		left: auto;
 		width: 358px;
 		top: 17px;
+		font-size: 3rem;
 	}
 	.form .form-label-g {
 		margin-left: none;
 		float: left;
 		padding: 4px;
-		width: 170px;
+		width: 320px;
 		text-align: left;
 	}
 	.form .form-label-d {
 		float: left;
 		padding: 4px;
-		width: 170px;
+		width: 320px;
 		text-align: left;
 		margin-left: none;
 	}
@@ -96,4 +97,10 @@
 	.taille-btn {
 		width: auto;
 	}
+	
+	label {
+    display: inline-block;
+    margin-bottom: .2rem;
+}
+
 }

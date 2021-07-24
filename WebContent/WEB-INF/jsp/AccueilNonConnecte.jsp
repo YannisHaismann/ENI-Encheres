@@ -20,7 +20,7 @@
 
 <title>[Title]</title>
 </head>
-<body style="background-image: url('./images/fond_page_connexion.jpg');">
+<body >
 
 	<%@include file="header_accueil.jsp"%>
 
@@ -48,12 +48,16 @@
 			<input placeholder="Le nom de l'article contient"
 				class="search-top-nav__form__input" type="text" name="nom-article">
 			<div>
-				<label class="search-top-nav__form__label" for="categorie">Catégorie:
-				</label> <select class="search-top-nav__form__input" id="categorie"
-					name="categorie">
-					<option value="">Toutes</option>
-					<option value="">Autres options à définir</option>
-				</select>
+				<label class="search-top-nav__form__label" for="categorie">Catégories:</label> 
+				<input  list="liste-categories" name="categorie" id="categorie">
+				
+				<datalist class="search-top-nav__form__input" id="liste-categories">
+					<option value="Toutes" selected="selected">
+ 					<option value="Informatique">
+				    <option value="Ameublement">
+					<option value="Vetements">
+					<option value="Sport et loisirs">
+				</datalist>
 			</div>
 			<input class="search-top-nav__form__input" type="submit"
 				name="envoyer">
