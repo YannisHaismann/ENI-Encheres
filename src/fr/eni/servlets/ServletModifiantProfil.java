@@ -60,7 +60,11 @@ public class ServletModifiantProfil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
+			rd.forward(request, response);
+	     }
 		int idutilisateur;
 		String pseudo;
 		String nom;
