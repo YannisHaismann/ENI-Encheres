@@ -16,7 +16,7 @@
 <title>Activer/Desactiver profil</title>
 </head>
 
-<body>
+<body> 
 	<%@include file="header_logo_simple.jsp"%>
 
 	<c:if test="${!empty listeCodesErreur}">

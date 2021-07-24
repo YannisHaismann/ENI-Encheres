@@ -24,7 +24,7 @@ public class ArticleVenduManager {
 		return ArticleVenduManager.manager;
 	}
 	
-	public void ajouter(String nom, String description, Date dateDebut, Date dateFin,
+	public ArticleVendu ajouter(String nom, String description, Date dateDebut, Date dateFin,
 						int prixInitial, int prixVente, int idUtilisateur, int idCategorie) throws BusinessException {	
 		try {
 			ArticleVendu article = new ArticleVendu();
@@ -37,7 +37,7 @@ public class ArticleVenduManager {
 			article.setIdUtilisateur(idUtilisateur);
 			article.setIdCategorie(idCategorie);
 			
-			this.articleVenduDao.insert(article);
+			return this.articleVenduDao.insert(article);
 		}catch(BusinessException e) {
 			e.printStackTrace();
 			throw e;

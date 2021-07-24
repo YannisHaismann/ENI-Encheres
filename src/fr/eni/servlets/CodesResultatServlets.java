@@ -84,4 +84,10 @@ public class CodesResultatServlets {
 
 	public static final Integer CHOIX_INCORRECT = 30040;
 
+	public static final Integer RETRAIT_OBLIGATOIRE = 30041;
+
+	public static final Integer TAILLE_MAX_RETRAIT_DEPASSER = 30042;
+
+	public static final Integer RETRAIT_INVALIDE = 30043;
+
 }

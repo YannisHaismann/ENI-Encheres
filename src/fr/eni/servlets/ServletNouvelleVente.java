@@ -16,6 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.bll.ArticleVenduManager;
+import fr.eni.bll.CategoriesManager;
+import fr.eni.bll.RetraitsManager;
+import fr.eni.bo.ArticleVendu;
+import fr.eni.bo.Categories;
+import fr.eni.bo.Retraits;
 import fr.eni.exception.BusinessException;
 
 /**
@@ -34,7 +40,8 @@ public class ServletNouvelleVente extends HttpServlet {
 		if (session == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
 			rd.forward(request, response);
-	     }
+	    }
+		request.setAttribute("categorie", Categories.listeLibelle);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/NouvelleVente.jsp");
 		rd.forward(request, response);
 	}
@@ -60,12 +67,26 @@ public class ServletNouvelleVente extends HttpServlet {
 			long timeFin 			= dateDebut.getTime()+7*24*60*60*1000;
 			Date dateFin 			= new Date(timeFin);
 			int prixInitial			= 0;
+			Retraits retrait		= null;
+					
+			prixInitial 	= lirePrixInitial(request, listeCodesErreur);
+			nom 			= lireNomArticle(request, listeCodesErreur);
+			description 	= lireDescriptionArticle(request, listeCodesErreur);
+			retrait 		= lireRetraitArticle(request, listeCodesErreur);
+			System.out.println(request.getParameter("photo"));
 			
-			
-			prixInitial = lirePrixInitial(request, listeCodesErreur);
-			nom = lireNomArticle(request, listeCodesErreur);
-			description = lireDescriptionArticle(request, listeCodesErreur);
-			
+			ArticleVenduManager articleManager = new ArticleVenduManager();	
+			CategoriesManager categorieManager = new CategoriesManager();
+			RetraitsManager retraitManager 	   = new RetraitsManager();
+				
+			try {
+				Categories categorie = categorieManager.selectionner(request.getParameter("categorie"));
+				ArticleVendu article = articleManager.ajouter(nom, description, dateDebut, dateFin, prixInitial, prixInitial, Integer.parseInt(session.getAttribute("id").toString()), categorie.getId());
+				retrait.setId(article.getId());
+				retraitManager.ajouter(retrait.getId(), retrait.getRue(), retrait.getCodePostal(), retrait.getVille());
+			} catch (NumberFormatException | BusinessException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		doGet(request, response);
@@ -107,11 +128,48 @@ public class ServletNouvelleVente extends HttpServlet {
 	
 	private int lirePrixInitial(HttpServletRequest request, List<Integer> listeCodesErreur){
 		int prixInitial;
-		prixInitial = Integer.parseInt(request.getParameter("prixInitial"));
+		prixInitial = Integer.parseInt(request.getParameter("prixInitial").toString());
 		if (prixInitial == 0 || prixInitial > 2147483640) {
 			listeCodesErreur.add(CodesResultatServlets.PRIX_INCORRECT);
 		}
 		return prixInitial;
+	}
+	
+	private Retraits lireRetraitArticle(HttpServletRequest request, List<Integer> listeCodesErreur){
+		String rue;
+		String codePostal;
+		String ville;
+		rue = request.getParameter("rue");
+		codePostal = request.getParameter("codePostal");
+		ville = request.getParameter("ville");
+		if (rue == null || rue.trim().equals("") && codePostal == null || codePostal.trim().equals("") && ville == null || ville.trim().equals("")) {
+			listeCodesErreur.add(CodesResultatServlets.RETRAIT_OBLIGATOIRE);
+		} else if (rue.length() > 30 && codePostal.length() > 15 && ville.length() > 30) {
+			listeCodesErreur.add(CodesResultatServlets.TAILLE_MAX_RETRAIT_DEPASSER);
+		}
+		Pattern pattern = Pattern.compile("[a-zA-Z0-9 ]");
+		Matcher matcher = pattern.matcher(rue);
+		boolean retraitValide = matcher.find();
+		if (retraitValide == false) {
+			listeCodesErreur.add(CodesResultatServlets.RETRAIT_INVALIDE);
+		}	
+		matcher = pattern.matcher(codePostal);
+		retraitValide = matcher.find();
+		if (retraitValide == false) {
+			listeCodesErreur.add(CodesResultatServlets.RETRAIT_INVALIDE);
+		}
+		
+		matcher = pattern.matcher(ville);
+		retraitValide = matcher.find();
+		if (retraitValide == false) {
+			listeCodesErreur.add(CodesResultatServlets.RETRAIT_INVALIDE);
+		}
+		
+		Retraits retrait = new Retraits();
+		retrait.setRue(rue);
+		retrait.setVille(ville);
+		retrait.setCodePostal(codePostal);
+		return retrait;
 	}
 }
 

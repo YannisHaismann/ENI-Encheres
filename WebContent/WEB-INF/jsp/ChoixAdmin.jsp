@@ -17,7 +17,7 @@
 <title>Activer/Desactiver les droits d'administrations</title>
 </head>
 
-<body>
+<body> 
 	<%@include file="header_logo_simple.jsp"%>
 
 	<c:if test="${!empty listeCodesErreur}">

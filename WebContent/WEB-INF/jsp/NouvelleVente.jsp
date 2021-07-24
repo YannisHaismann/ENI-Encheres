@@ -53,56 +53,43 @@
     		<form action="<%=request.getContextPath()%>/NouvelleVente" method="post">
 			        <h2 style="text-align: center;"> Nouvelle vente</h2>
 			        <div>
-			        	<label class="label-vente" for="article">Article: </label><input required="required" type="text" name="article" id="article">
+			        	<label class="label-vente" for="article">Article: </label><input required="required" type="text" name="nom" id="article">
 			        </div>
 			        
 			        <div>
 			            <label class="label-vente" for="description">Description: </label><textarea required="required" class="textarea" id="description" 
-			            name="description" rows="5" cols="30"></textarea>
+			            name="desc" rows="5" cols="30"></textarea>
 			        </div>
 		        
 			        <div>
-			        	<label class="label-vente" for="categorie">Categorie: </label>
-			        	<input   list="liste-categories" name="categorie" id="categorie">
-			        	 
-						<datalist id="liste-categories" >
-						  <option value="Informatique">
-						  <option value="Ameublement">
-						  <option value="Vetements">
-						  <option value="Sport et loisirs">
-						</datalist>       	
+			        	<label class="label-vente" for="categorie">Categorie: </label>		        	 
+						<select name="categorie" id="categorie">
+							<c:forEach var="categorie" items="${requestScope.categorie}">
+			  					<option value="${categorie}">${categorie}</option>
+			  				</c:forEach>
+						</select>       	
 			        </div>
 			        
 			        <div>
-			        	<label  class="label-vente" for="photo">Photo de l'article: </label>
-			        	<input  required="required" type="file" id="photo" name="photo" value="UPLOADER">
+			        	<label class="label-vente" for="photo">Photo de l'article: </label>
+			        	<input required="required" type="file" id="photo" name="photo" value="UPLOADER">
 			        </div>
 			        
 			        <div>
 			        	<label class="label-vente" for="mise a prix">Prix initial: </label>
-			       		<input required="required" type="number" min="0" max="100000" step="10" id="mise a prix" name="mise a prix" >
+			       		<input required="required" type="number" min="0" max="1000000000" step="1" id="mise a prix" name="prixInitial" >
 			        </div>
 			        
-			        <div>
-			         	<label class="label-vente" for="dateDebut">Début de l'enchère: </label>
-			       		<input required="required" type="date" name="dateDebut" id="dateDebut">
-			        </div>
-			        
-			        <div>
-			         	<label class="label-vente" for="dateFin">Fin de l'enchère: </label>
-			       		<input required="required" type="date" name="dateFin" id="dateFin">
-			        </div>
-			
 					<fieldset>
 						<legend>Retrait</legend>
-						<label class="label-vente" for="rue">Rue</label> <input required="required" type="text" name="rue" id="rue"> <br>
-						<label class="label-vente" for="codePostal">Code Postal</label> <input required="required" type="text" name="codePostal" id="codePostal"><br>
-						<label class="label-vente" for="ville">Ville</label> <input required="required" type="text" name="ville" id="ville">
+						<label class="label-vente" for="rue">Rue</label> <input value="${sessionScope.rue}" required="required" type="text" name="rue" id="rue"> <br>
+						<label class="label-vente" for="codePostal">Code Postal</label> <input value="${sessionScope.codePostal}" required="required" type="text" name="codePostal" id="codePostal"><br>
+						<label class="label-vente" for="ville">Ville</label> <input value="${sessionScope.ville}" required="required" type="text" name="ville" id="ville">
 					</fieldset>
 			
 			
 					<div class="form-boutton" class="label-gauche-inscription">
-							<a href="<%=request.getContextPath()%>/ServletAccueil"> <input required="required" class="enregistrer-button" type="submit" value="Enregistrer" name="enregistrer"></a> 
+							<a href="<%=request.getContextPath()%>/ServletAccueil"> <input id="envoyer" required="required" class="enregistrer-button" type="submit" value="Enregistrer" name="enregistrer"></a> 
 					</div>
 			
 					<div class="form-boutton" class="label-droit-inscription">
@@ -120,7 +107,26 @@
   </div> 
 
 <%@include file="footer.jsp"%>
+<script type="text/javascript">
 
+	var img = document.querySelector("#photo");
+	img.addEventListener("change", (e) => {
+		var selectedFile = img.files[0];
+		
+		var reader = new FileReader();
+
+		var imgtag = document.querySelector(".img-article");
+		imgtag.title = selectedFile.name;
+
+		reader.onload = function(event) {
+		  imgtag.src = event.target.result;
+		};
+
+		reader.readAsDataURL(selectedFile);
+		
+	}, false);
+	
+</script>
 </body>
 
 </html>
