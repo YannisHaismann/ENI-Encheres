@@ -11,4 +11,5 @@ public interface EncheresDAO {
 	public void update(Encheres enchere) throws BusinessException;
 	public void delete(Encheres enchere) throws BusinessException;
 	Encheres selectByIdUtilisateur(int idUtilisateur) throws BusinessException;
+	public void deleteByIdUtilisateur(int id) throws BusinessException;
 }

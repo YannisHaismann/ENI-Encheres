@@ -39,10 +39,10 @@
 		<form name="form-desactivation"
 			action="<%=request.getContextPath()%>/ChoixDesactiver" method="post">
 			<div>
-				<label for="pseudo" class="label-choix">Activation/Desactivation d'un compte utilisteur : </label>
+				<label for="pseudoDesactiver" class="label-choix">Activation/Desactivation d'un compte utilisteur : </label>
 			</div>
 			<div>
-				<input type="text" name="pseudoDesactiver" id="pseudo"	placeholder="Saisir son pseudo" value="" required="required"/>
+				<input type="text" name="pseudoDesactiver" id="pseudoDesactiver"	placeholder="Saisir son pseudo" value="" required="required"/>
 			</div>
 			<div>
 				<label for="choix" class="label-choix" >Choix : </label>

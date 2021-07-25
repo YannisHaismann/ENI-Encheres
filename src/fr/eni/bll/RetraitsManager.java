@@ -66,4 +66,8 @@ public class RetraitsManager {
 	public List<Retraits> selectionnerTous() throws BusinessException {
 		return this.retraitsDao.selectAll();
 	}
+	
+	public void deleteById(int id) throws BusinessException{
+		this.retraitsDao.deleteById(id);
+	}
 }

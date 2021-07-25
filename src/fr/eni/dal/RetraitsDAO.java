@@ -12,5 +12,5 @@ public interface RetraitsDAO {
 	public List<Retraits> selectAll() throws BusinessException;
 	public void update (Retraits retrait) throws BusinessException;
 	public void delete(Retraits retrait) throws BusinessException;
-	
+	public void deleteById(int id) throws BusinessException;
 }

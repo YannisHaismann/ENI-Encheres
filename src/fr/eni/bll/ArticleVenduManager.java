@@ -85,4 +85,12 @@ public class ArticleVenduManager {
 	public ArticleVendu selectionner(int id) throws BusinessException {
 		return this.articleVenduDao.selectBy(id);
 	}
+	
+	public void supprimerParIdUtilisateur(int id) throws BusinessException{
+		this.articleVenduDao.deleteByIdUtilisateur(id);
+	}
+	
+	public List<ArticleVendu> selectionnerTousByIdUtilisateur(int id) throws BusinessException{
+		return this.articleVenduDao.selectAllByIdUtilisateur(id);
+	}
 }
