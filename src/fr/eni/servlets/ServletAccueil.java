@@ -34,17 +34,17 @@ public class ServletAccueil extends HttpServlet {
 		UtilisateursManager utilisateurManager = new UtilisateursManager();
 		try {
 			List<ArticleVendu> listArticles = articleManager.selectionnerTous();
-			int minPage = 1;
-			int articleParPage = 10;
-			Map[] articles = new Map[articleParPage];
-			int nombrePage = listArticles.size() / articleParPage;
+			int minPage 			= 0;
+			int articleParPage 		= 10;
+			int nombrePage		 	= listArticles.size() / articleParPage + ((listArticles.size() % articleParPage == 0) ? 0 : 1);
 			request.setAttribute("nombrePage", nombrePage);
 			
 			if(request.getParameter("page") != null) {
-				minPage = minPage * Integer.parseInt(request.getParameter("page").toString());
+				minPage = minPage + ((articleParPage * Integer.parseInt(request.getParameter("page").toString())) - articleParPage);
 			}
 			int maxPage = minPage + articleParPage;
 			int y = 0, o = 0;
+			Map[] articles 	= new Map[articleParPage];
 			for(ArticleVendu article : listArticles) {
 				y++;
 				if(y >= minPage) {
