@@ -22,7 +22,7 @@ import fr.eni.utils.BCrypt;
 /**
  * Servlet implementation class ServletConnexion
  */
-@WebServlet("/ServletConnexion")
+@WebServlet(urlPatterns= {"/ServletConnexion", ""})
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
