@@ -34,17 +34,31 @@ public class ServletAccueil extends HttpServlet {
 		UtilisateursManager utilisateurManager = new UtilisateursManager();
 		try {
 			List<ArticleVendu> listArticles = articleManager.selectionnerTous();
-			Map[] articles = new Map[listArticles.size()];
 			int i = 0;
+			int t = 5;
+			Map[] articles = new Map[t];
+			int nombrePage = listArticles.size() / t;
+			request.setAttribute("nombrePage", nombrePage);
+			
+			if(request.getParameter("page") != null) {
+				System.out.println(Integer.parseInt(request.getParameter("page").toString()));
+				i = i * Integer.parseInt(request.getParameter("page").toString());
+			}
+			int u = i + t;
+			int y = 0;
 			for(ArticleVendu article : listArticles) {
-				Map<String, String> articleActual = new HashMap<String, String>();
-				articleActual.put("nom", article.getNom());
-				articleActual.put("prix", String.valueOf(article.getPrixVente()));
-				articleActual.put("dateFin", article.getDateFin().toString());
-				articleActual.put("vendeur", utilisateurManager.selectionner(article.getIdUtilisateur()).getNom());
-				articleActual.put("id", String.valueOf(article.getId()));
-				articles[i] = articleActual;
-				i++;
+				y++;
+				if(i < y) {
+					Map<String, String> articleActual = new HashMap<String, String>();
+					articleActual.put("nom", article.getNom());
+					articleActual.put("prix", String.valueOf(article.getPrixVente()));
+					articleActual.put("dateFin", article.getDateFin().toString());
+					articleActual.put("vendeur", utilisateurManager.selectionner(article.getIdUtilisateur()).getNom());
+					articleActual.put("id", String.valueOf(article.getId()));
+					articles[i] = articleActual;
+					i++;
+					if(i == u) break;		
+				}
 			}
 			request.setAttribute("articles", articles);
 		} catch (BusinessException e) {

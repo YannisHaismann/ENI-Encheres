@@ -120,6 +120,15 @@
 			 </div>
 		</c:forEach>	
 	</div>
+	
+	<div class="pagination">
+		<% 
+		int u = Integer.parseInt(request.getAttribute("nombrePage").toString());
+		
+		for(int i=1; i <= u; i++) { %>
+			<a href="<%=request.getContextPath()%>/ServletAccueil?page=<%=i%>"> <%=i %> </a>
+		<%} %>
+	</div>
 
 
 	<%@include file="footer.jsp"%>
