@@ -43,6 +43,10 @@ public class EncheresManager {
 		return this.encheresDao.selectAllBy(idArticle);
 	}
 	
+	public Encheres selectionnerParIdUtilisateur(int idUtilisateur) throws BusinessException{
+		return this.encheresDao.selectByIdUtilisateur(idUtilisateur);
+	}
+	
 	public void update(Date dateEnchere, int montant, int idUtilisateur, int idArticle) throws BusinessException{
 		try {
 			Encheres enchere = new Encheres();

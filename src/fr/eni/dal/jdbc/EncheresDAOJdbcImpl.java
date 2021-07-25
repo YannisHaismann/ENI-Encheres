@@ -16,12 +16,13 @@ import fr.eni.exception.BusinessException;
 
 public class EncheresDAOJdbcImpl implements EncheresDAO {
 	
-	public static final String INSERT 				= "INSERT INTO ENCHERES VALUES (?, ?, ?, ?);";
-	public static final String SELECT_ALL_BY_ID 	= "SELECT * FROM ENCHERES WHERE no_article = ?;";
-	public static final String SELECT_ALL 			= "SELECT * FROM ENCHERES;";
-	public static final String UPDATE_BY_IDID 		= "UPDATE ENCHERES SET date_enchere = ?,"
-													+ " montant_enchere = ? WHERE no_utilisateur = ? AND no_article = ?;";
-	public static final String DELETE_BY_IDID 		= "DELETE FROM ENCHERES WHERE no_article = ? AND no_utilisateur = ?;";
+	public static final String INSERT 					= "INSERT INTO ENCHERES VALUES (?, ?, ?, ?);";
+	public static final String SELECT_ALL_BY_ID 		= "SELECT * FROM ENCHERES WHERE no_article = ?;";
+	public static final String SELECT_ALL 				= "SELECT * FROM ENCHERES;";
+	public static final String UPDATE_BY_IDID 			= "UPDATE ENCHERES SET date_enchere = ?,"
+														+ " montant_enchere = ? WHERE no_utilisateur = ? AND no_article = ?;";
+	public static final String DELETE_BY_IDID 			= "DELETE FROM ENCHERES WHERE no_article = ? AND no_utilisateur = ?;";
+	public static final String SELECT_BY_ID_UTILISATEUR	= "SELECT * FROM ENCHERES WHERE no_utilisateur = ?;";
 
 
 	@Override
@@ -86,6 +87,38 @@ public class EncheresDAOJdbcImpl implements EncheresDAO {
 				pstmt.close();
 				
 				return encheres;
+			}catch(Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_BY_ID_OBJET_ECHEC);
+			throw businessException;
+		}
+	}
+	
+	@Override
+	public Encheres selectByIdUtilisateur(int idUtilisateur) throws BusinessException {
+		
+		try(Connection con = ConnectionProvider.getConnection()) {
+			try {
+				PreparedStatement pstmt;
+				pstmt = con.prepareStatement(SELECT_BY_ID_UTILISATEUR);
+				pstmt.setInt(1, idUtilisateur);
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				Encheres enchere = new Encheres();
+				enchere.setIdUtilisateur(rs.getInt("no_utilisateur"));
+				enchere.setIdArticle(rs.getInt("no_article"));
+				enchere.setDate(rs.getDate("date_enchere"));
+				enchere.setMontant(rs.getInt("montant_enchere"));
+
+				rs.close();
+				pstmt.close();
+				
+				return enchere;
 			}catch(Exception e) {
 				e.printStackTrace();
 				throw e;

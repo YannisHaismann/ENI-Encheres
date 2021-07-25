@@ -51,15 +51,17 @@ public class ServletEncherirArticleDetail extends HttpServlet {
 			String utilisateurTopEnchere = "";
 			Utilisateurs vendeur = utilisateurManager.selectionner(article.getIdUtilisateur());
 			for(Encheres enchere : encheres) {
-				if(prixTopEnchere > enchere.getMontant()) {
+				if(prixTopEnchere < enchere.getMontant()) {
 					prixTopEnchere = enchere.getMontant();
 					utilisateurTopEnchere = utilisateurManager.selectionner(enchere.getIdUtilisateur()).getPseudo();
 				}
 			}
 			Retraits retrait = retraitManager.selectionner(article.getId());
-			
 			if(request.getParameter("encherir") != null) {
 				if(Integer.parseInt(request.getParameter("propositionEnchere")) > prixTopEnchere) {
+					Encheres ancienneEnchere = encheresManager.selectionnerParIdUtilisateur(Integer.parseInt(session.getAttribute("id").toString()));
+					encheresManager.suprimer(ancienneEnchere.getIdArticle(), ancienneEnchere.getIdUtilisateur());;
+
 					Encheres nouvelleEnchere = new Encheres();
 					nouvelleEnchere.setDate(new Date(Calendar.getInstance().getTime().getTime()));
 					nouvelleEnchere.setIdArticle(article.getId());
@@ -88,8 +90,7 @@ public class ServletEncherirArticleDetail extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		doGet(request, response);
 	}
 

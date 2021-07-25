@@ -64,7 +64,7 @@
 		<p>
 			<span>Vendeur: </span><span>${vendeur.nom}</span>
 		</p>
-		<form action="" method="post">
+		<form action="<%=request.getContextPath()%>/ServletEncherirArticleDetail?id=${article.id}" method="post">
 			<p>
 				<label>Ma proposition: </label> <input type="number"
 					name="propositionEnchere"> <input type="submit"
