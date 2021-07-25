@@ -110,16 +110,25 @@
 	</div>
 	<div class="liste-article">
 		<c:forEach var="article" items="${requestScope.articles}">
+			 <c:if test ="${article != null}">
 			 <div class="article-div">
-			 	<p><c:out value="${article.nom}"/></p>
+			 	<p><a href="<%=request.getContextPath()%>/ServletEncherirArticleDetail?id=${article.id}"><c:out value="${article.nom}"/></a></p>
 			 	<p>Prix: <c:out value="${article.prix}"/></p>
 			 	<p>Fin de l'enchère: <c:out value="${article.dateFin}"/></p>
 			 	<p>Vendeur: <c:out value="${article.vendeur}"/></p>
 			 </div>
+			 </c:if>
 		</c:forEach>	
 	</div>
-
-
+	
+	<div class="pagination">
+		<% 
+		int u = Integer.parseInt(request.getAttribute("nombrePage").toString());
+		
+		for(int i=1; i <= u; i++) { %>
+			<a href="<%=request.getContextPath()%>/ServletAccueil?page=<%=i%>"> <%=i%> </a>
+		<%} %>
+	</div>
 
 </body>
 </html>
