@@ -53,7 +53,7 @@
 			<div>
 				<label class="label-gauche-inscription" for="pseudo">Pseudo <span
 					class="requis">*</span></label> <input type="text" id="pseudo" required
-					name="pseudo" value="">
+					name="pseudo" placeholder="votre pseudo" value="">
 			</div>
 			<div>
 				<label class="label-droit-inscription" for="nom">Nom <span
@@ -74,22 +74,22 @@
 
 			<div>
 				<label class="label-gauche-inscription" for="telephone">Téléphone</label> <input
-					type="text" id="telephone" name="telephone" value="">
+					type="text" id="telephone" placeholder="votre téléphone" name="telephone" value="">
 			</div>
 			<div>
 				<label class="label-droit-inscription" for="rue">Rue <span
 					class="requis">*</span></label> <input type="text" id="rue" required
-					name="rue" value=""><br>
+					name="rue" placeholder="votre rue" value=""><br>
 			</div>
 			<div>
 				<label class="label-gauche-inscription" for="codePostal">Code postal <span
 					class="requis">*</span></label> <input type="text" id="codePostal" required
-					name="codePostal" value="" max="99999" pattern="[0-9]{5}">
+					name="codePostal" value="" max="99999" placeholder="votre code postal" pattern="[0-9]{5}">
 			</div>
 			<div>
 				<label class="label-droit-inscription" for="ville">Ville <span
 					class="requis">*</span></label> <input type="text" id="ville" name="ville"
-					value=""><br>
+					placeholder="votre ville" value=""><br>
 			</div>
 			<div>
 				<label class="label-gauche-inscription" for="motDePasse">Mot de passe <span
@@ -107,12 +107,12 @@
 			
 			
 				
-			<div class="form-boutton" class="label-gauche-inscription">
+			<div class="form-boutton label-gauche-inscription">
 					<input   name="creer-button" type="submit" 
 					value="Créer"> 
 			</div>
 				
-			<div class="form-boutton" class="label-droit-inscription">
+			<div class="form-boutton label-droit-inscription">
 					<a href="<%=request.getContextPath()%>/ServletAccueil"> <input   name="annuler-button" type="button" 
 					value="Annuler"></a>
 			</div>
