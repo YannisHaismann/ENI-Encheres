@@ -49,6 +49,15 @@ public class ServletNouvelleVente extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
 			rd.forward(request, response);
 	    }
+		
+		int desactiver = (int) session.getAttribute("desactiver");
+		List<Integer> listeCodesErreur = new ArrayList<>();
+		if (desactiver == 1) {
+			listeCodesErreur.add(CodesResultatServlets.COMPTE_DESACTIVER);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/NouvelleVente.jsp");
+			rd.forward(request, response);
+	     }
+		
 		request.setAttribute("categorie", Categories.listeLibelle);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/NouvelleVente.jsp");
 		rd.forward(request, response);
@@ -86,6 +95,10 @@ public class ServletNouvelleVente extends HttpServlet {
 			ArticleVenduManager articleManager = new ArticleVenduManager();	
 			CategoriesManager categorieManager = new CategoriesManager();
 			RetraitsManager retraitManager 	   = new RetraitsManager();
+			
+			if (listeCodesErreur.size() > 0) {
+				request.setAttribute("listeCodesErreur", listeCodesErreur);		
+			}
 				
 			try {
 				Categories categorie = categorieManager.selectionner(request.getParameter("categorie"));
@@ -97,7 +110,8 @@ public class ServletNouvelleVente extends HttpServlet {
 			}
 		}
 		
-		doGet(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/NouvelleVente.jsp");
+		rd.forward(request, response);
 	}
 	
 	private String lireNomArticle(HttpServletRequest request, List<Integer> listeCodesErreur){

@@ -90,4 +90,8 @@ public class CodesResultatServlets {
 
 	public static final Integer RETRAIT_INVALIDE = 30043;
 
+	public static final Integer COMPTE_DESACTIVER = 30044;
+
+	public static final Integer COMPTE_DESACTIVER_ENCHERES = 30045;
+
 }
