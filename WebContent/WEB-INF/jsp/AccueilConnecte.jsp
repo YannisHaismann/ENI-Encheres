@@ -114,7 +114,7 @@
 		<c:forEach var="article" items="${requestScope.articles}">
 			 <c:if test ="${article != null}">
 			 <div class="article-div">
-			 	<p><a href="<%=request.getContextPath()%>/ServletEncherirArticleDetail?id=${article.id}"><c:out value="${article.nom}"/></a></p>
+			 	<p><a class="article-nom" href="<%=request.getContextPath()%>/ServletEncherirArticleDetail?id=${article.id}"><c:out value="${article.nom}"/></a></p>
 			 	<p>Prix: <c:out value="${article.prix}"/></p>
 			 	<p>Fin de l'enchère: <c:out value="${article.dateFin}"/></p>
 			 	<p>Vendeur: <c:out value="${article.vendeur}"/></p>
@@ -174,7 +174,27 @@
 			ventesNonDebutees.disabled 	 = false;
 			ventesTerminees.disabled = false;
 		});
+		
 	</script>
 
 </body>
+<style type="text/css">
+	.article-div{
+		border: 2px solid black;
+		width: 20%;
+		margin: auto;
+		margin-bottom: 10px;
+		margin-top: 10px;
+		padding: 20px;
+		font-size: 20px
+	}
+	.pagination{
+		font-size: 22px;
+		text-align: center;
+		margin: auto;
+		border: 2px solid black;
+		display: inline-block;
+		padding: 20px;
+	}
+</style>
 </html>

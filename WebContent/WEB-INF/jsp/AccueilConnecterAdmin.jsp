@@ -170,6 +170,28 @@
 			ventesTerminees.disabled = false;
 		});
 	</script>
+	
+	
 
 </body>
+
+<style type="text/css">
+	.article-div{
+		border: 2px solid black;
+		width: 20%;
+		margin: auto;
+		margin-bottom: 10px;
+		margin-top: 10px;
+		padding: 20px;
+		font-size: 20px
+	}
+	.pagination{
+		font-size: 22px;
+		text-align: center;
+		margin: auto;
+		border: 2px solid black;
+		display: inline-block;
+		padding: 20px;
+	}
+</style>
 </html>
