@@ -66,17 +66,17 @@
 							name="achat-ou-vente"><label for="achats">Achats</label>
 					</div>
 					<div>
-						<input type="checkbox" name="encheres-ouvertes"
+						<input class="encheres-ouvertes" type="checkbox" name="encheres-ouvertes"
 							id="encheres-ouvertes"><label for="encheres-ouvertes">Enchères
 							ouvertes</label>
 					</div>
 					<div>
-						<input type="checkbox" name="mes-encheres-en-cours"
+						<input class="mes-encheres-en-cours" type="checkbox" name="mes-encheres-en-cours"
 							id="mes-encheres-en-cours"><label
 							for="mes-encheres-en-cours">Mes enchères en cours</label>
 					</div>
 					<div>
-						<input type="checkbox" name="mes-encheres-remportees"
+						<input class="mes-encheres-remportees" type="checkbox" name="mes-encheres-remportees"
 							id="mes-encheres-remportees"><label
 							for="mes-encheres-remportees">Mes enchères remportées</label>
 					</div>
@@ -88,17 +88,17 @@
 							ventes</label>
 					</div>
 					<div>
-						<input type="checkbox" name="mes-ventes-en-cours"
+						<input class="mes-ventes-en-cours" type="checkbox" name="mes-ventes-en-cours"
 							id="mes-ventes-en-cours"><label for="mes-ventes-en-cours">Mes
 							ventes en cours</label>
 					</div>
 					<div>
-						<input type="checkbox" name="ventes-non-debutees"
+						<input class="ventes-non-debutees" type="checkbox" name="ventes-non-debutees"
 							id="ventes-non-debutees"><label for="ventes-non-debutees">Ventes
 							non débutées</label>
 					</div>
 					<div>
-						<input type="checkbox" name="ventes-terminees"
+						<input  class="ventes-terminees" type="checkbox" name="ventes-terminees"
 							id="ventes-terminees"><label for="ventes-terminees">Ventes
 							terminées</label>
 					</div>
@@ -129,6 +129,47 @@
 			<a href="<%=request.getContextPath()%>/ServletAccueil?page=<%=i%>"> <%=i%> </a>
 		<%} %>
 	</div>
+	
+			<script type="text/javascript">
+		var achats = document.querySelector("#achats");
+		var ventes = document.querySelector("#ventes");
+		
+		var encheresOuvertes		= document.querySelector(".encheres-ouvertes");
+		var mesEncheresEnCours		= document.querySelector(".mes-encheres-en-cours");
+		var mesEncheresRemportees	= document.querySelector(".mes-encheres-remportees");
+
+		var mesVentesEnCours 		= document.querySelector(".mes-ventes-en-cours");
+		var ventesNonDebutees 		= document.querySelector(".ventes-non-debutees");
+		var ventesTerminees 		= document.querySelector(".ventes-terminees");
+		
+		achats.addEventListener("click", (e) => {
+			encheresOuvertes.disabled = false;
+			mesEncheresEnCours.disabled = false;
+			mesEncheresRemportees.disabled = false;
+			
+			mesVentesEnCours.disabled = true;
+			ventesNonDebutees.disabled 	 = true;
+			ventesTerminees.disabled = true;
+			
+			mesVentesEnCours.checked = false;
+			ventesNonDebutees.checked = false;
+			ventesTerminees.checked = false;
+		});
+		
+		ventes.addEventListener("click", (e) => {
+			encheresOuvertes.disabled = true;
+			mesEncheresEnCours.disabled = true;
+			mesEncheresRemportees.disabled = true;
+			
+			encheresOuvertes.checked = false;
+			mesEncheresEnCours.checked = false;
+			mesEncheresRemportees.checked = false;
+			
+			mesVentesEnCours.disabled = false;
+			ventesNonDebutees.disabled 	 = false;
+			ventesTerminees.disabled = false;
+		});
+	</script>
 
 </body>
 </html>
