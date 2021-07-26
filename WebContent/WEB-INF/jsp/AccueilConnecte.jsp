@@ -111,7 +111,6 @@
 		</form>
 	</div>
 	<div class="liste-article">
-		<c:if test="${requestScope.articles != null}">
 			<c:forEach var="article" items="${requestScope.articles}">
 				 <c:if test ="${article != null}">
 					 <div class="article-div">
@@ -122,7 +121,6 @@
 					 </div>
 				 </c:if>
 			</c:forEach>
-		</c:if>	
 	</div>
 	
 	<div class="pagination">

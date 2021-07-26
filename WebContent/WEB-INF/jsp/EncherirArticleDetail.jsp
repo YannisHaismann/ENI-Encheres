@@ -70,7 +70,7 @@
 					name="propositionEnchere"> <input type="submit"
 					name="encherir">
 		</form>
-		<a href="RETOUR">Back</a>
+		<a href="<%=request.getContextPath()%>/ServletAccueil">Back</a>
 		</p>
 	</form>
 	</fieldset>

@@ -2,7 +2,9 @@ package fr.eni.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,7 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.bll.ArticleVenduManager;
 import fr.eni.bll.UtilisateursManager;
+import fr.eni.bo.ArticleVendu;
 import fr.eni.bo.Utilisateurs;
 import fr.eni.exception.BusinessException;
 import fr.eni.utils.BCrypt;
@@ -110,11 +114,10 @@ public class ServletConnexion extends HttpServlet {
 					int admin = (int) session.getAttribute("administrateur");
 					if( admin == 1) {
 						RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecterAdmin.jsp");
-						rd.forward(request, response);
+                        rd.forward(request, response);
 					}
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecte.jsp");
-					rd.forward(request, response);
-
+                    rd.forward(request, response);
 				}
 
 			} catch (BusinessException e) {
@@ -169,10 +172,10 @@ public class ServletConnexion extends HttpServlet {
 					int admin = (int) session.getAttribute("administrateur");
 					if( admin == 1) {
 						RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecterAdmin.jsp");
-						rd.forward(request, response);
+                        rd.forward(request, response);
 					}
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilConnecte.jsp");
-					rd.forward(request, response);
+                    rd.forward(request, response);
 
 				}
 
