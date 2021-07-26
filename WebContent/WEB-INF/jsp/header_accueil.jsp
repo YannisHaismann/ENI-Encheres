@@ -4,7 +4,7 @@
 
 	<nav class="header-nav-bar">
 
-		<a href="#" class="header-logo-eni"><img
+		<a href="<%=request.getContextPath()%>/ServletAccueil" class="header-logo-eni"><img
 			src="./images/logo-ENI.png" height="45" width="45" alt=""></a>
 		<ul class="header-menu">
 			<li><a class="header-nav-link"
