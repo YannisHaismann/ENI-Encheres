@@ -123,11 +123,13 @@
 	
 	<div class="pagination">
 		<% 
+		if(request.getAttribute("nombrePage") != null){
 		int u = Integer.parseInt(request.getAttribute("nombrePage").toString());
 		
 		for(int i=1; i <= u; i++) { %>
 			<a href="<%=request.getContextPath()%>/ServletAccueil?page=<%=i%>"> <%=i%> </a>
-		<%} %>
+		<%} 
+		}%>
 	</div>
 	
 			<script type="text/javascript">

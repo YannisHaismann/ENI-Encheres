@@ -111,25 +111,29 @@
 		</form>
 	</div>
 	<div class="liste-article">
-		<c:forEach var="article" items="${requestScope.articles}">
-			 <c:if test ="${article != null}">
-			 <div class="article-div">
-			 	<p><a class="article-nom" href="<%=request.getContextPath()%>/ServletEncherirArticleDetail?id=${article.id}"><c:out value="${article.nom}"/></a></p>
-			 	<p>Prix: <c:out value="${article.prix}"/></p>
-			 	<p>Fin de l'enchère: <c:out value="${article.dateFin}"/></p>
-			 	<p>Vendeur: <c:out value="${article.vendeur}"/></p>
-			 </div>
-			 </c:if>
-		</c:forEach>	
+		<c:if test="${requestScope.articles != null}">
+			<c:forEach var="article" items="${requestScope.articles}">
+				 <c:if test ="${article != null}">
+					 <div class="article-div">
+					 	<p><a class="article-nom" href="<%=request.getContextPath()%>/ServletEncherirArticleDetail?id=${article.id}"><c:out value="${article.nom}"/></a></p>
+					 	<p>Prix: <c:out value="${article.prix}"/></p>
+					 	<p>Fin de l'enchère: <c:out value="${article.dateFin}"/></p>
+					 	<p>Vendeur: <c:out value="${article.vendeur}"/></p>
+					 </div>
+				 </c:if>
+			</c:forEach>
+		</c:if>	
 	</div>
 	
 	<div class="pagination">
 		<% 
+		if(request.getAttribute("nombrePage") != null){
 		int u = Integer.parseInt(request.getAttribute("nombrePage").toString());
 		
 		for(int i=1; i <= u; i++) { %>
 			<a href="<%=request.getContextPath()%>/ServletAccueil?page=<%=i%>"> <%=i%> </a>
-		<%} %>
+		<%} 
+		}%>
 	</div>
 
 
