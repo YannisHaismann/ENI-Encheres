@@ -15,12 +15,14 @@ import fr.eni.exception.BusinessException;
 
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	
-	public static final String INSERT 			= "INSERT INTO ARTICLES_VENDUS VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-	public static final String SELECT_BY_ID 	= "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?;";
-	public static final String SELECT_ALL 		= "SELECT * FROM ARTICLES_VENDUS;";
-	public static final String UPDATE_BY_ID 	= "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?,"
-												+ "	date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, no_utilisateur = ?, no_categorie = ? WHERE no_article = ?;";
-	public static final String DELETE_BY_ID 	= "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?;";
+	public static final String INSERT 					= "INSERT INTO ARTICLES_VENDUS VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+	public static final String SELECT_BY_ID 			= "SELECT * FROM ARTICLES_VENDUS WHERE no_article = ?;";
+	public static final String SELECT_ALL 				= "SELECT * FROM ARTICLES_VENDUS;";
+	public static final String SELECT_BY_UTILISATEUR 	= "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur = ?;";
+	public static final String UPDATE_BY_ID 			= "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, date_debut_encheres = ?,"
+														+ "	date_fin_encheres = ?, prix_initial = ?, prix_vente = ?, no_utilisateur = ?, no_categorie = ? WHERE no_article = ?;";
+	public static final String DELETE_BY_ID 			= "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?;";
+	public static final String DELETE_BY_ID_UTILISATEUR = "DELETE FROM ENCHERES WHERE no_utilisateur = ?;";
 
 	@Override
 	public ArticleVendu insert(ArticleVendu article) throws BusinessException {
@@ -223,6 +225,76 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.DELETE_OBJET_ECHEC);
+			throw businessException;
+		}
+	}
+	
+	@Override
+	public void deleteByIdUtilisateur(int id) throws BusinessException {
+
+		try (Connection con = ConnectionProvider.getConnection()) {
+			try {
+				con.setAutoCommit(false);
+				PreparedStatement pstmt = con.prepareStatement(DELETE_BY_ID_UTILISATEUR);
+
+				pstmt.setInt(1, id);
+
+				pstmt.executeUpdate();
+
+				pstmt.close();
+
+				con.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				con.rollback();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_OBJET_ECHEC);
+			throw businessException;
+		}
+
+	}
+	
+	@Override
+	public List<ArticleVendu> selectAllByIdUtilisateur(int id) throws BusinessException {
+		
+		try(Connection con = ConnectionProvider.getConnection()) {
+			try {
+				PreparedStatement pstmt;
+				pstmt = con.prepareStatement(SELECT_BY_UTILISATEUR);
+				pstmt.setInt(1, id);
+				ResultSet rs = pstmt.executeQuery();
+				List<ArticleVendu> articles = new ArrayList<>();
+						
+				while(rs.next()) {
+					ArticleVendu nouvelArticle = new ArticleVendu();
+					nouvelArticle.setId(rs.getInt("no_article"));
+					nouvelArticle.setNom(rs.getString("nom_article"));
+					nouvelArticle.setDescription(rs.getString("description"));
+					nouvelArticle.setDateDebut(rs.getDate("date_debut_encheres"));
+					nouvelArticle.setDateFin(rs.getDate("date_fin_encheres"));
+					nouvelArticle.setPrixInitial(rs.getInt("prix_initial"));
+					nouvelArticle.setPrixVente(rs.getInt("prix_vente"));
+					nouvelArticle.setIdUtilisateur(rs.getInt("no_utilisateur"));
+					nouvelArticle.setIdCategorie(rs.getInt("no_categorie"));
+					articles.add(nouvelArticle);
+				}
+			
+				rs.close();
+				pstmt.close();
+				
+				return articles;
+			}catch(Exception e) {
+				e.printStackTrace();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.SELECT_LISTE_BY_ID_OBJET_ECHEC);
 			throw businessException;
 		}
 	}

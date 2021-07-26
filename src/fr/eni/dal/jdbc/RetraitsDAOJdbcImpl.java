@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.bo.Retraits;
-import fr.eni.bo.Utilisateurs;
 import fr.eni.dal.CodesResultatDAL;
 import fr.eni.dal.ConnectionProvider;
 import fr.eni.dal.RetraitsDAO;
@@ -21,6 +20,7 @@ public class RetraitsDAOJdbcImpl implements RetraitsDAO {
 	public static final String SELECT_ALL 	= "SELECT * FROM RETRAITS;";
 	public static final String UPDATE 		= "UPDATE RETRAITS SET rue = ?, code_postal = ?, ville = ? WHERE no_article = ?;";
 	public static final String DELETE 		= "DELETE FROM RETRAITS WHERE no_article = ?";
+	public static final String DELETE_by_ID = "DELETE FROM RETRAITS WHERE no_article = ?";
 
 	@Override
 	public Retraits insert(Retraits retrait) throws BusinessException {
@@ -180,6 +180,35 @@ public class RetraitsDAOJdbcImpl implements RetraitsDAO {
 				PreparedStatement pstmt = con.prepareStatement(DELETE);
 
 				pstmt.setInt(1, retrait.getId());
+
+				pstmt.executeUpdate();
+
+				pstmt.close();
+
+				con.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				con.rollback();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_OBJET_ECHEC);
+			throw businessException;
+		}
+		
+	}
+	
+	@Override
+	public void deleteById(int id) throws BusinessException {
+
+		try (Connection con = ConnectionProvider.getConnection()) {
+			try {
+				con.setAutoCommit(false);
+				PreparedStatement pstmt = con.prepareStatement(DELETE_by_ID);
+
+				pstmt.setInt(1, id);
 
 				pstmt.executeUpdate();
 

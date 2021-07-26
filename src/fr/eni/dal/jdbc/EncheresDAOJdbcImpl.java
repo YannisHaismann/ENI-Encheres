@@ -23,7 +23,7 @@ public class EncheresDAOJdbcImpl implements EncheresDAO {
 														+ " montant_enchere = ? WHERE no_utilisateur = ? AND no_article = ?;";
 	public static final String DELETE_BY_IDID 			= "DELETE FROM ENCHERES WHERE no_article = ? AND no_utilisateur = ?;";
 	public static final String SELECT_BY_ID_UTILISATEUR	= "SELECT * FROM ENCHERES WHERE no_utilisateur = ?;";
-
+	public static final String DELETE_BY_ID_UTILISATEUR = "DELETE FROM ENCHERES WHERE no_utilisateur = ?;";
 
 	@Override
 	public Encheres insert(Encheres enchere) throws BusinessException {
@@ -206,6 +206,35 @@ public class EncheresDAOJdbcImpl implements EncheresDAO {
 			throw businessException;
 		}
 		
+	}
+	
+	@Override
+	public void deleteByIdUtilisateur(int id) throws BusinessException {
+
+		try (Connection con = ConnectionProvider.getConnection()) {
+			try {
+				con.setAutoCommit(false);
+				PreparedStatement pstmt = con.prepareStatement(DELETE_BY_ID_UTILISATEUR);
+
+				pstmt.setInt(1, id);
+
+				pstmt.executeUpdate();
+
+				pstmt.close();
+
+				con.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				con.rollback();
+				throw e;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_OBJET_ECHEC);
+			throw businessException;
+		}
+
 	}
 	
 	

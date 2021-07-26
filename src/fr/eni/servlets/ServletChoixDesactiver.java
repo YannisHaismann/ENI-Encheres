@@ -12,7 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.bll.ArticleVenduManager;
+import fr.eni.bll.EncheresManager;
+import fr.eni.bll.RetraitsManager;
 import fr.eni.bll.UtilisateursManager;
+import fr.eni.bo.ArticleVendu;
+import fr.eni.bo.Utilisateurs;
 import fr.eni.exception.BusinessException;
 
 /**
@@ -49,15 +54,24 @@ public class ServletChoixDesactiver extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
 			rd.forward(request, response);
 		}
+		
+		request.setCharacterEncoding("UTF-8");
 
 		//Récupération des saisies de l'utilisateur
 		String pseudoDesactiver = request.getParameter("pseudoDesactiver");
 		int choixDesactiver = Integer.parseInt(request.getParameter("choixDesactiver"));
 		
 		//Déclaration des variables
+		int idProfilDesactiver;
+		Utilisateurs profilDesactiver = new Utilisateurs();
+		List<ArticleVendu> listeArticle = new ArrayList<ArticleVendu>();
+		List<Integer> noArticle = new ArrayList<Integer>();
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		List<String> pseudos = new ArrayList<String>();
 		UtilisateursManager utilisateursManager = UtilisateursManager.getInstance();
+		ArticleVenduManager articleVenduManager = ArticleVenduManager.getInstance();
+		RetraitsManager retraitsManager = RetraitsManager.getInstance();
+		EncheresManager encheresManager = EncheresManager.getInstance();
 		
 		//Verification de la conformiter des infos saisies
 		if (!pseudoDesactiver.trim().equals("")) {
@@ -84,6 +98,18 @@ public class ServletChoixDesactiver extends HttpServlet {
 					utilisateursManager.updateDesactiverByPseudo(0,pseudoDesactiver);
 					}else {
 						utilisateursManager.updateDesactiverByPseudo(1,pseudoDesactiver);
+						profilDesactiver = utilisateursManager.selectByPseudo(pseudoDesactiver);
+						session.setAttribute("idProfilDesactiver", profilDesactiver.getId());
+						idProfilDesactiver = (int)session.getAttribute("idProfilDesactiver");
+						encheresManager.supprimerParIdUtilisateur(idProfilDesactiver);
+						listeArticle = articleVenduManager.selectionnerTousByIdUtilisateur(idProfilDesactiver);
+						for(ArticleVendu article : listeArticle) {
+							noArticle.add(article.getId());
+						}
+						for(int i : noArticle) {
+							retraitsManager.deleteById(i);
+						}
+						articleVenduManager.supprimerParIdUtilisateur(idProfilDesactiver);
 					}
 				} catch (BusinessException e) {
 					e.printStackTrace();

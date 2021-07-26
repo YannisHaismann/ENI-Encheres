@@ -2,6 +2,7 @@ package fr.eni.servlets;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -39,6 +40,20 @@ public class ServletEncherirArticleDetail extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/AccueilNonConnecte.jsp");
 			rd.forward(request, response);
 	     }
+		
+		List<Integer> listeCodesErreur = new ArrayList<>();
+		int desactiver = (int) session.getAttribute("desactiver");
+		
+		if (desactiver == 1) {
+			listeCodesErreur.add(CodesResultatServlets.COMPTE_DESACTIVER_ENCHERES);
+	     }
+		if (listeCodesErreur.size() > 0) {
+			request.setAttribute("listeCodesErreur", listeCodesErreur);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/EncherirArticleDetail.jsp");
+			rd.forward(request, response);
+		}
+		
+		
 		String id = request.getParameter("id");
 		ArticleVenduManager articleManager = new ArticleVenduManager();
 		EncheresManager encheresManager = new EncheresManager();

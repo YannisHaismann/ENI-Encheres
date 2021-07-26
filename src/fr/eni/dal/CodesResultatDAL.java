@@ -22,4 +22,8 @@ public class CodesResultatDAL {
 
 	public static final Integer SELECT_BY_EMAIL_OBJET_ECHEC = 10009;
 
+	public static final Integer SELECT_LISTE_BY_ID_OBJET_ECHEC = 10010;
+
+	public static final int SELECT_RETRAIT_BY_ID_OBJET_ECHEC = 10011;
+
 }

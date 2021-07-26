@@ -72,4 +72,8 @@ public class EncheresManager {
 		}
 	}
 	
+	public void supprimerParIdUtilisateur(int id) throws BusinessException{
+		this.encheresDao.deleteByIdUtilisateur(id);
+	}
+	
 }
